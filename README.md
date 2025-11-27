@@ -1,2 +1,2 @@
-# R-sineo
+# Resineo
 Refonte Résineo Extranet
