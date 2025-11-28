@@ -28,6 +28,9 @@ $timestamp = filemtime($cssFile);
             <a href="index.php?action=resines">Resines</a>
             <a href="index.php?action=entretien">Entretien</a>
             <a href="index.php?action=outillage">Outillage</a>
+            
+            <a href="index.php?action=compte"><img src="img/icone-compte.png" alt="Mon compte" class="nav-icon"></a>
+            <a href="index.php?action=devis"><img src="img/icone-devis.png" alt="Mon devis" class="nav-icon"></a>
         </nav>
         <h1><?= $title ?></h1>
     </header>

@@ -14,7 +14,44 @@ try {
     switch ($action) {
         // Pages accessibles à tous.
         case 'home':
-            echo "Page d'accueil (à implémenter)";
+            $productController = new ProductController();
+            $productController->showHome();
+            break;
+
+        case 'catalogue':
+            $productController = new ProductController();
+            $productController->showCatalogue();
+            break;
+
+        case 'resines':
+            $productController = new ProductController();
+            $productController->showCategory('resines');
+            break;
+
+        case 'entretien':
+            $productController = new ProductController();
+            $productController->showCategory('entretien');
+            break;
+
+        case 'outillage':
+            $productController = new ProductController();
+            $productController->showCategory('outillage');
+            break;
+
+        case 'devis':
+            $quoteController = new QuoteController();
+            $quoteController->showQuote();
+            break;
+
+        // Pages nécessitant une connexion (à sécuriser plus tard)
+        case 'compte':
+            $userController = new UserController();
+            $userController->showAccount();
+            break;
+
+        case 'messagerie':
+            $userController = new UserController();
+            $userController->showMessaging();
             break;
 
         default:
@@ -22,5 +59,6 @@ try {
     }
 } catch (Exception $e) {
     // En cas d'erreur, on affiche la page d'erreur.
-    echo "Erreur : " . $e->getMessage();
+    $errorView = new View('Erreur');
+    $errorView->render('errorPage', ['errorMessage' => $e->getMessage()]);
 }
