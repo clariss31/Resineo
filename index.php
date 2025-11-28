@@ -43,6 +43,32 @@ try {
             $quoteController->showQuote();
             break;
 
+        // Authentification
+        case 'registerForm':
+            $authController = new AuthController();
+            $authController->showRegister();
+            break;
+
+        case 'register':
+            $authController = new AuthController();
+            $authController->register();
+            break;
+
+        case 'loginForm':
+            $authController = new AuthController();
+            $authController->showLogin();
+            break;
+
+        case 'connectUser':
+            $authController = new AuthController();
+            $authController->login();
+            break;
+
+        case 'disconnectUser':
+            $authController = new AuthController();
+            $authController->logout();
+            break;
+
         // Pages nécessitant une connexion (à sécuriser plus tard)
         case 'compte':
             $userController = new UserController();
