@@ -23,12 +23,12 @@ $timestamp = filemtime($cssFile);
 
 <body>
     <header>
+        <img src="img/logo.png" alt="Logo" class="logo">
         <nav>
             <a href="index.php?action=catalogue">Catalogue</a>
             <a href="index.php?action=resines">Resines</a>
             <a href="index.php?action=entretien">Entretien</a>
             <a href="index.php?action=outillage">Outillage</a>
-            
             <a href="index.php?action=compte"><img src="img/icone-compte.png" alt="Mon compte" class="nav-icon"></a>
             <a href="index.php?action=devis"><img src="img/icone-devis.png" alt="Mon devis" class="nav-icon"></a>
         </nav>
@@ -36,7 +36,7 @@ $timestamp = filemtime($cssFile);
     </header>
 
     <main>
-        <?= $content /* Ici est affiché le contenu réel de la page. */ ?>
+        <?= $content /* Ici est affiché le contenu de la page. */ ?>
     </main>
 
     <footer>

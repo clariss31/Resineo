@@ -69,7 +69,6 @@ try {
             $authController->logout();
             break;
 
-        // Pages nécessitant une connexion (à sécuriser plus tard)
         case 'compte':
             $userController = new UserController();
             $userController->showAccount();
