@@ -6,7 +6,6 @@
     <label for="scent">Odeur :</label>
     <select name="scent" id="scent">
         <option value="">Toutes</option>
-        <option value="scented">Avec odeur</option>
         <option value="unscented">Sans odeur</option>
     </select>
 </div>

@@ -19,5 +19,5 @@
         </div>
         <button type="submit" class="btn">S'inscrire</button>
     </form>
-    <p>Vous avez déjà un compte ? <a href="index.php?action=loginForm">Connectez-vous</a></p>
+    <p>Vous avez déjà un compte ? <a href="index.php?action=loginForm">Connectez-vous !</a></p>
 </div>
