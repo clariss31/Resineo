@@ -3,8 +3,7 @@
 <div class="filters">
     <h3>Filtres</h3>
     <form action="index.php" method="GET">
-        <input type="hidden" name="action" value="category">
-        <input type="hidden" name="name" value="resines">
+        <input type="hidden" name="action" value="resines">
         <label for="color">Couleur :</label>
         <select name="color" id="color" onchange="this.form.submit()">
             <option value="">Toutes</option>

@@ -3,8 +3,7 @@
 <div class="filters">
     <h3>Filtres</h3>
     <form action="index.php" method="GET">
-        <input type="hidden" name="action" value="category">
-        <input type="hidden" name="name" value="entretien">
+        <input type="hidden" name="action" value="entretien">
         <label for="scent">Odeur :</label>
         <select name="scent" id="scent" onchange="this.form.submit()">
             <option value="">Toutes</option>

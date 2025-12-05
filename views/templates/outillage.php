@@ -3,8 +3,7 @@
 <div class="filters">
     <h3>Filtres</h3>
     <form action="index.php" method="GET">
-        <input type="hidden" name="action" value="category">
-        <input type="hidden" name="name" value="outillage">
+        <input type="hidden" name="action" value="outillage">
         <label for="tool_type">Type :</label>
         <select name="tool_type" id="tool_type" onchange="this.form.submit()">
             <option value="">Tous</option>
