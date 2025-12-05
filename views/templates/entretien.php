@@ -1,5 +1,4 @@
-<h2>Catégorie : Entretien</h2>
-<p>Liste des produits de la catégorie Entretien.</p>
+<h1>Catégorie : Entretien</h1>
 <div class="filters">
     <h3>Filtres</h3>
     <form action="index.php" method="GET">

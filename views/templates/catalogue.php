@@ -1,5 +1,4 @@
-<h2>Catalogue Produits</h2>
-<p>Retrouvez l'ensemble de nos produits.</p>
+<h1>Catalogue</h1>
 <div class="filters">
     <form action="index.php" method="GET">
         <input type="hidden" name="action" value="catalogue">

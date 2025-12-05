@@ -1,5 +1,4 @@
-<h2>Catégorie : Résines</h2>
-<p>Liste des produits de la catégorie Résines.</p>
+<h1>Catégorie : Résines</h1>
 <div class="filters">
     <h3>Filtres</h3>
     <form action="index.php" method="GET">

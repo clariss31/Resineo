@@ -588,3 +588,93 @@ footer.global-footer {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     z-index: 10;
 }
+
+/* Flash Message */
+.flash-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #1a3c34;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    font-weight: bold;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+/* Quote Actions Header */
+.quote-actions-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.btn-clear-all {
+    color: #1a3c34;
+    text-decoration: underline;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Modal Styles */
+.hidden {
+    display: none !important;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background-color: #f0f4f4;
+    /* Light grey/green bg */
+    padding: 2rem;
+    border-radius: 15px;
+    border: 2px solid #000;
+    /* Black border as per mockup */
+    text-align: center;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content p {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: #000;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.modal-actions .btn {
+    min-width: 100px;
+    border-radius: 5px;
+}
+
+.modal-actions .btn-primary {
+    background-color: #1a3c34;
+    color: white;
+    border: none;
+}
+
+.modal-actions .btn-secondary {
+    background-color: white;
+    color: #1a3c34;
+    border: 1px solid #ccc;
+}

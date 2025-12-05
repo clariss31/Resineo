@@ -1,5 +1,4 @@
-<h2>Catégorie : Outillage</h2>
-<p>Liste des produits de la catégorie Outillage.</p>
+<h1>Catégorie : Outillage</h1>
 <div class="filters">
     <h3>Filtres</h3>
     <form action="index.php" method="GET">

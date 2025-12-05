@@ -1,4 +1,4 @@
-<h2>Mon Compte</h2>
+<h1>Mon Compte</h1>
 <p>Vos informations personnelles.</p>
 <!-- Formulaire de modification à venir -->
 

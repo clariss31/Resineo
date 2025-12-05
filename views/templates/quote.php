@@ -1,8 +1,11 @@
-<h2>Produits ajoutés à la demande de devis</h2>
+<h1>Produits ajoutés à la demande de devis</h1>
 
 <?php if (empty($quoteItems)): ?>
     <p>Votre devis est vide.</p>
 <?php else: ?>
+    <div class="quote-actions-header">
+        <a href="#" id="clear-quote-btn" class="btn-clear-all">Tout supprimer</a>
+    </div>
     <div class="quote-list">
         <?php foreach ($quoteItems as $item): ?>
             <div class="quote-item">
@@ -62,3 +65,14 @@
         </form>
     </div>
 <?php endif; ?>
+
+<!-- Confirmation Modal -->
+<div id="confirmation-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <p id="modal-message">Voulez-vous vraiment supprimer le produit ?</p>
+        <div class="modal-actions">
+            <button id="modal-confirm-btn" class="btn btn-primary">Oui</button>
+            <button id="modal-cancel-btn" class="btn btn-secondary">Annuler</button>
+        </div>
+    </div>
+</div>

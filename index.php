@@ -59,6 +59,11 @@ try {
             $quoteController->updateQuantity();
             break;
 
+        case 'clearQuote':
+            $quoteController = new QuoteController();
+            $quoteController->clearQuote();
+            break;
+
         case 'sendQuote':
             $quoteController = new QuoteController();
             $quoteController->sendQuote();

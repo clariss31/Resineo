@@ -39,6 +39,14 @@ class QuoteController
             } else {
                 $_SESSION['quote'][$productId] = $quantity;
             }
+
+            // Récupéraion du nom du produit pour le message flash
+            $productManager = new ProductManager();
+            $product = $productManager->findOneById($productId);
+            $productName = $product ? $product->getName() : "Produit";
+
+            // Message flash de confirmation
+            $_SESSION['flash'] = "$productName ajouté au devis !";
         }
 
         // Redirect to the previous page (referer) or default to home/catalogue
@@ -55,6 +63,14 @@ class QuoteController
             unset($_SESSION['quote'][$productId]);
         }
 
+        Utils::redirect('devis');
+    }
+
+    public function clearQuote()
+    {
+        if (isset($_SESSION['quote'])) {
+            unset($_SESSION['quote']);
+        }
         Utils::redirect('devis');
     }
 

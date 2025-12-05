@@ -65,6 +65,21 @@ $timestamp = filemtime($cssFile);
     </header>
 
     <main>
+        <?php if (isset($_SESSION['flash'])): ?>
+            <div class="flash-message" id="flash-message">
+                <?= $_SESSION['flash'] ?>
+            </div>
+            <?php unset($_SESSION['flash']); ?>
+            <script>
+                setTimeout(function () {
+                    const flash = document.getElementById('flash-message');
+                    if (flash) {
+                        flash.style.opacity = '0';
+                        setTimeout(() => flash.remove(), 500); // Wait for fade out
+                    }
+                }, 3000); // 3 seconds
+            </script>
+        <?php endif; ?>
         <?= $content /* Ici est affiché le contenu de la page. */ ?>
     </main>
 
@@ -112,6 +127,7 @@ $timestamp = filemtime($cssFile);
         </div>
     </footer>
 
+    <script src="js/quote-actions.js"></script>
 </body>
 
 </html>
