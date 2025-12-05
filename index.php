@@ -43,6 +43,26 @@ try {
             $quoteController->showQuote();
             break;
 
+        case 'addToQuote':
+            $quoteController = new QuoteController();
+            $quoteController->addToQuote();
+            break;
+
+        case 'removeFromQuote':
+            $quoteController = new QuoteController();
+            $quoteController->removeFromQuote();
+            break;
+
+        case 'updateQuantity':
+            $quoteController = new QuoteController();
+            $quoteController->updateQuantity();
+            break;
+
+        case 'sendQuote':
+            $quoteController = new QuoteController();
+            $quoteController->sendQuote();
+            break;
+
         // Authentification
         case 'registerForm':
             $authController = new AuthController();

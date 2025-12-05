@@ -3,8 +3,7 @@
     --primary-dark: #12382f;
     --primary-light: #eef4f5;
     --secondary-green: #6c9a8b;
-    /* Approximate for the 'AAA' secondary color in image if needed, using a safe backup or the color from the image #6f9c8e based on visual inspection of "Secondary" block which says "AAA" but no hex code clearly visible other than contrast rating? Ah, typically I should pick one. Let's stick to the dark and light provided in the plan. And maybe a color for the button. */
-    --text-color: #333;
+    --text-color: black;
 }
 
 * {
@@ -73,8 +72,6 @@ p {
     display: flex;
     align-items: center;
     border: 2px solid #1a3c34;
-    /* Dark green border */
-    /* Slight rounding if desired, or 0 for sharp edges */
     padding: 5px;
     background-color: #fff;
 }
@@ -184,16 +181,154 @@ footer.global-footer {
 }
 
 .product-card {
-    border: 1px solid #ddd;
-    padding: 1rem;
+    border: none;
+    background-color: var(--primary-light);
+    /* Light blue/gray background */
+    padding: 1.5rem;
     width: 300px;
-    border-radius: 8px;
+    border-radius: 10px;
+    /* Rounded corners for card */
     text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    /* Subtle shadow per mockup feel */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .product-card img {
     max-width: 100%;
     height: auto;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    /* Rounded corners for image */
+}
+
+.product-card h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #000;
+}
+
+.product-card .price {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.btn-quote {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #1a3c34;
+    /* Dark green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    /* Rounded corners as per image */
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+/* Quote List Styles */
+.quote-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 2rem auto;
+}
+
+.quote-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-light);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.quote-item-info {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.quote-item img {
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.quote-item-details h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #000;
+}
+
+.quote-item-details .price {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.quote-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    background-color: #1a3c34;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: white;
+    gap: 10px;
+}
+
+.quantity-selector a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0 5px;
+}
+
+.quantity-selector span {
+    font-weight: bold;
+}
+
+.btn-delete {
+    background-color: #1a3c34;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-delete:hover {
+    background-color: #0d2a23;
+}
+
+.quote-total {
+    text-align: right;
+    max-width: 1000px;
+    margin: 2rem auto;
+}
+
+.quote-total h3 {
     margin-bottom: 1rem;
 }
 
@@ -403,4 +538,53 @@ footer.global-footer {
     color: #1a3c34;
     font-weight: bold;
     text-decoration: underline;
+}
+
+/* Quote Form Specifics */
+.quote-form-container {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.quote-form-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #1a3c34;
+    border-radius: 0;
+    outline: none;
+    background-color: #fff;
+}
+
+.form-group-large {
+    flex: 2 !important;
+    /* Override flex: 1 from .form-row .form-group */
+}
+
+.form-actions-centered {
+    justify-content: center;
+}
+
+/* Header Badge */
+.header-icon-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.quote-badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background-color: #1a3c34;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 10;
 }

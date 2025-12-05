@@ -30,8 +30,11 @@
             <div class="product-card">
                 <img src="<?= $product->getImage() ?>" alt="<?= $product->getName() ?>">
                 <h3><?= $product->getName() ?></h3>
-                <p><?= $product->getDescription() ?></p>
                 <span class="price"><?= number_format($product->getPrice(), 2) ?> €</span>
+                <form action="index.php?action=addToQuote" method="post">
+                    <input type="hidden" name="product_id" value="<?= $product->getId() ?>">
+                    <button type="submit" class="btn-quote">Ajouter au devis</button>
+                </form>
             </div>
         <?php endforeach; ?>
     <?php endif; ?>
