@@ -138,26 +138,26 @@ INSERT INTO `users` (`firstname`, `lastname`, `email`, `password`, `role`) VALUE
 
 -- Products (avec colonne image)
 INSERT INTO `products` (`category_id`, `name`, `image`, `description`, `price`, `color`) VALUES
-(1, 'Résineo Drain 10kg', 'img/resineo-drain.png', 'Le revêtement drainant par excellence. Idéal pour les plages de piscine et allées piétonnes.', 52.00, 'Naturel'),
-(1, 'Résineo Grip 10kg', 'img/resineo-grip.png', 'Une formulation spécifique pour une adhérence maximale. Recommandé pour les rampes d\'accès.', 54.00, 'Gris'),
-(1, 'Résineo Arbre 10kg', 'img/resineo-arbre.png', 'Protégez et embellissez vos entourages d\'arbres. Perméable à l\'eau et à l\'air.', 50.00, 'Terre'),
-(1, 'Résineo Renov 10kg', 'img/resineo-renov.png', 'La solution idéale pour la rénovation de sols anciens. S\'applique directement sur béton.', 56.00, 'Beige'),
-(1, 'Résineo Jeux 10kg', 'img/resineo-jeux.png', 'Un revêtement souple et amortissant conçu pour les aires de jeux pour enfants.', 47.00, 'Rouge'),
-(1, 'Résineo Marbre 10kg', 'img/resineo-marbre.png', 'L\'élégance du marbre roulé pour vos extérieurs. Granulats sélectionnés pour leur noblesse.', 24.00, 'Blanc'),
-(1, 'Résineo Minerall 10kg', 'img/resineo-minerall.png', 'Aspect minéral brut pour un rendu contemporain et naturel.', 56.00, 'Gris Foncé'),
-(1, 'Résineo Quartz 10kg', 'img/resineo-quartz.png', 'La résistance du quartz coloré pour des sols décoratifs haute performance.', 36.00, 'Bleu');
+(1, 'Résineo Drain 10kg', 'img/resineo-drain.png', 'Le revêtement drainant par excellence. Idéal pour les plages de piscine et allées piétonnes.', 52.00, 'Sable'),
+(1, 'Résineo Grip 10kg', 'img/resineo-grip.png', 'Une formulation spécifique pour une adhérence maximale. Recommandé pour les rampes d\'accès.', 54.00, 'Sable'),
+(1, 'Résineo Arbre 10kg', 'img/resineo-arbre.png', 'Protégez et embellissez vos entourages d\'arbres. Perméable à l\'eau et à l\'air.', 50.00, 'Terracotta'),
+(1, 'Résineo Renov 10kg', 'img/resineo-renov.png', 'La solution idéale pour la rénovation de sols anciens. S\'applique directement sur béton.', 56.00, 'Ardoise'),
+(1, 'Résineo Jeux 10kg', 'img/resineo-jeux.png', 'Un revêtement souple et amortissant conçu pour les aires de jeux pour enfants.', 47.00, 'Sable'),
+(1, 'Résineo Marbre 10kg', 'img/resineo-marbre.png', 'L\'élégance du marbre roulé pour vos extérieurs. Granulats sélectionnés pour leur noblesse.', 24.00, 'Galet'),
+(1, 'Résineo Minerall 10kg', 'img/resineo-minerall.png', 'Aspect minéral brut pour un rendu contemporain et naturel.', 56.00, 'Galet'),
+(1, 'Résineo Quartz 10kg', 'img/resineo-quartz.png', 'La résistance du quartz coloré pour des sols décoratifs haute performance.', 36.00, 'Galet');
 
 INSERT INTO `products` (`category_id`, `name`, `image`, `description`, `price`, `scent`) VALUES
-(2, 'Résineo Badigeon 5kg', 'img/resineo-badigeon.png', 'Raviveur de couleurs professionnel. Redonne de l\'éclat aux anciennes réalisations.', 36.00, 'Neutre'),
-(2, 'Résineo Lissant 5L', 'img/resineo-lissant.png', 'Entretenez efficacement et durablement votre résine de sol avec le Résineo Lissant.', 26.00, 'Chimique'),
-(2, 'Résineo Nettoyant Outils', 'img/resineo-nettoyant.png', 'Solvant puissant sans odeur pour le nettoyage efficace de vos platoirs.', 24.00, 'Sans odeur'),
-(2, 'Résineo Entretien', 'img/resineo-entretien.png', 'Shampoing dégraissant pour l\'entretien courant de vos surfaces en résine.', 23.00, 'Pin');
+(2, 'Résineo Badigeon 5kg', 'img/resineo-badigeon.png', 'Raviveur de couleurs professionnel. Redonne de l\'éclat aux anciennes réalisations.', 36.00, 'Oui'),
+(2, 'Résineo Lissant 5L', 'img/resineo-lissant.png', 'Entretenez efficacement et durablement votre résine de sol avec le Résineo Lissant.', 26.00, 'Oui'),
+(2, 'Résineo Nettoyant Outils', 'img/resineo-nettoyant.png', 'Solvant puissant sans odeur pour le nettoyage efficace de vos platoirs.', 24.00, 'Non'),
+(2, 'Résineo Entretien', 'img/resineo-entretien.png', 'Shampoing dégraissant pour l\'entretien courant de vos surfaces en résine.', 23.00, 'Oui');
 
 INSERT INTO `products` (`category_id`, `name`, `image`, `description`, `price`, `tool_type`) VALUES
-(3, 'Platoir en Komadur', 'img/platoir.png', 'Platoir spécifique en plastique Komadur évitant les traces noires lors du lissage.', 16.00, 'Lissage'),
-(3, 'Rateau à 2 vis', 'img/rateau.png', 'Râteau réglable spécial résine. Permet de tirer et régler l\'épaisseur du mélange.', 24.00, 'Épandage'),
-(3, 'Spatule dentée (250/7mm)', 'img/spatule-dentee.png', 'Spatule crantée B3 pour l\'application de la résine d\'accroche (primaire).', 18.00, 'Encollage'),
-(3, 'Spatule dentée (260/8mm)', 'img/spatule-dentee.png', 'Spatule large crantée pour les surfaces importantes.', 22.00, 'Encollage');
+(3, 'Platoir en Komadur', 'img/platoir.png', 'Platoir spécifique en plastique Komadur évitant les traces noires lors du lissage.', 16.00, 'Platoir'),
+(3, 'Rateau à 2 vis', 'img/rateau.png', 'Râteau réglable spécial résine. Permet de tirer et régler l\'épaisseur du mélange.', 24.00, 'Rateau'),
+(3, 'Spatule dentée (250/7mm)', 'img/spatule-dentee.png', 'Spatule crantée B3 pour l\'application de la résine d\'accroche (primaire).', 18.00, 'Spatule'),
+(3, 'Spatule dentée (260/8mm)', 'img/spatule-dentee.png', 'Spatule large crantée pour les surfaces importantes.', 22.00, 'Spatule');
 
 -- Conversations
 INSERT INTO `conversations` (`id`, `user_id`, `title`, `address`, `postal_code`, `city`, `status`, `created_at`) VALUES

@@ -67,4 +67,38 @@ class ProductManager extends AbstractEntityManager
 
         return $products;
     }
+
+    /**
+     * Récupère les produits par catégorie.
+     * @param int $categoryId
+     * @return Product[]
+     */
+    public function findByCategory(int $categoryId): array
+    {
+        return $this->findByFilter(['category_id' => $categoryId]);
+    }
+
+    /**
+     * Récupère les valeurs distinctes pour une colonne donnée.
+     * @param string $column
+     * @return array
+     */
+    public function getDistinctValues(string $column): array
+    {
+        // Whitelist des colonnes autorisées pour éviter les injections SQL
+        $allowedColumns = ['color', 'scent', 'tool_type', 'category_id'];
+        if (!in_array($column, $allowedColumns)) {
+            return [];
+        }
+
+        $sql = "SELECT DISTINCT $column FROM products WHERE $column IS NOT NULL AND $column != ''";
+        $result = $this->db->query($sql);
+        $values = [];
+
+        while ($row = $result->fetch()) {
+            $values[] = $row[$column];
+        }
+
+        return $values;
+    }
 }
