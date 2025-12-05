@@ -678,3 +678,325 @@ footer.global-footer {
     color: #1a3c34;
     border: 1px solid #ccc;
 }
+
+/* Catalogue Redesign Styles */
+.page-header {
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    color: white;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.header-content h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+.breadcrumb {
+    font-size: 1.1rem;
+    color: #f0f0f0;
+}
+
+.breadcrumb a {
+    color: white;
+    text-decoration: underline;
+}
+
+.catalogue-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    /* Remove padding to align with header */
+    gap: 40px;
+}
+
+.sidebar {
+    width: 250px;
+    flex-shrink: 0;
+}
+
+.catalogue-content {
+    flex-grow: 1;
+}
+
+.filter-group {
+    margin-bottom: 2rem;
+}
+
+.filter-group h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #000;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    /* Increase gap to reduce card width slightly */
+    width: 100%;
+}
+
+.product-card {
+    background: #eef4f5;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: none;
+    width: 100%;
+    /* Override 300px legacy width */
+    max-width: none;
+}
+
+.product-card img {
+    width: 100%;
+    height: 170px;
+    /* Standardized height */
+    object-fit: cover;
+    /* Ensure full image is visible, use 'cover' if cropping is preferred */
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.product-info h3 {
+    min-height: 50px;
+}
+
+/* Button Style */
+.add-to-quote-form .btn {
+    background-color: #1a3c34;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+/* Compact Price Display */
+.price-values {
+    margin-top: 10px;
+    font-weight: bold;
+    display: flex;
+    justify-content: left;
+    gap: 5px;
+}
+
+/* Checkbox Styling */
+.category-filters .checkbox-group {
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-group input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Custom Checkbox */
+.checkbox-group label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    background-color: transparent;
+    border: 2px solid #12382f;
+    border-radius: 4px;
+}
+
+/* Checked State */
+.checkbox-group input:checked~label::before {
+    background-color: #12382f;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' width='16px' height='16px'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.checkbox-group label {
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: #000;
+}
+
+/* Price Range Slider */
+.range-slider {
+    position: relative;
+    height: 30px;
+    margin-top: 10px;
+}
+
+.slider-track {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #000;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.range-slider input[type="range"] {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    pointer-events: none;
+    background: none;
+    -webkit-appearance: none;
+    appearance: none;
+    z-index: 2;
+    margin: 0;
+}
+
+.range-slider input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 3px;
+    background: transparent;
+    border: none;
+}
+
+.range-slider input[type="range"]::-webkit-slider-thumb {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #000;
+    pointer-events: auto;
+    -webkit-appearance: none;
+    margin-top: -10px;
+    cursor: pointer;
+    position: relative;
+    z-index: 3;
+    box-shadow: none;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.results-count {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.sort-controls select {
+    padding: 0.5rem;
+    border: 2px solid #12382f;
+    font-size: 1rem;
+    padding-right: 2rem;
+    min-width: 200px;
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Color Filter Styles */
+.color-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.color-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #000;
+}
+
+.color-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* Specific Colors */
+.color-circle.Sable {
+    background-color: #cdbaac;
+}
+
+.color-circle.Terracotta {
+    background-color: #8d6148;
+}
+
+.color-circle.Ardoise {
+    background-color: #6f7372;
+}
+
+.color-circle.Galet {
+    background-color: #999390;
+}
+
+/* Hide default radio */
+.color-option input[type="radio"] {
+    display: none;
+}
+
+/* Selected State */
+.color-option input[type="radio"]:checked+.color-circle {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px #000;
+}
+
+/* Header Backgrounds */
+.header-bg-catalogue {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../img/resines.png');
+}
+
+.header-bg-resines {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../img/resines-deco.png');
+}
+
+.header-bg-entretien {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../img/entretien.png');
+}
+
+.header-bg-outillage {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../img/outillage.png');
+}
+
+/* Reset Filter Icon */
+.color-circle.transparent {
+    background-color: transparent;
+    border: 2px solid #000;
+    position: relative;
+}
+
+.reset-cross {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+}

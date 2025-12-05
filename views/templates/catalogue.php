@@ -1,33 +1,101 @@
-<h1>Catalogue</h1>
-<div class="filters">
-    <form action="index.php" method="GET">
-        <input type="hidden" name="action" value="catalogue">
-        <label for="category_id">Filtrer par catégorie :</label>
-        <select name="category_id" id="category_id" onchange="this.form.submit()">
-            <option value="">Toutes les catégories</option>
-            <?php foreach ($categories as $id => $name): ?>
-                <option value="<?= $id ?>" <?= (isset($currentCategory) && $currentCategory == $id) ? 'selected' : '' ?>>
-                    <?= $name ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </form>
+<div class="page-header header-bg-catalogue">
+    <div class="header-content">
+        <h1>Catalogue</h1>
+        <div class="breadcrumb">
+            <a href="index.php?action=home">Accueil</a> > <span>Catalogue</span>
+        </div>
+    </div>
 </div>
 
-<div class="product-list">
-    <?php if (empty($products)): ?>
-        <p>Aucun produit trouvé.</p>
-    <?php else: ?>
-        <?php foreach ($products as $product): ?>
-            <div class="product-card">
-                <img src="<?= $product->getImage() ?>" alt="<?= $product->getName() ?>">
-                <h3><?= $product->getName() ?></h3>
-                <span class="price"><?= number_format($product->getPrice(), 2) ?> €</span>
-                <form action="index.php?action=addToQuote" method="post">
-                    <input type="hidden" name="product_id" value="<?= $product->getId() ?>">
-                    <button type="submit" class="btn-quote">Ajouter au devis</button>
-                </form>
+<div class="catalogue-container">
+    <aside class="sidebar">
+        <form id="filter-form" action="index.php" method="GET">
+            <input type="hidden" name="action" value="catalogue">
+            
+            <div class="filter-group">
+                <h3>Prix</h3>
+                <div class="price-range-controls">
+                    <div class="range-slider">
+                        <div class="slider-track"></div>
+                        <input type="range" id="price-min" name="min_price" 
+                               min="<?= $minPrice ?>" max="<?= $maxPrice ?>" 
+                               value="<?= $currentMinPrice ?>" step="1"
+                               oninput="updatePriceDisplay()" onchange="this.form.submit()">
+                        <input type="range" id="price-max" name="max_price" 
+                               min="<?= $minPrice ?>" max="<?= $maxPrice ?>" 
+                               value="<?= $currentMaxPrice ?>" step="1"
+                               oninput="updatePriceDisplay()" onchange="this.form.submit()">
+                    </div>
+                </div>
+                <div class="price-values">
+                    <span id="price-min-display"><?= number_format($currentMinPrice, 0, ',', ' ') ?> €</span> - 
+                    <span id="price-max-display"><?= number_format($currentMaxPrice, 0, ',', ' ') ?> €</span>
+                </div>
             </div>
-        <?php endforeach; ?>
-    <?php endif; ?>
+
+            <div class="filter-group">
+                <h3>Catégorie</h3>
+                <div class="category-filters">
+                    <?php foreach ($categories as $id => $name): ?>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="cat-<?= $id ?>" name="categories[]" value="<?= $id ?>"
+                                <?= (is_array($currentCategories) && in_array($id, $currentCategories)) || $currentCategories === $id ? 'checked' : '' ?>
+                                onchange="this.form.submit()">
+                            <label for="cat-<?= $id ?>"><?= $name ?></label>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </form>
+    </aside>
+
+    <main class="catalogue-content">
+        <div class="results-header">
+            <span class="results-count"><?= count($products) ?> résultats</span>
+            <div class="sort-controls">
+                <select name="sort" form="filter-form" onchange="this.form.submit()">
+                    <option value="">Trier par</option>
+                    <option value="price-ASC" <?= $currentSort === 'price-ASC' ? 'selected' : '' ?>>Prix croissant</option>
+                    <option value="price-DESC" <?= $currentSort === 'price-DESC' ? 'selected' : '' ?>>Prix décroissant</option>
+                    <option value="id-DESC" <?= $currentSort === 'id-DESC' ? 'selected' : '' ?>>Plus récents</option>
+                    <option value="id-ASC" <?= $currentSort === 'id-ASC' ? 'selected' : '' ?>>Plus anciens</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="product-grid">
+            <?php foreach ($products as $product): ?>
+                <div class="product-card" id="product-<?= $product->getId() ?>">
+                    <img src="<?= $product->getImage() ?>" alt="<?= $product->getName() ?>">
+                    <div class="product-info">
+                        <h3><?= $product->getName() ?></h3>
+                        <p class="price"><?= number_format($product->getPrice(), 2) ?> €</p>
+                        <form action="index.php?action=addToQuote" method="post">
+                            <input type="hidden" name="product_id" value="<?= $product->getId() ?>">
+                            <button type="submit" class="btn-quote">Ajouter au devis</button>
+                        </form>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </main>
 </div>
+
+<script>
+function updatePriceDisplay() {
+    const minRange = document.getElementById('price-min');
+    const maxRange = document.getElementById('price-max');
+    const minDisplay = document.getElementById('price-min-display');
+    const maxDisplay = document.getElementById('price-max-display');
+
+    // Prevent crossing
+    if (parseInt(minRange.value) > parseInt(maxRange.value)) {
+        const temp = minRange.value;
+        minRange.value = maxRange.value;
+        maxRange.value = temp;
+    }
+
+    minDisplay.textContent = minRange.value + ' €';
+    maxDisplay.textContent = maxRange.value + ' €';
+}
+</script>

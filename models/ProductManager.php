@@ -48,14 +48,52 @@ class ProductManager extends AbstractEntityManager
         $params = [];
         $where = [];
 
-        foreach ($filters as $key => $value) {
-            // On suppose que les clés du tableau correspondent aux colonnes de la table
-            $where[] = "$key = :$key";
-            $params[$key] = $value;
+        // Filtre par catégorie (int ou array)
+        if (!empty($filters['category_id'])) {
+            if (is_array($filters['category_id'])) {
+                $ids = array_map('intval', $filters['category_id']);
+                if (!empty($ids)) {
+                    $where[] = "category_id IN (" . implode(',', $ids) . ")";
+                }
+            } else {
+                $where[] = "category_id = :category_id";
+                $params['category_id'] = $filters['category_id'];
+            }
+        }
+
+        // Filtre par prix minimum
+        if (isset($filters['min_price']) && $filters['min_price'] !== '') {
+            $where[] = "price >= :min_price";
+            $params['min_price'] = $filters['min_price'];
+        }
+
+        // Filtre par prix maximum
+        if (isset($filters['max_price']) && $filters['max_price'] !== '') {
+            $where[] = "price <= :max_price";
+            $params['max_price'] = $filters['max_price'];
+        }
+
+        // Autres filtres génériques (color, scent...)
+        $genericFilters = ['color', 'scent', 'tool_type'];
+        foreach ($genericFilters as $key) {
+            if (!empty($filters[$key])) {
+                $where[] = "$key = :$key";
+                $params[$key] = $filters[$key];
+            }
         }
 
         if (!empty($where)) {
             $sql .= " WHERE " . implode(" AND ", $where);
+        }
+
+        // Tri
+        if (!empty($filters['order_by'])) {
+            $direction = (isset($filters['direction']) && strtoupper($filters['direction']) === 'DESC') ? 'DESC' : 'ASC';
+            $allowedSorts = ['price', 'name', 'id']; // 'id' sert de proxy pour la date si 'created_at' n'existe pas
+
+            if (in_array($filters['order_by'], $allowedSorts)) {
+                $sql .= " ORDER BY " . $filters['order_by'] . " " . $direction;
+            }
         }
 
         $result = $this->db->query($sql, $params);
@@ -100,5 +138,44 @@ class ProductManager extends AbstractEntityManager
         }
 
         return $values;
+    }
+
+    /**
+     * Récupère le prix minimum et maximum des produits (filtrés).
+     * @param array $filters
+     * @return array ['min_price' => float, 'max_price' => float]
+     */
+    public function getMinMaxPrices(array $filters = []): array
+    {
+        $sql = "SELECT MIN(price) as min_price, MAX(price) as max_price FROM products";
+        $params = [];
+        $where = [];
+
+        // Réutilisation de la logique de filtrage (sauf prix)
+        if (!empty($filters['category_id'])) {
+            if (is_array($filters['category_id'])) {
+                $ids = array_map('intval', $filters['category_id']);
+                if (!empty($ids)) {
+                    $where[] = "category_id IN (" . implode(',', $ids) . ")";
+                }
+            } else {
+                $where[] = "category_id = :category_id";
+                $params['category_id'] = $filters['category_id'];
+            }
+        }
+
+        // ... autres filtres si nécessaire
+
+        if (!empty($where)) {
+            $sql .= " WHERE " . implode(" AND ", $where);
+        }
+
+        $result = $this->db->query($sql, $params);
+        $row = $result->fetch();
+
+        return [
+            'min_price' => $row['min_price'] ?? 0,
+            'max_price' => $row['max_price'] ?? 1000
+        ];
     }
 }

@@ -127,6 +127,7 @@ $timestamp = filemtime($cssFile);
         </div>
     </footer>
 
+    <script src="js/ajax-quote.js"></script>
     <script src="js/quote-actions.js"></script>
 </body>
 
