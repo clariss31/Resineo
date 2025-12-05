@@ -22,25 +22,86 @@ $timestamp = filemtime($cssFile);
 </head>
 
 <body>
-    <header>
-        <img src="img/logo.png" alt="Logo" class="logo">
-        <nav>
+    <header class="main-header">
+        <div class="header-left">
+            <a href="index.php?action=home">
+                <img src="img/logo.png" alt="Resineo Logo" class="logo">
+            </a>
+        </div>
+
+        <div class="header-search">
+            <form action="index.php" method="GET" class="search-form">
+                <input type="hidden" name="action" value="catalogue">
+                <input type="text" name="search" placeholder="Rechercher un produit">
+                <button type="submit">
+                    <img src="img/loupe.png" alt="Rechercher">
+                </button>
+            </form>
+        </div>
+
+        <nav class="header-nav">
             <a href="index.php?action=catalogue">Catalogue</a>
-            <a href="index.php?action=resines">Resines</a>
+            <a href="index.php?action=resines">Résines</a>
             <a href="index.php?action=entretien">Entretien</a>
             <a href="index.php?action=outillage">Outillage</a>
-            <a href="index.php?action=compte"><img src="img/icone-compte.png" alt="Mon compte" class="nav-icon"></a>
-            <a href="index.php?action=devis"><img src="img/icone-devis.png" alt="Mon devis" class="nav-icon"></a>
         </nav>
-        <h1><?= $title ?></h1>
+
+        <div class="header-actions">
+            <a href="index.php?action=compte">
+                <img src="img/icone-compte.png" alt="Mon compte">
+            </a>
+            <a href="index.php?action=devis">
+                <img src="img/icone-devis.png" alt="Mon panier">
+            </a>
+        </div>
     </header>
 
     <main>
         <?= $content /* Ici est affiché le contenu de la page. */ ?>
     </main>
 
-    <footer>
-        <p>Copyright © Resineo 2025 - Pichinov</p>
+    <footer class="global-footer">
+        <img src="img/resines.png" alt="Ambiance Résines" class="footer-top-image">
+
+        <div class="applicator-banner">
+            <p style="font-size: 1.5rem; margin: 0;">Vous souhaitez devenir applicateur ? Rejoignez notre réseau !</p>
+            <a href="#" class="btn btn-white">Devenir applicateur</a>
+        </div>
+
+        <div class="main-footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="img/logo.png" alt="Resineo Logo">
+                </div>
+
+                <div class="footer-contact">
+                    <div class="contact-item">
+                        <img src="img/telephone.png" alt="Téléphone">
+                        <a href="tel:+330980405320">+33 (0)9 80 40 53 20</a>
+                    </div>
+                    <div class="contact-item">
+                        <img src="img/mail.png" alt="Email">
+                        <a href="mailto:contact@resineo.com">contact@resineo.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p style="font-size: 1rem;">Copyright © 2025 - Site web créé par Pichinov.</p>
+
+                <div class="social-links">
+                    <a href="#"><img src="img/facebook.png" alt="Facebook"></a>
+                    <a href="#"><img src="img/instagram.png" alt="Instagram"></a>
+                    <a href="#"><img src="img/linkedin.png" alt="LinkedIn"></a>
+                    <a href="#"><img src="img/youtube.png" alt="YouTube"></a>
+                </div>
+
+                <div class="legal-links">
+                    <span>Politique de confidentialité</span>
+                    <span>Mentions légales</span>
+                </div>
+            </div>
+        </div>
     </footer>
 
 </body>

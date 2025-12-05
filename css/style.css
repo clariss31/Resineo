@@ -1,0 +1,406 @@
+/* Base Styles and Reset */
+:root {
+    --primary-dark: #12382f;
+    --primary-light: #eef4f5;
+    --secondary-green: #6c9a8b;
+    /* Approximate for the 'AAA' secondary color in image if needed, using a safe backup or the color from the image #6f9c8e based on visual inspection of "Secondary" block which says "AAA" but no hex code clearly visible other than contrast rating? Ah, typically I should pick one. Let's stick to the dark and light provided in the plan. And maybe a color for the button. */
+    --text-color: #333;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #fbfcfc;
+}
+
+h1 {
+    font-size: 50pt;
+    font-weight: bold;
+    color: #000;
+}
+
+h2 {
+    font-size: 40pt;
+    font-weight: bold;
+    color: #000;
+}
+
+h3 {
+    font-size: 20pt;
+    font-weight: bold;
+    color: #000;
+}
+
+p {
+    font-size: 18pt;
+    font-weight: normal;
+}
+
+/* Header Styles */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    gap: 2rem;
+}
+
+/* Logo */
+.header-left .logo {
+    max-height: 50px;
+    /* Adjust based on logo aspect ratio */
+    display: block;
+}
+
+/* Search Bar */
+.header-search {
+    flex-grow: 1;
+    /* Allow search bar to take available space */
+    max-width: 600px;
+    margin: 0 2rem;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    border: 2px solid #1a3c34;
+    /* Dark green border */
+    /* Slight rounding if desired, or 0 for sharp edges */
+    padding: 5px;
+    background-color: #fff;
+}
+
+.search-form input[type="text"] {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 8px;
+    font-size: 1rem;
+    color: #032b21;
+}
+
+.search-form input[type="text"]::placeholder {
+    color: #0d4436;
+}
+
+.search-form button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+.search-form button img {
+    height: 20px;
+    width: 20px;
+}
+
+/* Navigation */
+.header-nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.header-nav a {
+    text-decoration: none;
+    color: #032b21;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.header-nav a:hover {
+    color: #1a3c34;
+    /* Slightly lighter or different color on hover */
+}
+
+/* User Actions */
+.header-actions {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.header-actions a {
+    display: flex;
+    align-items: center;
+}
+
+.header-actions img {
+    height: 24px;
+    width: auto;
+}
+
+/* Main Content Spacing */
+main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Footer */
+footer.global-footer {
+    text-align: center;
+    padding: 0;
+    margin-top: 3rem;
+    background-color: transparent;
+}
+
+.footer-top-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+/* Applicator Banner */
+.applicator-banner {
+    background-color: var(--primary-dark);
+    color: #fff;
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+}
+
+/* Product Grid (from previous context, keeping it clean) */
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    width: 300px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+
+.filters {
+    margin-bottom: 2rem;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--primary-dark);
+    color: #fff;
+    border: 2px solid var(--primary-dark);
+}
+
+.btn-primary:hover {
+    background-color: #fff;
+    color: var(--primary-dark);
+}
+
+.btn-white {
+    background-color: #fff;
+    color: var(--primary-dark);
+    border: 2px solid #fff;
+}
+
+.btn-white:hover {
+    background-color: var(--primary-dark);
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+/* Footer Main */
+.main-footer {
+    background-color: var(--primary-light);
+    padding: 3rem 2rem;
+    color: var(--primary-dark);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 2rem;
+}
+
+.footer-logo img {
+    height: 60px;
+}
+
+.footer-contact {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.2rem;
+}
+
+.contact-item img {
+    height: 40px;
+    width: 40px;
+}
+
+.contact-item a {
+    text-decoration: underline;
+    color: #12382f;
+    font-weight: bold;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    font-size: 1rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.social-links img {
+    height: 20px;
+    width: auto;
+}
+
+.legal-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.legal-links a {
+    text-decoration: none;
+    color: var(--primary-dark);
+}
+
+/* Auth Styles */
+.auth-container {
+    max-width: 600px;
+    margin: 4rem 0;
+    /* Align with left main padding, but give some vertical space */
+}
+
+.auth-container h2 {
+    font-size: 2rem;
+    /* Override global H2 huge size for this context if needed, or keep 40pt if design asks. Mockup H2 looks smaller than 40pt. Let's try 2rem (~24pt) first or stick to global if "Se connecter" is main title */
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.login-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #000;
+}
+
+.login-form .required {
+    color: red;
+    margin-left: 2px;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"],
+.login-form input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #1a3c34;
+    /* Dark green thick border */
+    border-radius: 0;
+    /* Sharp edges as per mockup */
+    font-size: 1rem;
+    outline: none;
+}
+
+.login-form input:focus {
+    border-color: #000;
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.form-actions .btn {
+    padding: 12px 30px;
+    background-color: #1a3c34;
+    /* Dark green */
+    color: white;
+    border-radius: 5px;
+    /* Slight radius on button in second mockup? Or 15px global? Mockup 2 button looks slightly rounded but more rectangular than 15px. Let's stick to global or override. Mockup 2 button: "Connexion" has rounded corners. User said "image 2". Image 2 button looks like small radius ~4px. Global btn is 15px. Let's respect global unless it looks wrong, but mockup implies sharper. Let's try to match mockup 2. */
+    border-radius: 4px;
+    border: none;
+    font-size: 1.1rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 2rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.login-form input {
+    background-color: #fff;
+}
+
+.register-link {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.register-link a {
+    color: #1a3c34;
+    font-weight: bold;
+    text-decoration: underline;
+}
