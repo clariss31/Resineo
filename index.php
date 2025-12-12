@@ -116,7 +116,6 @@ try {
             break;
 
         case 'compte':
-        case 'showAccount':
             $userController = new UserController();
             $userController->showAccount();
             break;

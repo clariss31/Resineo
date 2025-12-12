@@ -21,7 +21,7 @@
 
         <!-- Navigation -->
         <nav class="account-nav">
-            <a href="index.php?action=showAccount" class="account-nav-item active">
+            <a href="index.php?action=compte" class="account-nav-item active">
                 <img src="img/icone-infos.png" alt="Infos">
                 Informations
             </a>

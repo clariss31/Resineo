@@ -77,7 +77,7 @@ class UserController
         $_SESSION['user'] = $user;
         $_SESSION['flash'] = "Informations mises à jour avec succès.";
 
-        Utils::redirect("showAccount");
+        Utils::redirect("compte");
     }
 
     /**

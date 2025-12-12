@@ -914,6 +914,12 @@ footer.global-footer {
     color: #555;
 }
 
+.right-header-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .sort-controls select {
     padding: 0.5rem;
     border: 2px solid #12382f;

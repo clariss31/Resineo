@@ -17,7 +17,7 @@
             <a href="index.php?action=disconnectUser" class="logout-link">Déconnexion</a>
         </div>
         <nav class="account-nav">
-            <a href="index.php?action=showAccount" class="account-nav-item">
+            <a href="index.php?action=compte" class="account-nav-item">
                 <img src="img/icone-compte.png" alt="Infos">
                 Informations
             </a>

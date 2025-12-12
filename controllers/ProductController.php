@@ -4,7 +4,7 @@ class ProductController
 {
     /**
      * Affiche le catalogue complet des produits.
-     * Gère les filtres (catégorie, prix, tri) et la pagination si nécessaire.
+     * Gère les filtres (catégorie, prix, tri).
      * @return void
      */
     public function showCatalogue()
