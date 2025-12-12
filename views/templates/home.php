@@ -1,3 +1,87 @@
-<h1>Bienvenue sur Résineo</h1>
-<p>Le spécialiste du revêtement drainant pour espaces extérieurs.</p>
-<p>Découvrez nos produits et solutions pour vos chantiers.</p>
+<div class="home-hero">
+    <div class="hero-left">
+        <h1>Découvrez nos revêtements <br> <span class="text-green">techniques</span> et <span
+                class="text-green">innovants</span></h1>
+
+        <div class="applicator-pill">
+            <div class="applicator-avatars">
+                <img src="img/applicateur1.png" alt="App1">
+                <img src="img/applicateur2.png" alt="App2">
+                <img src="img/applicateur3.png" alt="App3">
+            </div>
+            <span>Rejoignez nos 500+ applicateurs !</span>
+        </div>
+
+        <a href="index.php?action=showMessaging" class="btn btn-dark">Devenir applicateur</a>
+    </div>
+
+    <div class="hero-right-grid">
+        <div class="grid-item item-large bg-resines">
+            <a href="index.php?action=resines" class="cat-btn">Résines <img src="img/flèche-droite.png" alt=">"></a>
+        </div>
+        <div class="grid-col">
+            <div class="grid-item item-small bg-entretien">
+                <a href="index.php?action=entretien" class="cat-btn">Entretien <img src="img/flèche-droite.png"
+                        alt=">"></a>
+            </div>
+            <div class="grid-item item-small bg-outillage">
+                <a href="index.php?action=outillage" class="cat-btn">Outillage <img src="img/flèche-droite.png"
+                        alt=">"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="new-products-section">
+    <h2>Nouveautés</h2>
+
+    <div class="products-grid">
+        <?php foreach ($newProducts as $product): ?>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="<?= htmlspecialchars($product->getImage()) ?>"
+                        alt="<?= htmlspecialchars($product->getName()) ?>">
+                </div>
+                <div class="product-info">
+                    <h3><?= htmlspecialchars($product->getName()) ?></h3>
+                    <p class="price"><?= number_format($product->getPrice(), 2, ',', ' ') ?> €</p>
+                    <form action="index.php?action=addToQuote" method="POST" class="add-to-quote-form">
+                        <input type="hidden" name="product_id" value="<?= $product->getId() ?>">
+                        <button type="submit" class="btn btn-dark btn-small">Ajouter au devis</button>
+                    </form>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <div class="text-center catalogue-container">
+        <a href="index.php?action=catalogue" class="btn btn-dark">Catalogue</a>
+    </div>
+</div>
+
+<div class="features-section">
+    <h2>RÉSINEO, le revêtement de sol drainant <br> esthétique et certifié</h2>
+
+    <div class="features-grid">
+        <div class="feature-item">
+            <img src="img/technique.png" alt="Technique">
+            <h3>TECHNIQUE</h3>
+            <p>Drainant et<br>Anti-glissant</p>
+        </div>
+        <div class="feature-item">
+            <img src="img/entretien-facile.png" alt="Entretien">
+            <h3>ENTRETIEN FACILE</h3>
+            <p>Ne se tache pas</p>
+        </div>
+        <div class="feature-item">
+            <img src="img/durable.png" alt="Durable">
+            <h3>DURABLE</h3>
+            <p>Résistant<br>au gel</p>
+        </div>
+        <div class="feature-item">
+            <img src="img/certifie.png" alt="Certifié">
+            <h3>CERTIFIÉ</h3>
+            <p>Revêtement certifié<br>par le CSTB</p>
+        </div>
+    </div>
+</div>

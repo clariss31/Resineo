@@ -28,6 +28,8 @@ class QuoteController
     {
         $productId = Utils::request('product_id');
         $quantity = Utils::request('quantity', 1);
+        $message = "Erreur lors de l'ajout.";
+        $success = false;
 
         if ($productId) {
             if (!isset($_SESSION['quote'])) {
@@ -45,8 +47,22 @@ class QuoteController
             $product = $productManager->findOneById($productId);
             $productName = $product ? $product->getName() : "Produit";
 
-            // Message flash de confirmation
-            $_SESSION['flash'] = "$productName ajouté au devis !";
+            $message = "$productName ajouté au devis !";
+            $success = true;
+
+            // Message flash de confirmation (legacy)
+            $_SESSION['flash'] = $message;
+        }
+
+        // Check for AJAX request
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'success' => $success,
+                'message' => $message,
+                'quoteCount' => array_sum($_SESSION['quote'] ?? [])
+            ]);
+            exit;
         }
 
         // Redirect to the previous page (referer) or default to home/catalogue

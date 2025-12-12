@@ -11,7 +11,7 @@
     <div class="account-sidebar">
         <div class="user-summary">
             <?php
-            $avatar = $user->getImage() ? "img/" . $user->getImage() : "img/avatar-default.png";
+            $avatar = $user->getImage() ? $user->getImage() : "img/avatar-default.png";
             ?>
             <img src="<?= $avatar ?>" alt="Avatar" class="avatar">
             <a href="index.php?action=disconnectUser" class="logout-link">Déconnexion</a>

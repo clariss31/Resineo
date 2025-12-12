@@ -1010,11 +1010,280 @@ footer.global-footer {
     align-items: flex-start;
 }
 
-.account-sidebar {
-    width: 250px;
-    flex-shrink: 0;
-    border: 2px solid #1a3c34;
+
+/* --- Home Page Styles --- */
+/* --- Home Page Styles --- */
+/* --- Home Page Styles --- */
+.home-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem 5%;
+    background-color: #f0f5f5;
+    /* Light grey/green tint corrected */
+    gap: 2rem;
+    margin: 2rem;
+    border-radius: 30px;
+    /* Rounded corners for the entire hero block */
 }
+
+.hero-left {
+    flex: 1;
+    max-width: 500px;
+}
+
+.hero-left h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    color: #000;
+}
+
+.text-green {
+    color: #5c7c74;
+    /* Adjusted green to match target */
+}
+
+.applicator-pill {
+    display: flex;
+    align-items: center;
+    background-color: #7b9e95;
+    /* Darker green/grey to match image */
+    color: white;
+    padding: 0.4rem 1.5rem 0.4rem 0.4rem;
+    border-radius: 50px;
+    width: fit-content;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.applicator-avatars {
+    display: flex;
+    margin-right: 1rem;
+}
+
+.applicator-avatars img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-left: -12px;
+    object-fit: cover;
+}
+
+.applicator-avatars img:first-child {
+    margin-left: 0;
+}
+
+/* Global Button Dark Styling (used in Hero and Catalogue) */
+.btn-dark {
+    background-color: #1a3c34;
+    /* Dark Jungle Green */
+    color: white;
+    padding: 0.9rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    font-size: 1rem;
+    display: inline-block;
+}
+
+.btn-dark:hover {
+    background-color: #2c5e52;
+}
+
+
+.hero-right-grid {
+    display: flex;
+    gap: 1rem;
+    height: 500px;
+    /* Fixed height for the grid */
+}
+
+.grid-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.grid-item {
+    position: relative;
+    border-radius: 20px;
+    /* Rounded corners for grid images */
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.item-large {
+    width: 300px;
+    height: 100%;
+}
+
+.item-small {
+    width: 250px;
+    /* Increased width to match proportion */
+    height: 242px;
+    /* Approx half minus gap */
+}
+
+/* Category Button Styling */
+.cat-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    /* Smooth rounded corners */
+    text-decoration: none;
+    color: #1a3c34;
+    /* Dark text */
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    width: auto;
+    /* Adapted width */
+    min-width: 140px;
+}
+
+.cat-btn img {
+    width: 16px;
+    height: auto;
+}
+
+.new-products-section {
+    padding: 3rem 5%;
+    text-align: center;
+}
+
+.new-products-section h2,
+.features-section h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Reusing .product-card styles roughly, but ensuring consistency */
+/* Reusing .product-card styles roughly, but ensuring consistency */
+.product-card {
+    background: #eff4f4;
+    /* Light greenish grey from capture */
+    border-radius: 12px;
+    overflow: hidden;
+    text-align: center;
+    /* Center align like capture */
+    height: 100%;
+    padding: 1rem;
+    /* Padding inside card */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    /* Rounded image corners */
+    margin-bottom: 1rem;
+}
+
+.product-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.product-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #000;
+}
+
+.product-info .price {
+    font-weight: bold;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.btn-small {
+    background-color: #1a3c34;
+    color: white;
+    padding: 0.8rem 1.7rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    width: auto;
+    /* Allow auto width */
+    display: inline-block;
+}
+
+.btn-small:hover {
+    background-color: #2c5e52;
+}
+
+.features-section {
+    background-color: #f0f5f5;
+    padding: 4rem 5%;
+    text-align: center;
+}
+
+.features-grid {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-top: 3rem;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 150px;
+}
+
+.feature-item img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+}
+
+.feature-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.feature-item p {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.4;
+}
+
+.text-center {
+    text-align: center;
+}
+
 
 .user-summary {
     display: flex;
@@ -1094,6 +1363,26 @@ footer.global-footer {
     margin-bottom: 1rem;
 }
 
+/* Restoring accidentally deleted class */
 .header-bg-account {
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../img/compte.png');
+}
+
+/* Home Page Utilities for Background Images and Margins */
+.bg-resines {
+    background-image: url('../img/resines.png');
+}
+
+.bg-entretien {
+    background-image: url('../img/entretien.png');
+}
+
+.bg-outillage {
+    background-image: url('../img/outillage.png');
+}
+
+.catalogue-container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
 }

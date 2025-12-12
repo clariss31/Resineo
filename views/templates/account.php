@@ -11,7 +11,7 @@
     <div class="account-sidebar">
         <div class="user-summary">
             <?php
-            $avatar = $user->getImage() ? "img/" . $user->getImage() : "img/avatar-default.png";
+            $avatar = $user->getImage() ? $user->getImage() : "img/avatar-default.png";
             // Check if file exists to be safe, or just trust DB? Default to avatar-default if null.
             // If absolute path logic isn't used, assume img/ relative.
             ?>

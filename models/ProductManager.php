@@ -178,4 +178,21 @@ class ProductManager extends AbstractEntityManager
             'max_price' => $row['max_price'] ?? 1000
         ];
     }
+
+    /**
+     * Récupère les 4 derniers produits ajoutés pour la page d'accueil.
+     * @param int $limit
+     * @return Product[]
+     */
+    public function findLatest(int $limit = 4): array
+    {
+        $sql = "SELECT * FROM products ORDER BY id DESC LIMIT " . (int) $limit;
+        $result = $this->db->query($sql);
+
+        $products = [];
+        while ($row = $result->fetch()) {
+            $products[] = new Product($row);
+        }
+        return $products;
+    }
 }

@@ -42,7 +42,7 @@ class UserController
                 $dest_path = $uploadFileDir . $newFileName;
 
                 if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                    $user->setImage($newFileName);
+                    $user->setImage('img/' . $newFileName);
                 }
             }
         }
