@@ -73,9 +73,13 @@
         <div class="product-grid">
             <?php foreach ($products as $product): ?>
                 <div class="product-card" id="product-<?= $product->getId() ?>">
-                    <img src="<?= $product->getImage() ?>" alt="<?= $product->getName() ?>">
+                    <a href="index.php?action=showProduct&id=<?= $product->getId() ?>">
+                        <img src="<?= $product->getImage() ?>" alt="<?= $product->getName() ?>">
+                    </a>
                     <div class="product-info">
-                        <h3><?= $product->getName() ?></h3>
+                        <a href="index.php?action=showProduct&id=<?= $product->getId() ?>" style="text-decoration: none; color: inherit;">
+                            <h3><?= $product->getName() ?></h3>
+                        </a>
                         <p class="price"><?= number_format($product->getPrice(), 2) ?> €</p>
                         <form action="index.php?action=addToQuote" method="post" class="add-to-quote-form">
                             <input type="hidden" name="product_id" value="<?= $product->getId() ?>">

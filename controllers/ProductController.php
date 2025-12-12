@@ -145,6 +145,36 @@ class ProductController
             'currentSort' => $_GET['sort'] ?? ''
         ]);
     }
+
+    public function showProduct()
+    {
+        $id = (int) Utils::request('id');
+        if (!$id) {
+            throw new Exception("Aucun identifiant de produit spécifié.");
+        }
+
+        $productManager = new ProductManager();
+        $product = $productManager->findOneById($id);
+
+        if (!$product) {
+            throw new Exception("Le produit demandé n'existe pas.");
+        }
+
+        // Mapping for Breadcrumbs / Category Name
+        $categories = [
+            1 => 'Résines',
+            2 => 'Entretien',
+            3 => 'Outillage'
+        ];
+        $categoryName = $categories[$product->getCategoryId()] ?? 'Catalogue';
+
+        $view = new View($product->getName());
+        $view->render('detail', [
+            'product' => $product,
+            'categoryName' => $categoryName
+        ]);
+    }
+
     public function addProduct()
     {
         // Vérification Admin

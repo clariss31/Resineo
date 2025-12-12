@@ -39,6 +39,11 @@ try {
             $productController->showCategory('outillage');
             break;
 
+        case 'showProduct':
+            $productController = new ProductController();
+            $productController->showProduct();
+            break;
+
         case 'addProduct':
             $productController = new ProductController();
             $productController->addProduct();

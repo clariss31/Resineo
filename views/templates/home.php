@@ -39,11 +39,16 @@
         <?php foreach ($newProducts as $product): ?>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="<?= htmlspecialchars($product->getImage()) ?>"
-                        alt="<?= htmlspecialchars($product->getName()) ?>">
+                    <a href="index.php?action=showProduct&id=<?= $product->getId() ?>">
+                        <img src="<?= htmlspecialchars($product->getImage()) ?>"
+                            alt="<?= htmlspecialchars($product->getName()) ?>">
+                    </a>
                 </div>
                 <div class="product-info">
-                    <h3><?= htmlspecialchars($product->getName()) ?></h3>
+                    <a href="index.php?action=showProduct&id=<?= $product->getId() ?>"
+                        style="text-decoration: none; color: inherit;">
+                        <h3><?= htmlspecialchars($product->getName()) ?></h3>
+                    </a>
                     <p class="price"><?= number_format($product->getPrice(), 2, ',', ' ') ?> €</p>
                     <form action="index.php?action=addToQuote" method="POST" class="add-to-quote-form">
                         <input type="hidden" name="product_id" value="<?= $product->getId() ?>">
