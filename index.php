@@ -1,8 +1,8 @@
 <?php
-session_start();
-
 require_once 'config/config.php';
 require_once 'config/autoload.php';
+session_start();
+
 require_once 'controllers/HomeController.php';
 
 // On récupère l'action demandée par l'utilisateur.
@@ -96,13 +96,20 @@ try {
             break;
 
         case 'compte':
+        case 'showAccount':
             $userController = new UserController();
             $userController->showAccount();
             break;
 
         case 'messagerie':
+        case 'showMessaging':
             $userController = new UserController();
             $userController->showMessaging();
+            break;
+
+        case 'updateAccount':
+            $userController = new UserController();
+            $userController->updateAccount();
             break;
 
         default:

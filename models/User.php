@@ -8,6 +8,7 @@ class User extends AbstractEntity
     private string $lastname;
     private string $role = 'client';
     private ?string $createdAt = null;
+    private ?string $image = null;
 
     /**
      * Getters and Setters
@@ -71,5 +72,15 @@ class User extends AbstractEntity
     public function setCreatedAt(string $createdAt): void
     {
         $this->createdAt = $createdAt;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): void
+    {
+        $this->image = $image;
     }
 }

@@ -35,28 +35,8 @@
         <h2>Demander un devis</h2>
         <form action="index.php?action=sendQuote" method="post" class="login-form">
             <div class="form-group">
-                <label for="title">Titre<span class="required">*</span></label>
-                <input type="text" name="title" id="title" required>
-            </div>
-
-            <div class="form-group">
                 <label for="message">Message<span class="required">*</span></label>
                 <textarea name="message" id="message" rows="5" class="quote-form-textarea" required></textarea>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group form-group-large">
-                    <label for="address">Adresse du chantier<span class="required">*</span></label>
-                    <input type="text" name="address" id="address" required>
-                </div>
-                <div class="form-group">
-                    <label for="postal_code">Code postal<span class="required">*</span></label>
-                    <input type="text" name="postal_code" id="postal_code" required>
-                </div>
-                <div class="form-group">
-                    <label for="city">Ville<span class="required">*</span></label>
-                    <input type="text" name="city" id="city" required>
-                </div>
             </div>
 
             <div class="form-actions form-actions-centered">

@@ -37,7 +37,8 @@ class AuthController
             'password' => $pass_hash,
             'firstname' => $firstname,
             'lastname' => $lastname,
-            'role' => 'client'
+            'role' => 'client',
+            'image' => 'avatar-default.png'
         ]);
 
         $userManager->create($user);
