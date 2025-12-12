@@ -168,11 +168,83 @@ class ProductController
         ];
         $categoryName = $categories[$product->getCategoryId()] ?? 'Catalogue';
 
+        // Dropdown Data for Edit Modal
+        $distinctColors = $productManager->getDistinctValues('color');
+        $distinctToolTypes = $productManager->getDistinctValues('tool_type');
+
         $view = new View($product->getName());
         $view->render('detail', [
             'product' => $product,
-            'categoryName' => $categoryName
+            'categoryName' => $categoryName,
+            'distinctColors' => $distinctColors,
+            'distinctToolTypes' => $distinctToolTypes
         ]);
+    }
+
+    public function updateProduct()
+    {
+        // Admin verification
+        // Assumes AuthController logic sets $_SESSION['user']
+        if (!isset($_SESSION['user']) || $_SESSION['user']->getRole() !== 'admin') {
+            header('Location: index.php?action=home');
+            exit();
+        }
+
+        $id = (int) Utils::request('id');
+        $productManager = new ProductManager();
+        $product = $productManager->findOneById($id);
+
+        if (!$product) {
+            throw new Exception("Produit introuvable.");
+        }
+
+        // Update basic fields
+        $product->setName(Utils::request('name'));
+        $product->setDescription(Utils::request('description'));
+        $product->setPrice((float) Utils::request('price'));
+        $product->setCategoryId((int) Utils::request('category_id'));
+
+        $product->setColor(Utils::request('color') ?: null);
+        $product->setScent(isset($_POST['no_scent']) ? 'Sans odeur' : null); // Simple check based on checkbox
+        $product->setToolType(Utils::request('tool_type') ?: null);
+
+        // Image handling
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
+            $uploadDir = 'img/';
+            $uploadFile = $uploadDir . basename($_FILES['image']['name']);
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
+                $product->setImage($uploadFile);
+            }
+        }
+
+        if ($productManager->update($product)) {
+            $_SESSION['flash'] = "Produit mis à jour avec succès.";
+        } else {
+            $_SESSION['flash'] = "Erreur lors de la mise à jour.";
+        }
+
+        header('Location: index.php?action=showProduct&id=' . $id);
+    }
+
+    public function deleteProduct()
+    {
+        // Admin verification
+        if (!isset($_SESSION['user']) || $_SESSION['user']->getRole() !== 'admin') {
+            header('Location: index.php?action=home');
+            exit();
+        }
+
+        $id = (int) Utils::request('id');
+        $productManager = new ProductManager();
+
+        if ($productManager->delete($id)) {
+            $_SESSION['flash'] = "Produit supprimé avec succès.";
+            // Redirect to appropriate category or home
+            header('Location: index.php?action=home');
+        } else {
+            $_SESSION['flash'] = "Erreur lors de la suppression.";
+            header('Location: index.php?action=showProduct&id=' . $id);
+        }
     }
 
     public function addProduct()

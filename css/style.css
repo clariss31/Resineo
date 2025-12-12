@@ -1773,3 +1773,38 @@ footer.global-footer {
     text-align: center;
     cursor: pointer;
 }
+
+/* Custom Delete Button Style */
+.btn-delete-custom {
+    background-color: white;
+    color: #1a3c34;
+    /* Dark Green */
+    border: 3px solid #1a3c34;
+    /* Thick Border match input/nav */
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    /* Match standard btn radius if any, usually small */
+    font-weight: 500;
+}
+
+.btn-delete-custom:hover {
+    background-color: #f0f5f5;
+}
+
+/* Ensure labels are left aligned in modals and black */
+.form-group label {
+    display: block;
+    text-align: left;
+    margin-bottom: 0.5rem;
+    color: #000;
+    font-weight: 600;
+}
+
+.admin-edit-btn-container {
+    position: absolute;
+    top: 120px;
+    right: 40px;
+    z-index: 10;
+}

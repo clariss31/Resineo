@@ -44,6 +44,16 @@ try {
             $productController->showProduct();
             break;
 
+        case 'updateProduct':
+            $productController = new ProductController();
+            $productController->updateProduct();
+            break;
+
+        case 'deleteProduct':
+            $productController = new ProductController();
+            $productController->deleteProduct();
+            break;
+
         case 'addProduct':
             $productController = new ProductController();
             $productController->addProduct();

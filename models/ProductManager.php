@@ -227,4 +227,56 @@ class ProductManager extends AbstractEntityManager
             return false;
         }
     }
+
+    /**
+     * Met à jour un produit existant.
+     * @param Product $product
+     * @return bool
+     */
+    public function update(Product $product): bool
+    {
+        $sql = "UPDATE products SET 
+                category_id = :category_id, 
+                name = :name, 
+                description = :description, 
+                price = :price, 
+                image = :image, 
+                color = :color, 
+                scent = :scent, 
+                tool_type = :tool_type 
+                WHERE id = :id";
+
+        try {
+            $this->db->query($sql, [
+                'id' => $product->getId(),
+                'category_id' => $product->getCategoryId(),
+                'name' => $product->getName(),
+                'description' => $product->getDescription(),
+                'price' => $product->getPrice(),
+                'image' => $product->getImage(),
+                'color' => $product->getColor(),
+                'scent' => $product->getScent(),
+                'tool_type' => $product->getToolType()
+            ]);
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    /**
+     * Supprime un produit par son ID.
+     * @param int $id
+     * @return bool
+     */
+    public function delete(int $id): bool
+    {
+        $sql = "DELETE FROM products WHERE id = :id";
+        try {
+            $this->db->query($sql, ['id' => $id]);
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 }
