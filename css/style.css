@@ -1304,8 +1304,6 @@ footer.global-footer {
     text-align: center;
 }
 
-
-/* Account Page RESTORED Styles (Match Capture 2 EXACTLY - REVERTED) */
 /* Account Page Styles */
 .header-bg-account {
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../img/compte.png');
@@ -1321,7 +1319,7 @@ footer.global-footer {
 }
 
 .account-sidebar {
-    width: 280px;
+    width: 240px;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
@@ -1404,8 +1402,10 @@ footer.global-footer {
 }
 
 /* Invert icon color for active state (white icon) */
+/* Filter removed to rely on specific active images */
 .account-nav-item.active img {
-    filter: brightness(0) invert(1);
+    /* filter: brightness(0) invert(1); */
+    filter: none;
 }
 
 /* Default icon (inactive) - should be dark? If png is white, we need to invert to dark */
@@ -1713,8 +1713,8 @@ footer.global-footer {
 .form-group select,
 .form-group textarea {
     padding: 0.7rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: 3px solid #1a3c34;
+    border-radius: 0px;
     font-family: inherit;
     font-size: 0.95rem;
     background-color: white;

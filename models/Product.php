@@ -12,7 +12,7 @@ class Product extends AbstractEntity
     private ?string $toolType = null;
 
     /**
-     * Getters and Setters
+     * Getters et Setters
      */
 
     public function getCategoryId(): int

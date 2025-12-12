@@ -18,10 +18,10 @@
         </div>
         <nav class="account-nav">
             <a href="index.php?action=showAccount" class="account-nav-item">
-                <img src="img/avatar-default.png" alt="Infos">
+                <img src="img/icone-compte.png" alt="Infos">
                 Informations
             </a>
-            <a href="index.php?action=showMessaging" class="account-nav-item active">
+            <a href="index.php?action=messagerie" class="account-nav-item active">
                 <img src="img/icone-messagerie-active.png" alt="Messagerie">
                 Messagerie
             </a>

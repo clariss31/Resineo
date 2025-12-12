@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        // Update Badge
+                        // Mise à jour du badge
                         const badgeContainer = document.querySelector('.header-icon-link');
                         let badge = document.querySelector('.quote-badge');
 
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             badge.remove();
                         }
 
-                        // Show Flash Message
+                        // Affichage du message flash
                         showFlashMessage(data.message);
                     }
                 })
@@ -43,6 +43,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+/**
+ * Affiche un message flash temporaire.
+ * @param {string} message Le message à afficher
+ */
 function showFlashMessage(message) {
     let flash = document.getElementById('flash-message');
     if (flash) {

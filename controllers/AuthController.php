@@ -2,12 +2,22 @@
 
 class AuthController
 {
+    /**
+     * Affiche le formulaire d'inscription.
+     * @return void
+     */
     public function showRegister()
     {
         $view = new View("Inscription");
         $view->render("register");
     }
 
+    /**
+     * Traite l'inscription d'un nouvel utilisateur.
+     * Vérifie les données, hash le mot de passe et crée l'utilisateur.
+     * @return void
+     * @throws Exception Si les champs sont vides ou si l'email existe déjà.
+     */
     public function register()
     {
         // On récupère les données du formulaire
@@ -47,12 +57,22 @@ class AuthController
         Utils::redirect("loginForm");
     }
 
+    /**
+     * Affiche le formulaire de connexion.
+     * @return void
+     */
     public function showLogin()
     {
         $view = new View("Connexion");
         $view->render("login");
     }
 
+    /**
+     * Traite la connexion de l'utilisateur.
+     * Vérifie les identifiants et initialise la session.
+     * @return void
+     * @throws Exception Si les identifiants sont incorrects.
+     */
     public function login()
     {
         $email = Utils::request("email");
@@ -78,6 +98,10 @@ class AuthController
         }
     }
 
+    /**
+     * Déconnecte l'utilisateur et détruit la session.
+     * @return void
+     */
     public function logout()
     {
         unset($_SESSION['user']);

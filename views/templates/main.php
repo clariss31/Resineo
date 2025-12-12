@@ -88,7 +88,7 @@ $timestamp = filemtime($cssFile);
 
         <div class="applicator-banner">
             <p style="font-size: 1.5rem; margin: 0;">Vous souhaitez devenir applicateur ? Rejoignez notre réseau !</p>
-            <a href="index.php?action=showMessaging" class="btn btn-white">Devenir applicateur</a>
+            <a href="index.php?action=messagerie" class="btn btn-white">Devenir applicateur</a>
         </div>
 
         <div class="main-footer">

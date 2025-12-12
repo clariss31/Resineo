@@ -25,7 +25,7 @@
                 <img src="img/icone-infos.png" alt="Infos">
                 Informations
             </a>
-            <a href="index.php?action=showMessaging" class="account-nav-item">
+            <a href="index.php?action=messagerie" class="account-nav-item">
                 <img src="img/icone-messagerie.png" alt="Messagerie">
                 Messagerie
             </a>
@@ -67,7 +67,7 @@
             </div>
 
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary" style="display: none;">Enregistrer</button>
+                <button type="submit" class="btn btn-dark">Enregistrer</button>
                 <!-- Hidden submit for enter key -->
             </div>
         </form>

@@ -2,6 +2,11 @@
 
 class UserController
 {
+    /**
+     * Affiche la page "Mon compte" avec les informations de l'utilisateur.
+     * Redirige vers la connexion si l'utilisateur n'est pas connecté.
+     * @return void
+     */
     public function showAccount()
     {
         // Si l'utilisateur n'est pas connecté, on le redirige vers la page de connexion
@@ -14,6 +19,11 @@ class UserController
         $view->render("account", ['user' => $_SESSION['user']]);
     }
 
+    /**
+     * Met à jour les informations du compte utilisateur.
+     * Gère la modification du profil, de l'avatar et du mot de passe.
+     * @return void
+     */
     public function updateAccount()
     {
         if (!isset($_SESSION['user'])) {
@@ -28,7 +38,7 @@ class UserController
         $userManager = new UserManager();
         $user = $_SESSION['user'];
 
-        // Handle Avatar Upload
+        // Gère le téléchargement de l'avatar
         if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
             $fileTmpPath = $_FILES['avatar']['tmp_name'];
             $fileName = $_FILES['avatar']['name'];
@@ -47,7 +57,7 @@ class UserController
             }
         }
 
-        // Update fields
+        // Mise à jour des champs
         if ($firstname)
             $user->setFirstname($firstname);
         if ($lastname)
@@ -55,21 +65,25 @@ class UserController
         if ($email)
             $user->setEmail($email);
 
-        // Update password only if provided
+        // Mise à jour du mot de passe uniquement s'il est fourni
         if (!empty($password)) {
             $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
         }
 
-        // Save to DB
+        // Sauvegarde en base de données
         $userManager->update($user);
 
-        // Update session
+        // Mise à jour de la session
         $_SESSION['user'] = $user;
         $_SESSION['flash'] = "Informations mises à jour avec succès.";
 
         Utils::redirect("showAccount");
     }
 
+    /**
+     * Affiche la messagerie de l'utilisateur.
+     * @return void
+     */
     public function showMessaging()
     {
         if (!isset($_SESSION['user'])) {

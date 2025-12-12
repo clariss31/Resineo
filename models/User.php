@@ -11,7 +11,7 @@ class User extends AbstractEntity
     private ?string $image = null;
 
     /**
-     * Getters and Setters
+     * Getters et Setters
      */
 
     public function getEmail(): string

@@ -2,12 +2,17 @@
 
 class ProductController
 {
+    /**
+     * Affiche le catalogue complet des produits.
+     * Gère les filtres (catégorie, prix, tri) et la pagination si nécessaire.
+     * @return void
+     */
     public function showCatalogue()
     {
         $productManager = new ProductManager();
         $filters = [];
 
-        // Filtres
+        // Filtres de recherche
         if (isset($_GET['categories']) && is_array($_GET['categories'])) {
             $filters['category_id'] = $_GET['categories'];
         } elseif (isset($_GET['category_id']) && !empty($_GET['category_id'])) {
@@ -22,7 +27,7 @@ class ProductController
             $filters['max_price'] = (float) $_GET['max_price'];
         }
 
-        // Tri
+        // Tri des résultats
         if (isset($_GET['sort'])) {
             $parts = explode('-', $_GET['sort']);
             if (count($parts) === 2) {
@@ -31,10 +36,10 @@ class ProductController
             }
         }
 
-        // Récupération des produits filtrés
+        // Récupération des produits selon les filtres
         $products = $productManager->findByFilter($filters);
 
-        // Récupération des prix min/max (pour le slider, basé sur les catégories sélectionnées uniquement)
+        // Récupération des plages de prix pour le slider (basé sur les catégories sélectionnées uniquement)
         $rangeFilters = [];
         if (isset($filters['category_id'])) {
             $rangeFilters['category_id'] = $filters['category_id'];
@@ -47,7 +52,7 @@ class ProductController
             3 => 'Outillage'
         ];
 
-        // Fetch distinct values for Admin Selects
+        // Récupération des valeurs distinctes pour les listes déroulantes de l'administration
         $distinctColors = $productManager->getDistinctValues('color');
         $distinctToolTypes = $productManager->getDistinctValues('tool_type');
 
@@ -62,11 +67,17 @@ class ProductController
             'minPrice' => $priceRange['min_price'],
             'maxPrice' => $priceRange['max_price'],
             'currentSort' => $_GET['sort'] ?? '',
-            'distinctColors' => $distinctColors,       // Pass specific options
-            'distinctToolTypes' => $distinctToolTypes  // Pass specific options
+            'distinctColors' => $distinctColors,       // Passer les options spécifiques
+            'distinctToolTypes' => $distinctToolTypes  // Passer les options spécifiques
         ]);
     }
 
+    /**
+     * Affiche les produits d'une catégorie spécifique.
+     * Configure automatiquement les filtres appropriés (couleur, odeur, type).
+     * @param string $categoryName Le nom de la catégorie (Resines, Entretien, Outillage)
+     * @return void
+     */
     public function showCategory(string $categoryName)
     {
         // Affiche une catégorie spécifique (Résines, Entretien, Outillage)
@@ -121,7 +132,7 @@ class ProductController
             }
         }
 
-        // 4. Récupération des produits filtrés
+        // 4. Récupération des produits selon les filtres
         $products = $productManager->findByFilter($filters);
 
         // 5. Récupération des prix min/max pour le slider (borné à la catégorie)
@@ -146,6 +157,11 @@ class ProductController
         ]);
     }
 
+    /**
+     * Affiche la page de détail d'un produit.
+     * @return void
+     * @throws Exception Si l'ID est manquant ou le produit introuvable.
+     */
     public function showProduct()
     {
         $id = (int) Utils::request('id');
@@ -160,7 +176,7 @@ class ProductController
             throw new Exception("Le produit demandé n'existe pas.");
         }
 
-        // Mapping for Breadcrumbs / Category Name
+        // Correspondance pour le fil d'ariane / Nom de catégorie
         $categories = [
             1 => 'Résines',
             2 => 'Entretien',
@@ -168,7 +184,7 @@ class ProductController
         ];
         $categoryName = $categories[$product->getCategoryId()] ?? 'Catalogue';
 
-        // Dropdown Data for Edit Modal
+        // Données pour les listes déroulantes de modification
         $distinctColors = $productManager->getDistinctValues('color');
         $distinctToolTypes = $productManager->getDistinctValues('tool_type');
 
@@ -181,10 +197,15 @@ class ProductController
         ]);
     }
 
+    /**
+     * Met à jour les informations d'un produit.
+     * Nécessite des droits d'administrateur.
+     * @return void
+     * @throws Exception Si le produit est introuvable.
+     */
     public function updateProduct()
     {
-        // Admin verification
-        // Assumes AuthController logic sets $_SESSION['user']
+        // Vérification des droits d'administrateur
         if (!isset($_SESSION['user']) || $_SESSION['user']->getRole() !== 'admin') {
             header('Location: index.php?action=home');
             exit();
@@ -198,17 +219,17 @@ class ProductController
             throw new Exception("Produit introuvable.");
         }
 
-        // Update basic fields
+        // Mise à jour des champs de base
         $product->setName(Utils::request('name'));
         $product->setDescription(Utils::request('description'));
         $product->setPrice((float) Utils::request('price'));
         $product->setCategoryId((int) Utils::request('category_id'));
 
         $product->setColor(Utils::request('color') ?: null);
-        $product->setScent(isset($_POST['no_scent']) ? 'Sans odeur' : null); // Simple check based on checkbox
+        $product->setScent(isset($_POST['no_scent']) ? 'Sans odeur' : null); // Simple vérification basée sur la case à cocher
         $product->setToolType(Utils::request('tool_type') ?: null);
 
-        // Image handling
+        // Gestion de l'image
         if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
             $uploadDir = 'img/';
             $uploadFile = $uploadDir . basename($_FILES['image']['name']);
@@ -226,9 +247,14 @@ class ProductController
         header('Location: index.php?action=showProduct&id=' . $id);
     }
 
+    /**
+     * Supprime un produit.
+     * Nécessite des droits d'administrateur.
+     * @return void
+     */
     public function deleteProduct()
     {
-        // Admin verification
+        // Vérification des droits d'administrateur
         if (!isset($_SESSION['user']) || $_SESSION['user']->getRole() !== 'admin') {
             header('Location: index.php?action=home');
             exit();
@@ -239,7 +265,7 @@ class ProductController
 
         if ($productManager->delete($id)) {
             $_SESSION['flash'] = "Produit supprimé avec succès.";
-            // Redirect to appropriate category or home
+            // Redirection vers la catégorie appropriée ou l'accueil
             header('Location: index.php?action=home');
         } else {
             $_SESSION['flash'] = "Erreur lors de la suppression.";
@@ -247,6 +273,11 @@ class ProductController
         }
     }
 
+    /**
+     * Ajoute un nouveau produit.
+     * Nécessite des droits d'administrateur.
+     * @return void
+     */
     public function addProduct()
     {
         // Vérification Admin
@@ -263,7 +294,7 @@ class ProductController
         $categoryId = (int) Utils::request('category_id');
         $price = (float) Utils::request('price');
 
-        // Gestion dynamique des champs
+        // Gestion dynamique des champs spécifiques
         $color = null;
         $scent = null;
         $toolType = null;
@@ -281,8 +312,8 @@ class ProductController
             $toolType = Utils::request('tool_type');
         }
 
-        // Upload Image
-        $imagePath = 'img/camera-icon.png'; // Default
+        // Téléchargement de l'image
+        $imagePath = 'img/camera-icon.png'; // Défaut
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $uploadDir = 'img/';
             $filename = uniqid() . '_' . basename($_FILES['image']['name']);

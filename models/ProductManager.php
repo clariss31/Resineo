@@ -123,7 +123,7 @@ class ProductManager extends AbstractEntityManager
      */
     public function getDistinctValues(string $column): array
     {
-        // Whitelist des colonnes autorisées pour éviter les injections SQL
+        // Liste blanche des colonnes autorisées pour éviter les injections SQL
         $allowedColumns = ['color', 'scent', 'tool_type', 'category_id'];
         if (!in_array($column, $allowedColumns)) {
             return [];
@@ -204,12 +204,6 @@ class ProductManager extends AbstractEntityManager
     {
         $sql = "INSERT INTO products (category_id, name, description, price, image, color, scent, tool_type) 
                 VALUES (:category_id, :name, :description, :price, :image, :color, :scent, :tool_type)";
-
-        // Using prepare/execute via the AbstractManager's query helper wrapper or direct PDO?
-        // Checking AbstractEntityManager or existing usage. 
-        // existing usage: $this->db->query($sql, params) -> returns Statement.
-        // If it returns statement, we need to check if it executed successfully. 
-        // But AbstractEntityManager::query usually wraps PDO::prepare and execute.
 
         try {
             $this->db->query($sql, [

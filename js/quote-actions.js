@@ -8,12 +8,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let confirmAction = null;
 
+    /**
+     * Affiche la modale de confirmation.
+     * @param {string} message Le message à afficher
+     * @param {function} action L'action à exécuter si confirmé
+     */
     function showModal(message, action) {
         modalMessage.textContent = message;
         confirmAction = action;
         modal.classList.remove('hidden');
     }
 
+    /**
+     * Masque la modale de confirmation.
+     */
     function hideModal() {
         modal.classList.add('hidden');
         confirmAction = null;
@@ -51,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
         cancelBtn.addEventListener('click', hideModal);
     }
 
-    // Close modal if clicking outside content
+    // Fermer la modale si clic en dehors du contenu
     if (modal) {
         modal.addEventListener('click', function (e) {
             if (e.target === modal) {

@@ -3,17 +3,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const openBtn = document.getElementById('btn-add-product');
     const closeBtn = document.getElementById('close-modal');
     const form = document.getElementById('product-form');
-    
-    // Inputs
+
+    // Champs de saisie
     const categorySelect = document.getElementById('product-category');
     const imageInput = document.getElementById('product-image');
     const imagePreview = document.getElementById('image-preview');
 
-    // Dynamic Fields
+    // Champs dynamiques
     const fieldColor = document.getElementById('field-color');
     const fieldScent = document.getElementById('field-scent');
     const fieldToolType = document.getElementById('field-tool-type');
 
+    /**
+     * Bascule l'affichage de la modale.
+     */
     function toggleModal() {
         modal.classList.toggle('hidden');
     }
@@ -27,23 +30,25 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (modal) {
-        modal.addEventListener('click', function(e) {
+        modal.addEventListener('click', function (e) {
             if (e.target === modal) {
                 toggleModal();
             }
         });
     }
 
-    // Dynamic Fields Logic
+    /**
+     * Met à jour l'affichage des champs dynamiques selon la catégorie sélectionnée.
+     */
     function updateFields() {
         const categoryId = categorySelect.value;
-        
-        // Reset all
+
+        // Réinitialiser tout
         fieldColor.classList.add('hidden');
         fieldScent.classList.add('hidden');
         fieldToolType.classList.add('hidden');
 
-        // Logic based on Category ID
+        // Logique basée sur l'ID de catégorie
         // 1: Résines -> Color
         // 2: Entretien -> Scent
         // 3: Outillage -> Tool Type
@@ -61,13 +66,13 @@ document.addEventListener('DOMContentLoaded', function () {
         updateFields(); // Init on load
     }
 
-    // Image Preview Logic
+    // Logique de prévisualisation de l'image
     if (imageInput) {
-        imageInput.addEventListener('change', function(e) {
+        imageInput.addEventListener('change', function (e) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     imagePreview.src = e.target.result;
                     // Reset styling for placeholder
                     imagePreview.style.width = '100%';

@@ -2,6 +2,11 @@
 
 class QuoteController
 {
+    /**
+     * Affiche le contenu du devis (panier).
+     * Calcule le total et récupère les détails des produits.
+     * @return void
+     */
     public function showQuote()
     {
         $products = [];
@@ -12,7 +17,7 @@ class QuoteController
             foreach ($_SESSION['quote'] as $productId => $quantity) {
                 $product = $productManager->findOneById($productId);
                 if ($product) {
-                    $product->quantity = $quantity; // Temporarily attach quantity to object for view
+                    $product->quantity = $quantity; // Attache temporairement la quantité à l'objet pour la vue
                     $products[] = $product;
                     $total += $product->getPrice() * $quantity;
                 }
@@ -24,6 +29,11 @@ class QuoteController
         $view->render("quote", ['quoteItems' => $products, 'total' => $total]);
     }
 
+    /**
+     * Ajoute un produit au devis.
+     * Gère les requêtes classiques et AJAX.
+     * @return void
+     */
     public function addToQuote()
     {
         $productId = Utils::request('product_id');
@@ -42,7 +52,7 @@ class QuoteController
                 $_SESSION['quote'][$productId] = $quantity;
             }
 
-            // Récupéraion du nom du produit pour le message flash
+            // Récupération du nom du produit pour le message flash
             $productManager = new ProductManager();
             $product = $productManager->findOneById($productId);
             $productName = $product ? $product->getName() : "Produit";
@@ -54,7 +64,7 @@ class QuoteController
             $_SESSION['flash'] = $message;
         }
 
-        // Check for AJAX request
+        // Vérification d'une requête AJAX
         if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
             header('Content-Type: application/json');
             echo json_encode([
@@ -65,12 +75,16 @@ class QuoteController
             exit;
         }
 
-        // Redirect to the previous page (referer) or default to home/catalogue
+        // Redirection vers la page précédente ou le catalogue par défaut
         $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php?action=catalogue';
         header("Location: $referer");
         exit();
     }
 
+    /**
+     * Supprime un produit du devis.
+     * @return void
+     */
     public function removeFromQuote()
     {
         $productId = Utils::request('product_id');
@@ -82,6 +96,10 @@ class QuoteController
         Utils::redirect('devis');
     }
 
+    /**
+     * Vide entièrement le devis.
+     * @return void
+     */
     public function clearQuote()
     {
         if (isset($_SESSION['quote'])) {
@@ -90,10 +108,14 @@ class QuoteController
         Utils::redirect('devis');
     }
 
+    /**
+     * Met à jour la quantité d'un produit dans le devis.
+     * @return void
+     */
     public function updateQuantity()
     {
         $productId = Utils::request('product_id');
-        $direction = Utils::request('direction'); // 'increase' or 'decrease'
+        $direction = Utils::request('direction'); // 'increase' ou 'decrease'
 
         if ($productId && isset($_SESSION['quote'][$productId])) {
             if ($direction === 'increase') {
@@ -101,7 +123,7 @@ class QuoteController
             } elseif ($direction === 'decrease') {
                 $_SESSION['quote'][$productId]--;
                 if ($_SESSION['quote'][$productId] <= 0) {
-                    unset($_SESSION['quote'][$productId]); // Remove if 0
+                    unset($_SESSION['quote'][$productId]); // Supprime si 0
                 }
             }
         }
@@ -109,9 +131,13 @@ class QuoteController
         Utils::redirect('devis');
     }
 
+    /**
+     * Simule l'envoi du devis.
+     * @return void
+     */
     public function sendQuote()
     {
-        // Ici, on pourrait traiter le formulaire (envoyer un email, enregistrer en BDD, etc.)
+        // Simuler l'envoi du devis (envoi email, BDD, etc.)
         // Pour l'instant, on vide juste le devis (simulation d'envoi réussi).
         unset($_SESSION['quote']);
 

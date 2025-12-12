@@ -2,6 +2,10 @@
 
 class HomeController
 {
+    /**
+     * Affiche la page d'accueil avec les derniers produits.
+     * @return void
+     */
     public function showHome()
     {
         $productManager = new ProductManager();

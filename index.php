@@ -122,7 +122,6 @@ try {
             break;
 
         case 'messagerie':
-        case 'showMessaging':
             $userController = new UserController();
             $userController->showMessaging();
             break;
