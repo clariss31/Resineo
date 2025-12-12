@@ -54,7 +54,7 @@
         <?php endforeach; ?>
     </div>
 
-    <div class="text-center catalogue-container">
+    <div class="text-center home-catalogue-container">
         <a href="index.php?action=catalogue" class="btn btn-dark">Catalogue</a>
     </div>
 </div>

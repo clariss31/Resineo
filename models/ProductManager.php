@@ -195,4 +195,36 @@ class ProductManager extends AbstractEntityManager
         }
         return $products;
     }
+    /**
+     * Crée un nouveau produit.
+     * @param Product $product
+     * @return bool
+     */
+    public function create(Product $product): bool
+    {
+        $sql = "INSERT INTO products (category_id, name, description, price, image, color, scent, tool_type) 
+                VALUES (:category_id, :name, :description, :price, :image, :color, :scent, :tool_type)";
+
+        // Using prepare/execute via the AbstractManager's query helper wrapper or direct PDO?
+        // Checking AbstractEntityManager or existing usage. 
+        // existing usage: $this->db->query($sql, params) -> returns Statement.
+        // If it returns statement, we need to check if it executed successfully. 
+        // But AbstractEntityManager::query usually wraps PDO::prepare and execute.
+
+        try {
+            $this->db->query($sql, [
+                'category_id' => $product->getCategoryId(),
+                'name' => $product->getName(),
+                'description' => $product->getDescription(),
+                'price' => $product->getPrice(),
+                'image' => $product->getImage(),
+                'color' => $product->getColor(),
+                'scent' => $product->getScent(),
+                'tool_type' => $product->getToolType()
+            ]);
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 }

@@ -47,6 +47,10 @@ class ProductController
             3 => 'Outillage'
         ];
 
+        // Fetch distinct values for Admin Selects
+        $distinctColors = $productManager->getDistinctValues('color');
+        $distinctToolTypes = $productManager->getDistinctValues('tool_type');
+
         // Affiche le catalogue complet avec les produits et filtres
         $view = new View("Catalogue");
         $view->render("catalogue", [
@@ -57,7 +61,9 @@ class ProductController
             'currentMaxPrice' => $filters['max_price'] ?? $priceRange['max_price'],
             'minPrice' => $priceRange['min_price'],
             'maxPrice' => $priceRange['max_price'],
-            'currentSort' => $_GET['sort'] ?? ''
+            'currentSort' => $_GET['sort'] ?? '',
+            'distinctColors' => $distinctColors,       // Pass specific options
+            'distinctToolTypes' => $distinctToolTypes  // Pass specific options
         ]);
     }
 
@@ -138,5 +144,69 @@ class ProductController
             'maxPrice' => $priceRange['max_price'],
             'currentSort' => $_GET['sort'] ?? ''
         ]);
+    }
+    public function addProduct()
+    {
+        // Vérification Admin
+        if (!isset($_SESSION['user']) || $_SESSION['user']->getRole() !== 'admin') {
+            $_SESSION['flash'] = "Accès refusé.";
+            Utils::redirect('catalogue');
+        }
+
+        $productManager = new ProductManager();
+
+        // Récupération des données du formulaire
+        $name = Utils::request('name');
+        $description = Utils::request('description');
+        $categoryId = (int) Utils::request('category_id');
+        $price = (float) Utils::request('price');
+
+        // Gestion dynamique des champs
+        $color = null;
+        $scent = null;
+        $toolType = null;
+
+        if ($categoryId === 1) { // Résines
+            $color = Utils::request('color');
+        } elseif ($categoryId === 2) { // Entretien
+            $noScent = Utils::request('no_scent');
+            if ($noScent) {
+                $scent = "Sans odeur";
+            } else {
+                $scent = Utils::request('scent');
+            }
+        } elseif ($categoryId === 3) { // Outillage
+            $toolType = Utils::request('tool_type');
+        }
+
+        // Upload Image
+        $imagePath = 'img/camera-icon.png'; // Default
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = 'img/';
+            $filename = uniqid() . '_' . basename($_FILES['image']['name']);
+            $targetPath = $uploadDir . $filename;
+
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+                $imagePath = $targetPath;
+            }
+        }
+
+        $product = new Product();
+        $product->setCategoryId($categoryId);
+        $product->setName($name);
+        $product->setDescription($description);
+        $product->setPrice($price);
+        $product->setImage($imagePath);
+        $product->setColor($color);
+        $product->setScent($scent);
+        $product->setToolType($toolType);
+
+        if ($productManager->create($product)) {
+            $_SESSION['flash'] = "Produit ajouté avec succès !";
+        } else {
+            $_SESSION['flash'] = "Erreur lors de l'ajout.";
+        }
+
+        Utils::redirect('catalogue');
     }
 }

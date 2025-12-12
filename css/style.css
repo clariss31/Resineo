@@ -805,6 +805,13 @@ footer.global-footer {
     align-items: center;
 }
 
+/* Home Catalogue Button Container */
+.home-catalogue-container {
+    text-align: center;
+    margin-top: 2rem;
+    width: 100%;
+}
+
 .checkbox-group input {
     position: absolute;
     opacity: 0;
@@ -1129,6 +1136,19 @@ footer.global-footer {
     /* Approx half minus gap */
 }
 
+/* Restoring Missing Background Images */
+.bg-resines {
+    background-image: url('../img/resines.png');
+}
+
+.bg-entretien {
+    background-image: url('../img/entretien.png');
+}
+
+.bg-outillage {
+    background-image: url('../img/outillage.png');
+}
+
 /* Category Button Styling */
 .cat-btn {
     position: absolute;
@@ -1285,13 +1305,43 @@ footer.global-footer {
 }
 
 
+/* Account Page RESTORED Styles (Match Capture 2 EXACTLY - REVERTED) */
+/* Account Page Styles */
+.header-bg-account {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../img/compte.png');
+}
+
+.account-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 2rem auto;
+    gap: 3rem;
+    align-items: flex-start;
+    padding: 0 2rem;
+}
+
+.account-sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* User Summary Box */
 .user-summary {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    justify-content: space-between;
     padding: 1.5rem;
-    border-bottom: 2px solid #1a3c34;
+    border: 3px solid #1a3c34;
+    /* Thick Green Border */
     background-color: #fff;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
 }
 
 .user-summary img.avatar {
@@ -1305,12 +1355,16 @@ footer.global-footer {
     font-weight: bold;
     text-decoration: underline;
     color: #1a3c34;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
+/* Sidebar Navigation */
 .account-nav {
     display: flex;
     flex-direction: column;
+    gap: 0;
+    /* Items touch each other or close gap */
+    width: 100%;
 }
 
 .account-nav-item {
@@ -1319,15 +1373,24 @@ footer.global-footer {
     gap: 1rem;
     padding: 1.5rem;
     text-decoration: none;
-    color: #1a3c34;
+    color: white;
     font-weight: 500;
     font-size: 1.1rem;
-    border-bottom: 2px solid #1a3c34;
-    background-color: #fbfcfc;
+    background-color: #1a3c34;
+    /* Dark Green Default */
+    border: 3px solid #1a3c34;
+    cursor: pointer;
 }
 
-.account-nav-item:last-child {
+/* Inactive state: White bg, Green border */
+.account-nav-item:not(.active) {
+    background-color: #fff;
+    /* White background for inactive */
+    color: #1a3c34;
+    /* Dark text */
     border-bottom: none;
+    /* Combine borders if stacking, or keep full border */
+    border: 3px solid #1a3c34;
 }
 
 .account-nav-item.active {
@@ -1336,53 +1399,232 @@ footer.global-footer {
 }
 
 .account-nav-item img {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
+    height: 24px;
+    width: 24px;
 }
+
+/* Invert icon color for active state (white icon) */
+.account-nav-item.active img {
+    filter: brightness(0) invert(1);
+}
+
+/* Default icon (inactive) - should be dark? If png is white, we need to invert to dark */
+/* Assuming icons like icone-infos.png are dark by default. If they are white, we inverse logic. 
+   Let's assume they are dark (standard) based on previous usage. 
+   If they are white, .active img filter: none, .inactive img filter: invert(0) etc.
+   Wait, previously .active img had filter: brightness(0) invert(1). That implies original is dark. 
+   So active (dark bg) needs white icon -> invert. Correct. 
+*/
 
 .account-content {
     flex-grow: 1;
 }
 
-.account-content h3 {
-    margin-bottom: 1.5rem;
+/* Account Form */
+.account-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .account-form label {
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
     color: #000;
+    display: block;
+    font-weight: normal;
 }
 
 .account-form input {
     width: 100%;
     padding: 12px;
-    border: 2px solid #1a3c34;
+    border: 3px solid #1a3c34;
+    /* Thick Green Border */
     font-size: 1rem;
-    margin-bottom: 1rem;
+    border-radius: 0;
+    background-color: white;
+    outline: none;
 }
 
-/* Restoring accidentally deleted class */
-.header-bg-account {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../img/compte.png');
+.form-row {
+    display: flex;
+    gap: 2rem;
 }
 
-/* Home Page Utilities for Background Images and Margins */
-.bg-resines {
-    background-image: url('../img/resines.png');
+.form-row .form-group {
+    flex: 1;
 }
 
-.bg-entretien {
-    background-image: url('../img/entretien.png');
+.form-group {
+    margin-bottom: 0;
 }
 
-.bg-outillage {
-    background-image: url('../img/outillage.png');
+/* Admin Modal & Other existing styles can remain or be cleaned up if unused */
+.btn-admin-add {
+    background-color: #1a3c34;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.7rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+    text-decoration: none;
 }
 
-.catalogue-container {
-    margin-top: 2rem;
+.btn-admin-add:hover {
+    background-color: #2c5e52;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
     display: flex;
     justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    background-color: #f0f5f5;
+    /* Light greenish grey background */
+    padding: 2rem;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.modal-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.image-preview-container {
+    background-color: white;
+    border-radius: 12px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: 2px dashed #cbd5e1;
+}
+
+.image-preview-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+#image-preview[src*="camera-icon.png"] {
+    width: 64px;
+    height: 64px;
+    opacity: 0.5;
+}
+
+.modal-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #1a3c34;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    background-color: white;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    /* Align inputs correctly */
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    width: auto;
+}
+
+.modal-actions {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #1a3c34;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.btn-full {
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
 }
