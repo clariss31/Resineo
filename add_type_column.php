@@ -4,8 +4,9 @@ require_once 'config/autoload.php';
 
 try {
     $db = DBManager::getInstance();
-    $stmt = $db->query("SHOW CREATE TABLE messages");
-    print_r($stmt->fetch(PDO::FETCH_ASSOC));
+    $sql = "ALTER TABLE messages ADD COLUMN type VARCHAR(20) DEFAULT 'text' AFTER sender_id";
+    $db->query($sql);
+    echo "Column 'type' added successfully.";
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 }

@@ -126,8 +126,18 @@ try {
             break;
 
         case 'messagerie':
-            $userController = new UserController();
-            $userController->showMessaging();
+            $messageController = new MessageController();
+            $messageController->showClientMessaging();
+            break;
+
+        case 'adminMessages':
+            $messageController = new MessageController();
+            $messageController->showAdminMessaging();
+            break;
+
+        case 'sendMessage':
+            $messageController = new MessageController();
+            $messageController->sendMessage();
             break;
 
         case 'updateAccount':

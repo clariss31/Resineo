@@ -106,6 +106,6 @@ class AuthController
     {
         unset($_SESSION['user']);
         session_destroy();
-        Utils::redirect("home");
+        Utils::redirect("loginForm");
     }
 }

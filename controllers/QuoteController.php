@@ -137,11 +137,59 @@ class QuoteController
      */
     public function sendQuote()
     {
-        // Simuler l'envoi du devis (envoi email, BDD, etc.)
-        // Pour l'instant, on vide juste le devis (simulation d'envoi réussi).
-        unset($_SESSION['quote']);
+        if (!isset($_SESSION['user'])) {
+            // Si pas connecté, redirection ou gestion (normalement le bouton n'est pas accessible, ou on redirige vers connect)
+            // Pour l'instant on suppose connecté car le formulaire est dans une zone sécurisée ou on redirige.
+            header('Location: index.php?action=connect');
+            exit();
+        }
 
-        // Redirection vers la page devis (qui affichera "Votre devis est vide") ou une page de succès
-        Utils::redirect('devis');
+        if (isset($_SESSION['quote']) && !empty($_SESSION['quote'])) {
+            $user = $_SESSION['user'];
+            $userMessage = Utils::request('message');
+
+            // 1. Récupérer les produits du devis
+            $products = [];
+            $productManager = new ProductManager();
+            foreach ($_SESSION['quote'] as $productId => $quantity) {
+                $product = $productManager->findOneById($productId);
+                if ($product) {
+                    $products[] = [
+                        'name' => $product->getName(),
+                        'price' => $product->getPrice(),
+                        'image' => $product->getImage(),
+                        'quantity' => $quantity
+                    ];
+                }
+            }
+
+            // 2. Construire le contenu JSON
+            $contentData = [
+                'user_message' => $userMessage,
+                'items' => $products
+            ];
+            $jsonContent = json_encode($contentData);
+
+            // 3. Récupérer/Créer conversation
+            $conversationManager = new ConversationManager();
+            $conversation = $conversationManager->getClientConversation($user->getId());
+
+            // 4. Créer le message
+            $message = new Message();
+            $message->setConversationId($conversation->getId());
+            $message->setSenderId($user->getId());
+            $message->setContent($jsonContent);
+            $message->setType('quote_request');
+
+            $messageManager = new MessageManager();
+            $messageManager->create($message);
+
+            // 5. Vider le panier
+            unset($_SESSION['quote']);
+            $_SESSION['flash'] = "Votre demande de devis a été envoyée au support.";
+        }
+
+        // Redirection vers messagerie pour voir le message envoyé
+        Utils::redirect('messagerie');
     }
 }

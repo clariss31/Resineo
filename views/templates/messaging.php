@@ -9,13 +9,16 @@
 
 <div class="account-container">
     <div class="account-sidebar">
+        <!-- User Summary Box -->
         <div class="user-summary">
-            <?php
-            $avatar = $user->getImage() ? $user->getImage() : "img/avatar-default.png";
-            ?>
-            <img src="<?= $avatar ?>" alt="Avatar" class="avatar">
+            <div class="user-info">
+                <?php $avatar = $user->getImage() ? $user->getImage() : "img/avatar-default.png"; ?>
+                <img src="<?= $avatar ?>" alt="Avatar" class="avatar">
+            </div>
             <a href="index.php?action=disconnectUser" class="logout-link">Déconnexion</a>
         </div>
+
+        <!-- Navigation -->
         <nav class="account-nav">
             <a href="index.php?action=compte" class="account-nav-item">
                 <img src="img/icone-compte.png" alt="Infos">
@@ -28,7 +31,74 @@
         </nav>
     </div>
 
-    <div class="account-content">
-        <!-- Empty as requested -->
-    </div>
+    <main class="account-content messaging-content">
+        <div class="chat-header">
+            <div class="chat-title">
+                <img src="img/avatar-resineo.png" alt="Resineo" class="chat-logo">
+                <h2>Support client</h2>
+            </div>
+        </div>
+
+        <div class="chat-messages" id="chat-messages">
+            <?php if (empty($messages)): ?>
+                <p class="no-messages">Commencez la discussion avec notre support.</p>
+            <?php else: ?>
+                <?php foreach ($messages as $msg): ?>
+                    <div class="message-bubble <?= $msg->getSenderId() === $user->getId() ? 'message-sent' : 'message-received' ?>">
+                        <div class="message-content">
+                            <?php if ($msg->getType() === 'quote_request'): ?>
+                                <?php 
+                                    $data = json_decode($msg->getContent(), true);
+                                    if ($data):
+                                ?>
+                                    <div class="quote-request-card">
+                                        <div class="quote-card-header">
+                                            <strong>Demande de devis</strong>
+                                        </div>
+                                        <div class="quote-card-items">
+                                            <?php foreach ($data['items'] as $item): ?>
+                                                <div class="quote-card-item">
+                                                    <img src="<?= htmlspecialchars($item['image']) ?>" alt="" class="quote-item-img">
+                                                    <div class="quote-item-details">
+                                                        <span class="quote-item-name"><?= htmlspecialchars($item['name']) ?></span>
+                                                        <span class="quote-item-price"><?= number_format($item['price'], 2) ?> €</span>
+                                                        <span class="quote-item-qty">Quantité : <?= $item['quantity'] ?></span>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
+                                        <div class="quote-card-message">
+                                            <?= nl2br(htmlspecialchars($data['user_message'])) ?>
+                                        </div>
+                                    </div>
+                                <?php else: ?>
+                                    <?= nl2br(htmlspecialchars($msg->getContent())) ?>
+                                <?php endif; ?>
+                            <?php else: ?>
+                                <?= nl2br(htmlspecialchars($msg->getContent())) ?>
+                            <?php endif; ?>
+                            <span class="message-time">
+                                <?= date('d/m/Y H:i', strtotime($msg->getCreatedAt())) ?>
+                            </span>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+
+        <div class="chat-input-area">
+            <form action="index.php?action=sendMessage" method="POST" class="message-form">
+                <input type="hidden" name="conversation_id" value="<?= $conversation->getId() ?>">
+                <textarea name="content" placeholder="Entrez votre message ici..." required></textarea>
+                <button type="submit" class="btn btn-dark">Envoyer</button>
+            </form>
+        </div>
+    </main>
 </div>
+
+<script>
+    const chatContainer = document.getElementById('chat-messages');
+    if (chatContainer) {
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+</script>
