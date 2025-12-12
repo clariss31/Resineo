@@ -12,8 +12,16 @@
             <!-- Right: Info -->
             <div class="product-info-detail">
                 <div class="detail-breadcrumb">
+                    <?php
+                    $catSlugMap = [
+                        'Résines' => 'resines',
+                        'Entretien' => 'entretien',
+                        'Outillage' => 'outillage'
+                    ];
+                    $catSlug = $catSlugMap[$categoryName] ?? 'catalogue';
+                    ?>
                     <a href="index.php?action=home">Accueil</a> > <a
-                        href="index.php?action=<?= strtolower($categoryName) ?>"><?= $categoryName ?></a> >
+                        href="index.php?action=<?= $catSlug ?>"><?= $categoryName ?></a> >
                     <?= $product->getName() ?>
                 </div>
                 <h1><?= htmlspecialchars($product->getName()) ?></h1>

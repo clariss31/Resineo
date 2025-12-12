@@ -20,13 +20,13 @@ body {
 }
 
 h1 {
-    font-size: 50pt;
+    font-size: 40pt;
     font-weight: bold;
     color: #000;
 }
 
 h2 {
-    font-size: 40pt;
+    font-size: 30pt;
     font-weight: bold;
     color: #000;
 }
@@ -1329,7 +1329,6 @@ footer.global-footer {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
 }
 
 /* User Summary Box */
@@ -1813,4 +1812,22 @@ footer.global-footer {
     top: 120px;
     right: 40px;
     z-index: 10;
+}
+
+/* Error Page Styles */
+.error-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+    padding: 2rem;
+}
+
+.error-page-container h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 2rem;
 }
