@@ -342,4 +342,61 @@ class ProductController
 
         Utils::redirect('catalogue');
     }
+
+    /**
+     * Affiche les résultats de la recherche.
+     * @return void
+     */
+    public function search()
+    {
+        $searchTerm = Utils::request('search', '');
+        $productManager = new ProductManager();
+        $filters = ['search' => $searchTerm];
+
+        // Filtres de recherche (facettes)
+        if (isset($_GET['categories']) && is_array($_GET['categories'])) {
+            $filters['category_id'] = $_GET['categories'];
+        }
+
+        if (isset($_GET['min_price']) && $_GET['min_price'] !== '') {
+            $filters['min_price'] = (float) $_GET['min_price'];
+        }
+
+        if (isset($_GET['max_price']) && $_GET['max_price'] !== '') {
+            $filters['max_price'] = (float) $_GET['max_price'];
+        }
+
+        // Tri des résultats
+        if (isset($_GET['sort'])) {
+            $parts = explode('-', $_GET['sort']);
+            if (count($parts) === 2) {
+                $filters['order_by'] = $parts[0];
+                $filters['direction'] = $parts[1];
+            }
+        }
+
+        $products = $productManager->findByFilter($filters);
+
+        // Plages de prix globales (ou on pourrait filtrer par recherche aussi si on voulait affiner le slider)
+        $priceRange = $productManager->getMinMaxPrices();
+
+        $categories = [
+            1 => 'Résines',
+            2 => 'Entretien',
+            3 => 'Outillage'
+        ];
+
+        $view = new View("Recherche");
+        $view->render("search", [
+            'products' => $products,
+            'searchTerm' => $searchTerm,
+            'categories' => $categories,
+            'currentCategories' => $filters['category_id'] ?? [],
+            'currentMinPrice' => $filters['min_price'] ?? $priceRange['min_price'],
+            'currentMaxPrice' => $filters['max_price'] ?? $priceRange['max_price'],
+            'minPrice' => $priceRange['min_price'],
+            'maxPrice' => $priceRange['max_price'],
+            'currentSort' => $_GET['sort'] ?? ''
+        ]);
+    }
 }

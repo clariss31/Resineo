@@ -48,6 +48,30 @@ class ProductManager extends AbstractEntityManager
         $params = [];
         $where = [];
 
+        // Recherche textuelle (Search)
+        if (!empty($filters['search'])) {
+            // Utilisation du mode booléen pour permettre la recherche partielle (prefix*)
+            $searchTerm = $filters['search'];
+            // On ajoute * à la fin de chaque mot pour la recherche par préfixe
+            $words = explode(' ', $searchTerm);
+            $booleanSearch = '';
+            foreach ($words as $word) {
+                if (strlen($word) > 2) { // Uniquement pour les mots de plus de 2 lettres
+                    $booleanSearch .= '+' . $word . '* ';
+                }
+            }
+            $booleanSearch = trim($booleanSearch);
+
+            if (!empty($booleanSearch)) {
+                $where[] = "MATCH(name, description) AGAINST(:search IN BOOLEAN MODE)";
+                $params['search'] = $booleanSearch;
+            } else {
+                // Fallback si la recherche génère une chaîne vide (ex: mots trop courts)
+                $where[] = "name LIKE :search_like OR description LIKE :search_like";
+                $params['search_like'] = "%$searchTerm%";
+            }
+        }
+
         // Filtre par catégorie (int ou array)
         if (!empty($filters['category_id'])) {
             if (is_array($filters['category_id'])) {
@@ -89,7 +113,7 @@ class ProductManager extends AbstractEntityManager
         // Tri
         if (!empty($filters['order_by'])) {
             $direction = (isset($filters['direction']) && strtoupper($filters['direction']) === 'DESC') ? 'DESC' : 'ASC';
-            $allowedSorts = ['price', 'name', 'id']; // 'id' sert de proxy pour la date si 'created_at' n'existe pas
+            $allowedSorts = ['price', 'name', 'id'];
 
             if (in_array($filters['order_by'], $allowedSorts)) {
                 $sql .= " ORDER BY " . $filters['order_by'] . " " . $direction;

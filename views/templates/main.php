@@ -31,7 +31,7 @@ $timestamp = filemtime($cssFile);
 
         <div class="header-search">
             <form action="index.php" method="GET" class="search-form">
-                <input type="hidden" name="action" value="catalogue">
+                <input type="hidden" name="action" value="search">
                 <input type="text" name="search" placeholder="Rechercher un produit">
                 <button type="submit">
                     <img src="img/loupe.png" alt="Rechercher">

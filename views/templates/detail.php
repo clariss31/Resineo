@@ -18,7 +18,8 @@
                         'Entretien' => 'entretien',
                         'Outillage' => 'outillage'
                     ];
-                    $catSlug = $catSlugMap[$categoryName] ?? 'catalogue';
+                    $catKey = isset($categoryName) ? (string) $categoryName : '';
+                    $catSlug = $catSlugMap[$catKey] ?? 'catalogue';
                     ?>
                     <a href="index.php?action=home">Accueil</a> > <a
                         href="index.php?action=<?= $catSlug ?>"><?= $categoryName ?></a> >
