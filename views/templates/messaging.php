@@ -13,10 +13,10 @@
         <div class="user-summary">
             <div class="user-info">
                 <?php $avatar = $user->getImage() ? $user->getImage() : "img/avatar-default.png"; ?>
-                <img src="<?= $avatar ?>" alt="Avatar" class="avatar" style="cursor: pointer;"
+                <img src="<?= $avatar ?>" alt="Avatar" class="avatar cursor-pointer"
                     onclick="document.getElementById('avatar-messaging-input').click();">
                 <form action="index.php?action=updateAccount" method="post" enctype="multipart/form-data"
-                    style="display: none;">
+                    class="display-none">
                     <input type="hidden" name="redirect_to" value="messagerie">
                     <input type="file" name="avatar" id="avatar-messaging-input" onchange="this.form.submit()">
                 </form>
@@ -63,7 +63,11 @@
                                             <strong>Demande de devis</strong>
                                         </div>
                                         <div class="quote-card-items">
-                                            <?php foreach ($data['items'] as $item): ?>
+                                            <?php
+                                            $total = 0;
+                                            foreach ($data['items'] as $item):
+                                                $total += $item['price'] * $item['quantity'];
+                                                ?>
                                                 <div class="quote-card-item">
                                                     <img src="<?= htmlspecialchars($item['image']) ?>" alt="" class="quote-item-img">
                                                     <div class="quote-item-details">
@@ -73,6 +77,9 @@
                                                     </div>
                                                 </div>
                                             <?php endforeach; ?>
+                                        </div>
+                                        <div class="quote-card-total">
+                                            Total : <?= number_format($total, 2) ?> €
                                         </div>
                                         <div class="quote-card-message">
                                             <?= nl2br(htmlspecialchars($data['user_message'])) ?>
@@ -88,10 +95,14 @@
                                     ?>
                                     <div class="quote-request-card offer-card">
                                         <div class="quote-card-header">
-                                            <strong>Offre reçue</strong>
+                                            <strong>Offre</strong>
                                         </div>
                                         <div class="quote-card-items">
-                                            <?php foreach ($data['items'] as $item): ?>
+                                            <?php
+                                            $total = 0;
+                                            foreach ($data['items'] as $item):
+                                                $total += $item['price'] * $item['quantity'];
+                                                ?>
                                                 <div class="quote-card-item">
                                                     <img src="<?= htmlspecialchars($item['image']) ?>" alt="" class="quote-item-img">
                                                     <div class="quote-item-details">
@@ -101,6 +112,9 @@
                                                     </div>
                                                 </div>
                                             <?php endforeach; ?>
+                                        </div>
+                                        <div class="quote-card-total">
+                                            Total : <?= number_format($total, 2) ?> €
                                         </div>
                                         <div class="quote-card-message">
                                             <?= nl2br(htmlspecialchars($data['user_message'])) ?>

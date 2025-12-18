@@ -23,7 +23,19 @@ class ConversationManager extends AbstractEntityManager
 
         // Création automatique si inexistante
         $this->createConversation($userId);
-        return $this->getClientConversation($userId);
+
+        // On réessaie de récupérer la conversation
+        $result = $this->db->query($sql, ['user_id' => $userId]);
+        $row = $result->fetch();
+
+        if ($row) {
+            $conversation = new Conversation($row);
+            $conversation->setUserName($row['firstname'] . ' ' . $row['lastname']);
+            return $conversation;
+        }
+
+        // Si toujours rien, c'est un problème critique
+        throw new Exception("Impossible de créer ou récupérer la conversation pour l'utilisateur $userId.");
     }
 
     /**
@@ -72,24 +84,11 @@ class ConversationManager extends AbstractEntityManager
 
     private function createConversation(int $userId): void
     {
-        $sql = "INSERT INTO conversations (user_id, title, status, created_at) VALUES (:user_id, 'Support Client', 'open', NOW())";
-        // Note: address fields are required by DB schema but might not be relevant for simple support chat. Filling with placeholders or user data if necessary.
-        // Assuming the DB schema check showed address fields. Let's check if they have defaults or allow null.
-        // Re-checking check_schema output in history... 
-        // `address` varchar(255) NOT NULL, etc. They are NOT NULL. So we must provide dummy data or fetch user data.
-
-        // Fetch user data for address
-        $sqlUser = "SELECT address, postal_code, city FROM users WHERE id = :id";
-        $user = $this->db->query($sqlUser, ['id' => $userId])->fetch();
-
-        $sql = "INSERT INTO conversations (user_id, title, address, postal_code, city, status, created_at) 
-                VALUES (:user_id, 'Support Client', :address, :postal_code, :city, 'open', NOW())";
+        $sql = "INSERT INTO conversations (user_id, title, status, created_at) 
+                VALUES (:user_id, 'Support Client', 'open', NOW())";
 
         $this->db->query($sql, [
-            'user_id' => $userId,
-            'address' => $user['address'] ?? 'Non spécifié',
-            'postal_code' => $user['postal_code'] ?? '00000',
-            'city' => $user['city'] ?? 'Inconnu'
+            'user_id' => $userId
         ]);
     }
 }

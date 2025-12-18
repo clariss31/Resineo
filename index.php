@@ -4,6 +4,7 @@ require_once 'config/autoload.php';
 session_start();
 
 require_once 'controllers/HomeController.php';
+require_once 'controllers/LegalController.php';
 
 // On récupère l'action demandée par l'utilisateur.
 // Si aucune action n'est demandée, on affiche la page d'accueil.
@@ -143,6 +144,16 @@ try {
         case 'sendMessage':
             $messageController = new MessageController();
             $messageController->sendMessage();
+            break;
+
+        case 'mentionsLegales':
+            $legalController = new LegalController();
+            $legalController->showMentionsLegales();
+            break;
+
+        case 'politiqueConfidentialite':
+            $legalController = new LegalController();
+            $legalController->showPolitiqueConfidentialite();
             break;
 
         case 'updateAccount':

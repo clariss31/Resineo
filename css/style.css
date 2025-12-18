@@ -1,4 +1,4 @@
-/* Base Styles and Reset */
+/* Styles de base et Reset */
 :root {
     --primary-dark: #12382f;
     --primary-light: #eef4f5;
@@ -16,11 +16,10 @@ body {
     font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background-color: #fbfcfc;
 }
 
 h1 {
-    font-size: 40pt;
+    font-size: 35pt;
     font-weight: bold;
     color: #000;
 }
@@ -42,7 +41,7 @@ p {
     font-weight: normal;
 }
 
-/* Header Styles */
+/* Styles de l'en-tête */
 .main-header {
     display: flex;
     justify-content: space-between;
@@ -56,14 +55,12 @@ p {
 /* Logo */
 .header-left .logo {
     max-height: 50px;
-    /* Adjust based on logo aspect ratio */
     display: block;
 }
 
-/* Search Bar */
+/* Barre de recherche */
 .header-search {
     flex-grow: 1;
-    /* Allow search bar to take available space */
     max-width: 600px;
     margin: 0 2rem;
 }
@@ -119,10 +116,9 @@ p {
 
 .header-nav a:hover {
     color: #1a3c34;
-    /* Slightly lighter or different color on hover */
 }
 
-/* User Actions */
+/* Actions Utilisateur */
 .header-actions {
     display: flex;
     gap: 1.5rem;
@@ -139,14 +135,14 @@ p {
     width: auto;
 }
 
-/* Main Content Spacing */
+/* Espacement du contenu principal */
 main {
     padding: 2rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Footer */
+/* Pied de page */
 footer.global-footer {
     text-align: center;
     padding: 0;
@@ -162,7 +158,7 @@ footer.global-footer {
     padding: 0;
 }
 
-/* Applicator Banner */
+/* Bannière Applicateur */
 .applicator-banner {
     background-color: var(--primary-dark);
     color: #fff;
@@ -173,7 +169,13 @@ footer.global-footer {
     max-width: 100%;
 }
 
-/* Product Grid (from previous context, keeping it clean) */
+.applicator-text {
+    font-size: 1.1rem;
+    /* Même taille que le bouton (environ) */
+    font-weight: bold;
+}
+
+/* Liste de produits */
 .product-list {
     display: flex;
     flex-wrap: wrap;
@@ -183,14 +185,11 @@ footer.global-footer {
 .product-card {
     border: none;
     background-color: var(--primary-light);
-    /* Light blue/gray background */
     padding: 1.5rem;
     width: 300px;
     border-radius: 10px;
-    /* Rounded corners for card */
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    /* Subtle shadow per mockup feel */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -202,7 +201,6 @@ footer.global-footer {
     height: auto;
     margin-bottom: 1rem;
     border-radius: 10px;
-    /* Rounded corners for image */
 }
 
 .product-card h3 {
@@ -219,23 +217,27 @@ footer.global-footer {
     display: block;
 }
 
+/* Bouton Devis - Style unifié */
 .btn-quote {
     display: inline-block;
-    padding: 10px 20px;
     background-color: #1a3c34;
-    /* Dark green */
     color: white;
     border: none;
-    border-radius: 5px;
-    /* Rounded corners as per image */
-    font-weight: bold;
+    border-radius: 8px;
+    padding: 0.9rem 2rem;
+    font-weight: 600;
     cursor: pointer;
     text-decoration: none;
     font-size: 1rem;
     transition: background-color 0.3s;
 }
 
-/* Quote List Styles */
+.btn-quote:hover {
+    background-color: #7b9e93;
+}
+
+
+/* Liste de devis */
 .quote-list {
     display: flex;
     flex-direction: column;
@@ -319,7 +321,7 @@ footer.global-footer {
 }
 
 .btn-delete:hover {
-    background-color: #0d2a23;
+    background-color: #7b9e93;
 }
 
 .quote-total {
@@ -338,26 +340,29 @@ footer.global-footer {
 }
 
 /* Buttons */
+/* Boutons */
 .btn {
     display: inline-block;
-    padding: 10px 20px;
-    border-radius: 10px;
+    padding: 0.9rem 2rem;
+    border-radius: 8px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s;
+    border: none;
+    font-size: 1rem;
 }
 
+/* Bouton Primaire (Vert foncé) */
 .btn-primary {
     background-color: var(--primary-dark);
     color: #fff;
-    border: 2px solid var(--primary-dark);
 }
 
 .btn-primary:hover {
-    background-color: #fff;
-    color: var(--primary-dark);
+    background-color: #7b9e93;
+    color: #fff;
 }
 
 .btn-white {
@@ -372,18 +377,23 @@ footer.global-footer {
     border: 2px solid #fff;
 }
 
+/* Bouton Sombre (Reference: Devenir applicateur) */
+/* Bouton Sombre (Reference: Devenir applicateur) */
 .btn-dark {
     background-color: var(--primary-dark);
     color: white;
+    padding: 0.9rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
     border: none;
-    transition: background-color 0.3s;
+    font-size: 1rem;
 }
 
 .btn-dark:hover {
-    background-color: #0d2a23;
+    background-color: #7b9e93;
 }
 
-/* Footer Main */
+/* Pied de page principal */
 .main-footer {
     background-color: var(--primary-light);
     padding: 3rem 2rem;
@@ -414,7 +424,7 @@ footer.global-footer {
     display: flex;
     align-items: center;
     gap: 1rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .contact-item img {
@@ -426,9 +436,14 @@ footer.global-footer {
     text-decoration: underline;
     color: #12382f;
     font-weight: bold;
+    transition: color 0.3s;
 }
 
-/* Footer Bottom */
+.contact-item a:hover {
+    color: #7b9e93;
+}
+
+/* Bas du pied de page */
 .footer-bottom {
     display: flex;
     justify-content: space-between;
@@ -456,20 +471,24 @@ footer.global-footer {
 }
 
 .legal-links a {
-    text-decoration: none;
+    text-decoration: underline;
     color: var(--primary-dark);
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
-/* Auth Styles */
+.legal-links a:hover {
+    color: #7b9e93;
+}
+
+/* Styles Authentification */
 .auth-container {
     max-width: 600px;
     margin: 4rem 0;
-    /* Align with left main padding, but give some vertical space */
 }
 
 .auth-container h2 {
     font-size: 2rem;
-    /* Override global H2 huge size for this context if needed, or keep 40pt if design asks. Mockup H2 looks smaller than 40pt. Let's try 2rem (~24pt) first or stick to global if "Se connecter" is main title */
     margin-bottom: 2rem;
     font-weight: 700;
 }
@@ -497,9 +516,7 @@ footer.global-footer {
     width: 100%;
     padding: 12px;
     border: 2px solid #1a3c34;
-    /* Dark green thick border */
     border-radius: 0;
-    /* Sharp edges as per mockup */
     font-size: 1rem;
     outline: none;
 }
@@ -516,15 +533,13 @@ footer.global-footer {
 }
 
 .form-actions .btn {
-    padding: 12px 30px;
     background-color: #1a3c34;
-    /* Dark green */
     color: white;
-    border-radius: 5px;
-    /* Slight radius on button in second mockup? Or 15px global? Mockup 2 button looks slightly rounded but more rectangular than 15px. Let's stick to global or override. Mockup 2 button: "Connexion" has rounded corners. User said "image 2". Image 2 button looks like small radius ~4px. Global btn is 15px. Let's respect global unless it looks wrong, but mockup implies sharper. Let's try to match mockup 2. */
-    border-radius: 4px;
-    border: none;
     font-size: 1.1rem;
+}
+
+.form-actions .btn:hover {
+    background-color: #7b9e93;
 }
 
 .form-row {
@@ -551,7 +566,7 @@ footer.global-footer {
     text-decoration: underline;
 }
 
-/* Quote Form Specifics */
+/* Spécificités formulaire devis */
 .quote-form-container {
     margin: 0 auto;
     max-width: 800px;
@@ -568,14 +583,13 @@ footer.global-footer {
 
 .form-group-large {
     flex: 2 !important;
-    /* Override flex: 1 from .form-row .form-group */
 }
 
 .form-actions-centered {
     justify-content: center;
 }
 
-/* Header Badge */
+/* Badge En-tête */
 .header-icon-link {
     position: relative;
     display: flex;
@@ -600,7 +614,7 @@ footer.global-footer {
     z-index: 10;
 }
 
-/* Flash Message */
+/* Message Flash */
 .flash-message {
     position: fixed;
     bottom: 20px;
@@ -616,7 +630,7 @@ footer.global-footer {
     transition: opacity 0.5s ease;
 }
 
-/* Quote Actions Header */
+/* En-tête Actions Devis */
 .quote-actions-header {
     display: flex;
     justify-content: flex-end;
@@ -630,7 +644,7 @@ footer.global-footer {
     cursor: pointer;
 }
 
-/* Modal Styles */
+/* Styles Modale */
 .hidden {
     display: none !important;
 }
@@ -650,11 +664,9 @@ footer.global-footer {
 
 .modal-content {
     background-color: #f0f4f4;
-    /* Light grey/green bg */
     padding: 2rem;
     border-radius: 15px;
     border: 2px solid #000;
-    /* Black border as per mockup */
     text-align: center;
     max-width: 400px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -682,6 +694,11 @@ footer.global-footer {
     background-color: #1a3c34;
     color: white;
     border: none;
+    transition: background-color 0.3s;
+}
+
+.modal-actions .btn-primary:hover {
+    background-color: #7b9e93;
 }
 
 .modal-actions .btn-secondary {
@@ -690,7 +707,7 @@ footer.global-footer {
     border: 1px solid #ccc;
 }
 
-/* Catalogue Redesign Styles */
+/* Styles Catalogue */
 .page-header {
     height: 300px;
     background-size: cover;
@@ -727,7 +744,6 @@ footer.global-footer {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0;
-    /* Remove padding to align with header */
     gap: 40px;
 }
 
@@ -754,7 +770,6 @@ footer.global-footer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    /* Increase gap to reduce card width slightly */
     width: 100%;
 }
 
@@ -765,16 +780,13 @@ footer.global-footer {
     text-align: center;
     box-shadow: none;
     width: 100%;
-    /* Override 300px legacy width */
     max-width: none;
 }
 
 .product-card img {
     width: 100%;
     height: 170px;
-    /* Standardized height */
     object-fit: cover;
-    /* Ensure full image is visible, use 'cover' if cropping is preferred */
     border-radius: 8px;
     margin-bottom: 1rem;
 }
@@ -783,7 +795,7 @@ footer.global-footer {
     min-height: 50px;
 }
 
-/* Button Style */
+/* Boutons Formulaire Ajout */
 .add-to-quote-form .btn {
     background-color: #1a3c34;
     color: white;
@@ -796,7 +808,7 @@ footer.global-footer {
     font-size: 0.9rem;
 }
 
-/* Compact Price Display */
+/* Affichage Prix Compact */
 .price-values {
     margin-top: 10px;
     font-weight: bold;
@@ -805,7 +817,7 @@ footer.global-footer {
     gap: 5px;
 }
 
-/* Checkbox Styling */
+/* Styles Checkbox */
 .category-filters .checkbox-group {
     margin-bottom: 15px;
     position: relative;
@@ -816,7 +828,7 @@ footer.global-footer {
     align-items: center;
 }
 
-/* Home Catalogue Button Container */
+/* Conteneur Bouton Catalogue Accueil */
 .home-catalogue-container {
     text-align: center;
     margin-top: 2rem;
@@ -831,7 +843,7 @@ footer.global-footer {
     width: 0;
 }
 
-/* Custom Checkbox */
+/* Checkbox Personnalisée */
 .checkbox-group label::before {
     content: "";
     position: absolute;
@@ -845,7 +857,7 @@ footer.global-footer {
     border-radius: 4px;
 }
 
-/* Checked State */
+/* État Coché */
 .checkbox-group input:checked~label::before {
     background-color: #12382f;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' width='16px' height='16px'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
@@ -859,7 +871,7 @@ footer.global-footer {
     color: #000;
 }
 
-/* Price Range Slider */
+/* Slider Prix */
 .range-slider {
     position: relative;
     height: 30px;
@@ -921,8 +933,8 @@ footer.global-footer {
 }
 
 .results-count {
-    font-size: 1.2rem;
-    color: #555;
+    font-size: 1rem;
+    color: #000;
 }
 
 .right-header-controls {
@@ -939,9 +951,10 @@ footer.global-footer {
     min-width: 200px;
     background-color: white;
     cursor: pointer;
+    color: #000;
 }
 
-/* Color Filter Styles */
+/* Filtres Couleur */
 .color-filters {
     display: flex;
     flex-direction: column;
@@ -966,7 +979,7 @@ footer.global-footer {
     flex-shrink: 0;
 }
 
-/* Specific Colors */
+/* Couleurs Spécifiques */
 .color-circle.Sable {
     background-color: #cdbaac;
 }
@@ -983,17 +996,17 @@ footer.global-footer {
     background-color: #999390;
 }
 
-/* Hide default radio */
+/* Masquer radio par défaut */
 .color-option input[type="radio"] {
     display: none;
 }
 
-/* Selected State */
+/* État Sélectionné */
 .color-option input[type="radio"]:checked+.color-circle {
     box-shadow: 0 0 0 2px white, 0 0 0 4px #000;
 }
 
-/* Header Backgrounds */
+/* Arrière-plans En-tête */
 .header-bg-catalogue {
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../img/resines.png');
 }
@@ -1014,7 +1027,7 @@ footer.global-footer {
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../img/recherche.png');
 }
 
-/* Reset Filter Icon */
+/* Icône Reset Filtre */
 .color-circle.transparent {
     background-color: transparent;
     border: 2px solid #000;
@@ -1029,7 +1042,7 @@ footer.global-footer {
     font-size: 14px;
 }
 
-/* Account Page Styles */
+/* Styles Page Compte (Legacy container, overridden below) */
 .account-container {
     display: flex;
     max-width: 1200px;
@@ -1039,20 +1052,17 @@ footer.global-footer {
 }
 
 
-/* --- Home Page Styles --- */
-/* --- Home Page Styles --- */
-/* --- Home Page Styles --- */
+/* --- Styles Page d'Accueil --- */
 .home-hero {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 3rem 5%;
     background-color: #f0f5f5;
-    /* Light grey/green tint corrected */
     gap: 2rem;
-    margin: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     border-radius: 30px;
-    /* Rounded corners for the entire hero block */
 }
 
 .hero-left {
@@ -1069,14 +1079,12 @@ footer.global-footer {
 
 .text-green {
     color: #5c7c74;
-    /* Adjusted green to match target */
 }
 
 .applicator-pill {
     display: flex;
     align-items: center;
     background-color: #7b9e95;
-    /* Darker green/grey to match image */
     color: white;
     padding: 0.4rem 1.5rem 0.4rem 0.4rem;
     border-radius: 50px;
@@ -1104,30 +1112,12 @@ footer.global-footer {
     margin-left: 0;
 }
 
-/* Global Button Dark Styling (used in Hero and Catalogue) */
-.btn-dark {
-    background-color: #1a3c34;
-    /* Dark Jungle Green */
-    color: white;
-    padding: 0.9rem 2rem;
-    border-radius: 8px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background-color 0.2s;
-    font-size: 1rem;
-    display: inline-block;
-}
-
-.btn-dark:hover {
-    background-color: #2c5e52;
-}
-
+/* Bouton Dark déjà défini */
 
 .hero-right-grid {
     display: flex;
     gap: 1rem;
     height: 500px;
-    /* Fixed height for the grid */
 }
 
 .grid-col {
@@ -1139,7 +1129,6 @@ footer.global-footer {
 .grid-item {
     position: relative;
     border-radius: 20px;
-    /* Rounded corners for grid images */
     background-size: cover;
     background-position: center;
     overflow: hidden;
@@ -1152,12 +1141,10 @@ footer.global-footer {
 
 .item-small {
     width: 250px;
-    /* Increased width to match proportion */
     height: 242px;
-    /* Approx half minus gap */
 }
 
-/* Restoring Missing Background Images */
+/* Images de fond manquantes */
 .bg-resines {
     background-image: url('../img/resines.png');
 }
@@ -1170,19 +1157,18 @@ footer.global-footer {
     background-image: url('../img/outillage.png');
 }
 
-/* Category Button Styling */
+/* Style Boutons Catégorie Accueil */
 .cat-btn {
     position: absolute;
     bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 20px;
+    /* Aligné à gauche avec padding bas égal (20px) */
+    /* transform: translateX(-50%); Supprimé pour alignement gauche */
     background: white;
     padding: 0.8rem 1.2rem;
     border-radius: 12px;
-    /* Smooth rounded corners */
     text-decoration: none;
     color: #1a3c34;
-    /* Dark text */
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -1190,8 +1176,12 @@ footer.global-footer {
     gap: 0.5rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     width: auto;
-    /* Adapted width */
     min-width: 140px;
+    transition: color 0.3s;
+}
+
+.cat-btn:hover {
+    color: #7b9e93;
 }
 
 .cat-btn img {
@@ -1200,7 +1190,6 @@ footer.global-footer {
 }
 
 .new-products-section {
-    padding: 3rem 5%;
     text-align: center;
 }
 
@@ -1217,18 +1206,14 @@ footer.global-footer {
     margin-bottom: 2rem;
 }
 
-/* Reusing .product-card styles roughly, but ensuring consistency */
-/* Reusing .product-card styles roughly, but ensuring consistency */
+/* Card Produit (Style standardisé) */
 .product-card {
     background: #eff4f4;
-    /* Light greenish grey from capture */
     border-radius: 12px;
     overflow: hidden;
     text-align: center;
-    /* Center align like capture */
     height: 100%;
     padding: 1rem;
-    /* Padding inside card */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1239,7 +1224,6 @@ footer.global-footer {
     height: 200px;
     object-fit: cover;
     border-radius: 8px;
-    /* Rounded image corners */
     margin-bottom: 1rem;
 }
 
@@ -1275,18 +1259,22 @@ footer.global-footer {
     font-weight: 500;
     transition: background-color 0.2s;
     width: auto;
-    /* Allow auto width */
     display: inline-block;
 }
 
 .btn-small:hover {
-    background-color: #2c5e52;
+    background-color: #7b9e93;
 }
 
+/* Section Fonctionnalités */
 .features-section {
     background-color: #f0f5f5;
     padding: 4rem 5%;
     text-align: center;
+    border-radius: 30px;
+    /* Bordure radius cohérente avec le reste */
+    margin-top: 2rem;
+    /* Marge pour l'esthétique "boxed" */
 }
 
 .features-grid {
@@ -1325,7 +1313,7 @@ footer.global-footer {
     text-align: center;
 }
 
-/* Account Page Styles */
+/* Styles Page Compte */
 .header-bg-account {
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../img/compte.png');
 }
@@ -1346,15 +1334,16 @@ footer.global-footer {
     flex-direction: column;
 }
 
-/* User Summary Box */
+/* Boîte Résumé Utilisateur */
 .user-summary {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem;
+    gap: 1rem;
+    padding: 1rem;
     border: 3px solid #1a3c34;
-    /* Thick Green Border */
     background-color: #fff;
+    position: relative;
+    z-index: 2;
 }
 
 .user-info {
@@ -1376,12 +1365,11 @@ footer.global-footer {
     font-size: 1rem;
 }
 
-/* Sidebar Navigation */
+/* Navigation Latérale */
 .account-nav {
     display: flex;
     flex-direction: column;
     gap: 0;
-    /* Items touch each other or close gap */
     width: 100%;
 }
 
@@ -1389,31 +1377,30 @@ footer.global-footer {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1.5rem;
+    padding: 1rem;
     text-decoration: none;
     color: white;
     font-weight: 500;
     font-size: 1.1rem;
     background-color: #1a3c34;
-    /* Dark Green Default */
     border: 3px solid #1a3c34;
     cursor: pointer;
+    margin-top: -3px;
+    /* Chevauchement bordure item précédent */
+    position: relative;
+    z-index: 1;
 }
 
-/* Inactive state: White bg, Green border */
+/* État inactif */
 .account-nav-item:not(.active) {
     background-color: #fff;
-    /* White background for inactive */
     color: #1a3c34;
-    /* Dark text */
-    border-bottom: none;
-    /* Combine borders if stacking, or keep full border */
-    border: 3px solid #1a3c34;
 }
 
 .account-nav-item.active {
     background-color: #1a3c34;
     color: white;
+    z-index: 3;
 }
 
 .account-nav-item img {
@@ -1421,26 +1408,16 @@ footer.global-footer {
     width: 24px;
 }
 
-/* Invert icon color for active state (white icon) */
-/* Filter removed to rely on specific active images */
 .account-nav-item.active img {
-    /* filter: brightness(0) invert(1); */
     filter: none;
 }
 
-/* Default icon (inactive) - should be dark? If png is white, we need to invert to dark */
-/* Assuming icons like icone-infos.png are dark by default. If they are white, we inverse logic. 
-   Let's assume they are dark (standard) based on previous usage. 
-   If they are white, .active img filter: none, .inactive img filter: invert(0) etc.
-   Wait, previously .active img had filter: brightness(0) invert(1). That implies original is dark. 
-   So active (dark bg) needs white icon -> invert. Correct. 
-*/
 
 .account-content {
     flex-grow: 1;
 }
 
-/* Account Form */
+/* Formulaire Compte */
 .account-form {
     display: flex;
     flex-direction: column;
@@ -1459,7 +1436,6 @@ footer.global-footer {
     width: 100%;
     padding: 12px;
     border: 3px solid #1a3c34;
-    /* Thick Green Border */
     font-size: 1rem;
     border-radius: 0;
     background-color: white;
@@ -1479,7 +1455,7 @@ footer.global-footer {
     margin-bottom: 0;
 }
 
-/* Admin Modal & Other existing styles can remain or be cleaned up if unused */
+/* Modale Admin */
 .btn-admin-add {
     background-color: #1a3c34;
     color: white;
@@ -1493,12 +1469,15 @@ footer.global-footer {
     text-decoration: none;
 }
 
+.btn-admin-add:hover {
+    background-color: #7b9e93;
+}
 
-/* --- Product Detail Page Styles --- */
+
+/* --- Styles Page Détail Produit --- */
 
 .product-detail-page {
     background-color: #f0f5f5;
-    /* Light grey background */
     padding-bottom: 0;
 }
 
@@ -1523,7 +1502,6 @@ footer.global-footer {
     display: flex;
     gap: 4rem;
     align-items: center;
-    /* Align center vertically */
     background-color: transparent;
     margin-bottom: 4rem;
 }
@@ -1537,7 +1515,6 @@ footer.global-footer {
     justify-content: center;
     align-items: center;
     aspect-ratio: 1 / 1;
-    /* Force square ratio for container */
 }
 
 .product-image-large img {
@@ -1546,7 +1523,6 @@ footer.global-footer {
     width: auto;
     height: auto;
     object-fit: contain;
-    /* Ensure image fits */
 }
 
 .product-info-detail {
@@ -1573,7 +1549,6 @@ footer.global-footer {
     display: flex;
     align-items: center;
     gap: 3rem;
-    /* More space between price and form */
 }
 
 .price-large {
@@ -1586,7 +1561,6 @@ footer.global-footer {
     display: flex;
     align-items: center;
     gap: 1rem;
-    /* Gap between Qty and Button */
 }
 
 .qty-group {
@@ -1596,7 +1570,6 @@ footer.global-footer {
     border-radius: 8px;
     padding: 5px;
     height: 48px;
-    /* Match standard button height approx */
 }
 
 .qty-btn {
@@ -1610,6 +1583,11 @@ footer.global-footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: color 0.3s;
+}
+
+.qty-btn:hover {
+    color: #7b9e93;
 }
 
 .qty-group input {
@@ -1623,7 +1601,7 @@ footer.global-footer {
     outline: none;
 }
 
-/* Hide number spinner */
+/* Masquer les flèches du champ nombre */
 .qty-group input::-webkit-outer-spin-button,
 .qty-group input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -1642,7 +1620,7 @@ footer.global-footer {
     object-fit: cover;
 }
 
-/* Modal Styles */
+/* Styles Modale */
 .modal {
     position: fixed;
     top: 0;
@@ -1650,7 +1628,7 @@ footer.global-footer {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    /* Semi-transparent background */
+    /* Fond semi-transparent */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1666,7 +1644,7 @@ footer.global-footer {
 
 .modal-content {
     background-color: #f0f5f5;
-    /* Light greenish grey background */
+    /* Fond gris/vert clair */
     padding: 2rem;
     border-radius: 16px;
     width: 90%;
@@ -1748,7 +1726,7 @@ footer.global-footer {
     display: flex;
     gap: 1rem;
     align-items: flex-end;
-    /* Align inputs correctly */
+    /* Alignement correct des champs */
 }
 
 .form-row .form-group {
@@ -1794,26 +1772,26 @@ footer.global-footer {
     cursor: pointer;
 }
 
-/* Custom Delete Button Style */
+/* Bouton suppression personnalisé */
 .btn-delete-custom {
     background-color: white;
     color: #1a3c34;
-    /* Dark Green */
     border: 3px solid #1a3c34;
-    /* Thick Border match input/nav */
     padding: 10px 20px;
     font-size: 1rem;
     cursor: pointer;
     border-radius: 5px;
-    /* Match standard btn radius if any, usually small */
     font-weight: 500;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
 }
 
 .btn-delete-custom:hover {
-    background-color: #f0f5f5;
+    background-color: #7b9e93;
+    color: white;
+    border-color: #7b9e93;
 }
 
-/* Ensure labels are left aligned in modals and black */
+/* Alignement des labels à gauche dans les modales */
 .form-group label {
     display: block;
     text-align: left;
@@ -1829,7 +1807,7 @@ footer.global-footer {
     z-index: 10;
 }
 
-/* Error Page Styles */
+/* Page d'erreur */
 .error-page-container {
     display: flex;
     flex-direction: column;
@@ -1848,56 +1826,68 @@ footer.global-footer {
 }
 
 
-/* --- Messaging System Styles --- */
+/* --- Styles Messagerie --- */
 
-/* Client Layout (Account style extended) */
+/* Contenu Messagerie */
 .messaging-content {
     display: flex;
     flex-direction: column;
     height: 800px;
-    /* Fixed height for chat window */
     background: #fff;
-    border-radius: 8px;
-    /* Optional if container has it */
+    border-radius: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e1e4e8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .chat-header {
     padding: 1rem;
     border-bottom: 1px solid #eee;
-    background-color: #fcfcfc;
+    background-color: #f0f5f5;
 }
 
 .chat-title {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 }
 
 .chat-logo {
-    width: 32px;
-    height: 32px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #1a3c34;
+}
+
+.chat-title h2 {
+    font-size: 1.3rem !important;
+    margin: 0;
+    font-weight: bold;
 }
 
 .chat-messages {
     flex: 1;
     padding: 2rem;
     overflow-y: auto;
-    background-color: #f9f9f9;
+    background-color: #fff;
+    /* Fond blanc pour la zone de discussion */
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
-/* Message Bubbles */
+/* Bulles de message */
 .message-bubble {
     max-width: 70%;
-    padding: 0.5rem 1rem 1rem 1rem;
+    padding: 1rem;
     border-radius: 12px;
     position: relative;
-    font-size: 0.95rem;
-    line-height: 1.4;
+    line-height: 1.5;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .message-sent {
@@ -1909,10 +1899,46 @@ footer.global-footer {
 
 .message-received {
     align-self: flex-start;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    color: #333;
+    background-color: #f0f5f5;
+    border: none;
+    color: #1a3c34;
     border-bottom-left-radius: 2px;
+}
+
+/* Styles Messagerie & Offre */
+.quote-card-total {
+    text-align: right;
+    font-weight: bold;
+    color: #1b3a2f;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+#offer-total {
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #1b3a2f;
+    margin: 0 0 10px 0;
+}
+
+/* Classes utilitaires */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.display-none {
+    display: none;
+}
+
+
+/* Carte blanche dans bulle reçue */
+.message-received .quote-card-item {
+    background: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .message-content {
@@ -1929,11 +1955,11 @@ footer.global-footer {
     text-align: right;
 }
 
-/* Chat Input Area */
+/* Zone de saisie Chat */
 .chat-input-area {
     padding: 1.5rem;
     border-top: 1px solid #eee;
-    background-color: #fff;
+    background-color: #f0f5f5;
 }
 
 .message-form {
@@ -1957,17 +1983,19 @@ footer.global-footer {
 }
 
 
-/* --- Admin Messaging Styles --- */
+/* --- Styles Messagerie Admin --- */
 
 .admin-messaging-container {
     display: flex;
     height: 800px;
     background-color: #f4f4f4;
+    border: 1px solid #e1e4e8;
+    border-radius: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .conversations-sidebar {
     width: 230px;
-    /* Reduced from 350px (approx 2/3) */
     background-color: #fff;
     border-right: 1px solid #ddd;
     display: flex;
@@ -1988,9 +2016,7 @@ footer.global-footer {
     display: flex;
     align-items: center;
     gap: 10px;
-    /* Reduced gap */
-    padding: 1rem;
-    /* Reduced padding */
+    padding: 0.75rem;
     border-bottom: 1px solid #f0f0f0;
     cursor: pointer;
     text-decoration: none;
@@ -2005,7 +2031,6 @@ footer.global-footer {
 
 .avatar-circle {
     width: 40px;
-    /* Slightly smaller */
     height: 40px;
     background-color: #1a3c34;
     color: white;
@@ -2016,11 +2041,9 @@ footer.global-footer {
     font-weight: bold;
     font-size: 1.2rem;
     overflow: hidden;
-    /* Ensure image fits circle */
 }
 
-/* Use direct child selector to handle both text and img inside .avatar-circle if needed, 
-   but usually img will have the class or be inside */
+/* Sélecteur direct pour l'image dans le cercle avatar */
 .avatar-circle img {
     width: 100%;
     height: 100%;
@@ -2029,7 +2052,6 @@ footer.global-footer {
 
 .avatar-circle.small {
     width: 40px;
-    /* Match sidebar */
     height: 40px;
     font-size: 1.2rem;
 }
@@ -2045,7 +2067,6 @@ footer.global-footer {
     margin-bottom: 3px;
     color: #333;
     font-size: 0.95rem;
-    /* Slightly smaller font */
 }
 
 .conv-preview {
@@ -2063,7 +2084,7 @@ footer.global-footer {
     text-overflow: ellipsis;
 }
 
-/* Force override global main padding for this specific area */
+/* Override padding global pour cette zone */
 main.admin-chat-area {
     padding: 0 !important;
     flex: 1;
@@ -2073,11 +2094,8 @@ main.admin-chat-area {
 }
 
 .admin-header {
-    background-color: #fff;
-    /* Restored background */
+    background-color: #f0f5f5;
     padding: 1rem 2rem;
-    border-bottom: 1px solid #ddd;
-    /* Restored border */
 }
 
 .user-info {
@@ -2088,13 +2106,12 @@ main.admin-chat-area {
 
 .user-info h3 {
     font-size: 0.95rem;
-    /* Keep size adjustment */
     font-weight: 600;
     margin: 0;
     color: #333;
 }
 
-/* Quote Request Card Styles */
+/* Carte Demande de Devis */
 .quote-request-card {
     background-color: #f0f4f4;
     border-radius: 8px;
@@ -2134,12 +2151,13 @@ main.admin-chat-area {
 .quote-item-details {
     display: flex;
     flex-direction: column;
-    font-size: 0.85rem;
 }
 
 .quote-item-name {
-    font-weight: bold;
-    color: #333;
+    font-weight: normal;
+    color: #1a3c34;
+    font-size: 1rem;
+    margin-bottom: 5px;
 }
 
 .quote-item-price {
@@ -2160,16 +2178,13 @@ main.admin-chat-area {
 
 .quote-card-actions {
     margin-top: 15px;
-    /* Space above button */
 }
 
 /* -------------------------------------------------------------------------- */
 /*                            Offer Form & Messaging                          */
 /* -------------------------------------------------------------------------- */
 
-/* General Quote/Offer Card */
-/* General Quote/Offer Card */
-/* General Quote/Offer Card */
+/* Styles Généraux Devis/Offre */
 .quote-request-card {
     background-color: #fff;
     border: 1px solid #e9ecef;
@@ -2180,8 +2195,6 @@ main.admin-chat-area {
 /* Remove default borders for clearer look as requested */
 .quote-card-header {
     background-color: #f8f9fa;
-    padding: 8px 12px;
-    /* Remove border-bottom as requested "Supprime le trait" */
     border-bottom: none;
     color: #1a3c34;
     font-family: inherit;
@@ -2190,14 +2203,14 @@ main.admin-chat-area {
 }
 
 .quote-card-message {
-    /* Remove border-top as requested "Supprime le trait" */
     border-top: none;
     font-size: 0.95rem;
     color: #333;
 }
 
 /* -------------------------------------------------------------------------- */
-/*             Seamless Integration in Message Bubbles (Client & Admin)       */
+/* -------------------------------------------------------------------------- */
+/*             Intégration transparente dans les bulles (Client & Admin)      */
 /* -------------------------------------------------------------------------- */
 
 .message-bubble .quote-request-card {
@@ -2214,16 +2227,16 @@ main.admin-chat-area {
     padding-left: 0;
     padding-right: 0;
     margin-bottom: 5px;
-    /* Reduced margin */
 }
 
-/* Text Colors based on Bubble Context */
+/* Couleurs selon contexte */
 .message-sent .quote-card-header,
-.message-sent .quote-card-message {
+.message-sent .quote-card-message,
+.message-sent .quote-card-total {
     color: #fff;
 }
 
-/* Remove message separator line in sent bubble explicitly */
+/* Suppression du séparateur dans les messages envoyés */
 .message-sent .quote-card-message {
     border-top: none;
 }
@@ -2234,7 +2247,6 @@ main.admin-chat-area {
 
 .message-received .quote-card-message {
     border-top: none;
-    /* Removed for both */
     color: #333;
 }
 
@@ -2247,16 +2259,16 @@ main.admin-chat-area {
     border: none;
 }
 
-/* Items in Received (White) Bubble */
+/* Articles dans bulle reçue (Blanc) */
 .message-received .quote-card-item {
-    background: #f9f9f9;
+    background: #fff;
     border: 1px solid #eee;
     border-radius: 6px;
     padding: 10px;
 }
 
 /* -------------------------------------------------------------------------- */
-/*                            Offer Form (Interactive)                        */
+/*                            Formulaire d'Offre                              */
 /* -------------------------------------------------------------------------- */
 
 .offer-form-header {
@@ -2264,10 +2276,8 @@ main.admin-chat-area {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    /* Remove border as requested "Supprime le trait" */
     border-bottom: none;
     padding-bottom: 0;
-    /* Adjusted since border is gone */
 }
 
 .offer-form-header h3 {
@@ -2323,20 +2333,19 @@ main.admin-chat-area {
 }
 
 .offer-item-name-text {
-    font-weight: 600;
+    font-weight: normal;
     margin-bottom: 5px;
     font-size: 1rem;
-    color: #333;
+    color: #1a3c34;
 }
 
 .offer-item-controls {
     display: flex;
     gap: 15px;
-    /* Spacing between price, qty, delete */
     align-items: center;
 }
 
-/* Price Display (looks like text "26,00 €") */
+/* Affichage Prix */
 .price-display-wrapper {
     font-size: 1.2rem;
     font-weight: bold;
@@ -2344,18 +2353,15 @@ main.admin-chat-area {
     white-space: nowrap;
 }
 
-/* Quantity Control (Dark Green Pill: - 1 +) */
+/* Contrôle Quantité (Pilule vert sombre) */
 .offer-qty-control {
     display: flex;
     align-items: center;
     background-color: #1a3c34;
-    /* Dark Green */
     border-radius: 5px;
-    /* Rounded corners like image */
     padding: 5px;
     color: white;
     gap: 0;
-    /* Buttons touch input area */
 }
 
 .qty-btn {
@@ -2379,7 +2385,6 @@ main.admin-chat-area {
     font-size: 1.1rem;
     -moz-appearance: textfield;
     appearance: textfield;
-    /* Remove spinner */
 }
 
 .offer-qty-input::-webkit-outer-spin-button,
@@ -2453,33 +2458,26 @@ main.admin-chat-area {
     border-radius: 4px;
 }
 
-/* Footer: Message + Button side by side */
+/* Footer: Message + Bouton côte à côte */
 .offer-form-footer {
     display: flex;
     align-items: center;
-    /* Align items vertically */
     gap: 15px;
-    /* Space between input and button */
 }
 
 .offer-message-input {
     flex: 1;
-    /* Take available width */
     height: 50px;
-    /* Match button height approx */
     padding: 10px;
     border: 2px solid #1a3c34;
     border-radius: 6px;
-    /* Match standard or pill? Standard 4-6px */
     resize: none;
-    /* Prevent resize breaking layout */
     font-family: inherit;
     font-size: 1rem;
     margin-bottom: 0;
-    /* Remove bottom margin inside flex */
 }
 
-/* Ensure button matches height niceley */
+/* Hauteur bouton harmonisée */
 .offer-form-footer .btn {
     height: 50px;
     padding: 0 25px;
@@ -2503,10 +2501,10 @@ main.admin-chat-area {
 }
 
 /* -------------------------------------------------------------------------- */
-/*             Seamless Integration in Message Bubbles (Client & Admin)       */
+/*             Intégration dans les bulles de message                        */
 /* -------------------------------------------------------------------------- */
 
-/* When a card is inside a message bubble, make it transparent and seamless */
+/* Carte transparente dans les bulles */
 .message-bubble .quote-request-card {
     background: transparent;
     border: none;
@@ -2524,8 +2522,8 @@ main.admin-chat-area {
     margin-bottom: 10px;
 }
 
-/* Text Colors based on Bubble Context */
-/* If Sent (Green Bubble): Text White */
+/* Couleurs selon contexte */
+/* Si envoyé (Vert) : Texte blanc */
 .message-sent .quote-card-header {
     color: #fff;
 }
@@ -2534,28 +2532,18 @@ main.admin-chat-area {
     color: #fff;
 }
 
-/* If Received (White Bubble): Text Dark */
+/* Si reçu (Blanc) : Texte sombre */
 .message-received .quote-card-header {
     color: #1a3c34;
 }
 
 .message-received .quote-card-message {
-    border-top: 1px solid #eee;
     color: #333;
 }
 
-/* Items inside bubbles should remain as cards for clarity? 
-   User said "supprime les cadres à l'intérieur du devis et de l'offre".
-   This might mean the inner items too? 
-   "supprime les cadres à l'intérieur du devis et de l'offre" -> Remove frames INSIDE the quote/offer.
-   This strongly suggests the items (.quote-card-item) should also be seamless or simpler?
-   However, on the admin screenshot previously, the items were white cards inside the green.
-   If the user wants "style comme côté admin", then Admin Sent = White Item Cards.
-   Let's keep items as white cards for Sent (Green) to contrast.
-   For Received (White), white items on white bg might need a border?
-*/
 
-/* Items in Sent (Green) Bubble -> White cards */
+
+/* Articles dans bulle envoyée (Vert) -> Cartes blanches */
 .message-sent .quote-card-item {
     background: #fff;
     border-radius: 6px;
@@ -2564,14 +2552,10 @@ main.admin-chat-area {
     border: none;
 }
 
-/* Items in Received (White) Bubble -> White cards with border? Or Transparent?
-   If we make them transparent, they might blend too much.
-   Let's keep them as cards for now unless specified "item frames". 
-   "Cadres à l'intérieur du devis" usually refers to the container border.
-*/
+/* Articles dans bulle reçue (Blanc) */
 .message-received .quote-card-item {
-    background: #f9f9f9;
-    /* Slight contrast */
+    background: #fff;
+    /* Léger contraste */
     border: 1px solid #eee;
     border-radius: 6px;
     padding: 10px;
@@ -2643,10 +2627,10 @@ main.admin-chat-area {
 }
 
 .offer-item-name-text {
-    font-weight: 600;
+    font-weight: normal;
     margin-bottom: 5px;
     font-size: 1rem;
-    color: #333;
+    color: #1a3c34;
 }
 
 .offer-item-controls {

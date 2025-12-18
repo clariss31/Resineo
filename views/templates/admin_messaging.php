@@ -13,10 +13,10 @@
         <div class="user-summary">
             <div class="user-info">
                 <?php $avatar = $user->getImage() ? $user->getImage() : "img/avatar-default.png"; ?>
-                <img src="<?= $avatar ?>" alt="Avatar" class="avatar" style="cursor: pointer;"
+                <img src="<?= $avatar ?>" alt="Avatar" class="avatar cursor-pointer"
                     onclick="document.getElementById('avatar-admin-input').click();">
                 <form action="index.php?action=updateAccount" method="post" enctype="multipart/form-data"
-                    style="display: none;">
+                    class="display-none">
                     <input type="hidden" name="redirect_to" value="adminMessages">
                     <input type="file" name="avatar" id="avatar-admin-input" onchange="this.form.submit()">
                 </form>
@@ -120,14 +120,18 @@
                                         <?php if ($msg->getType() === 'quote_request'): ?>
                                             <?php
                                             $data = json_decode($msg->getContent(), true);
-                                            if ($data):
+                                            if ($data && isset($data['items'])):
                                                 ?>
                                                 <div class="quote-request-card">
                                                     <div class="quote-card-header">
                                                         <strong>Demande de devis</strong>
                                                     </div>
                                                     <div class="quote-card-items">
-                                                        <?php foreach ($data['items'] as $item): ?>
+                                                        <?php
+                                                        $total = 0;
+                                                        foreach ($data['items'] as $item):
+                                                            $total += $item['price'] * $item['quantity'];
+                                                            ?>
                                                             <div class="quote-card-item">
                                                                 <img src="<?= htmlspecialchars($item['image']) ?>" alt=""
                                                                     class="quote-item-img">
@@ -139,6 +143,9 @@
                                                                 </div>
                                                             </div>
                                                         <?php endforeach; ?>
+                                                    </div>
+                                                    <div class="quote-card-total">
+                                                        Total : <?= number_format($total, 2) ?> €
                                                     </div>
                                                     <div class="quote-card-message">
                                                         <?= nl2br(htmlspecialchars($data['user_message'])) ?>
@@ -157,14 +164,18 @@
                                         <?php elseif ($msg->getType() === 'offer'): ?>
                                             <?php
                                             $data = json_decode($msg->getContent(), true);
-                                            if ($data):
+                                            if ($data && isset($data['items'])):
                                                 ?>
                                                 <div class="quote-request-card offer-card">
                                                     <div class="quote-card-header">
                                                         <strong>Offre</strong>
                                                     </div>
                                                     <div class="quote-card-items">
-                                                        <?php foreach ($data['items'] as $item): ?>
+                                                        <?php
+                                                        $total = 0;
+                                                        foreach ($data['items'] as $item):
+                                                            $total += $item['price'] * $item['quantity'];
+                                                            ?>
                                                             <div class="quote-card-item">
                                                                 <img src="<?= htmlspecialchars($item['image']) ?>" alt=""
                                                                     class="quote-item-img">
@@ -176,6 +187,9 @@
                                                                 </div>
                                                             </div>
                                                         <?php endforeach; ?>
+                                                    </div>
+                                                    <div class="quote-card-total">
+                                                        Total : <?= number_format($total, 2) ?> €
                                                     </div>
                                                     <div class="quote-card-message">
                                                         <?= nl2br(htmlspecialchars($data['user_message'])) ?>
@@ -198,7 +212,7 @@
 
                     <div class="chat-input-area">
                         <!-- Formulaire d'offre (caché par défaut) -->
-                        <div id="offer-form-container" class="offer-form-container" style="display: none;">
+                        <div id="offer-form-container" class="offer-form-container display-none">
                             <div class="offer-form-header">
                                 <h3>Faire une offre</h3>
                                 <button type="button" class="close-offer-btn" onclick="closeOfferForm()">×</button>
@@ -206,6 +220,8 @@
                             <div class="offer-items-list" id="offer-items-list">
                                 <!-- Items will be injected here via JS -->
                             </div>
+                            <div id="offer-total">Total : 0.00
+                                €</div>
 
                             <!-- Search Product Input -->
                             <div class="search-products-container">
@@ -249,7 +265,8 @@
             <div class="offer-item-controls">
                 <div class="control-group">
                     <span class="control-label">Prix (€)</span>
-                    <input type="number" class="offer-item-price" step="0.01" value="" placeholder="">
+                    <input type="number" class="offer-item-price" step="0.01" value="" placeholder=""
+                        oninput="calculateOfferTotal()">
                 </div>
                 <div class="control-group">
                     <span class="control-label">Qté</span>
@@ -273,6 +290,19 @@
         chatContainer.scrollTop = chatContainer.scrollHeight;
     }
 
+    function calculateOfferTotal() {
+        let total = 0;
+        document.querySelectorAll('.offer-item-row').forEach(row => {
+            const price = parseFloat(row.querySelector('.offer-item-price').value) || 0;
+            const qty = parseInt(row.querySelector('.offer-item-qty').value) || 0;
+            total += price * qty;
+        });
+        const totalDiv = document.getElementById('offer-total');
+        if (totalDiv) {
+            totalDiv.textContent = 'Total : ' + total.toFixed(2) + ' €';
+        }
+    }
+
     function openOfferForm(quoteData) {
         const container = document.getElementById('offer-form-container');
         const list = document.getElementById('offer-items-list');
@@ -291,6 +321,7 @@
         container.style.display = 'block';
         document.getElementById('main-message-form').style.display = 'none';
         chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to see form
+        calculateOfferTotal();
     }
 
     function closeOfferForm() {
@@ -311,10 +342,12 @@
         clone.querySelector('.offer-item-qty').value = qty;
 
         list.appendChild(clone);
+        calculateOfferTotal();
     }
 
     function removeOfferItem(btn) {
         btn.closest('.offer-item-row').remove();
+        calculateOfferTotal();
     }
 
 
@@ -326,6 +359,7 @@
         val += delta;
         if (val < 1) val = 1;
         input.value = val;
+        calculateOfferTotal();
     }
 
     // Search Logic

@@ -89,7 +89,8 @@ $timestamp = filemtime($cssFile);
         <img src="img/resines.png" alt="Ambiance Résines" class="footer-top-image">
 
         <div class="applicator-banner">
-            <p style="font-size: 1.5rem; margin: 0;">Vous souhaitez devenir applicateur ? Rejoignez notre réseau !</p>
+            <p class="applicator-text" style="margin: 0;">Vous souhaitez devenir applicateur ? Rejoignez notre réseau !
+            </p>
             <a href="index.php?action=messagerie" class="btn btn-white">Devenir applicateur</a>
         </div>
 
@@ -115,15 +116,19 @@ $timestamp = filemtime($cssFile);
                 <p style="font-size: 1rem;">Copyright © 2025 - Site web créé par Pichinov.</p>
 
                 <div class="social-links">
-                    <a href="#"><img src="img/facebook.png" alt="Facebook"></a>
-                    <a href="#"><img src="img/instagram.png" alt="Instagram"></a>
-                    <a href="#"><img src="img/linkedin.png" alt="LinkedIn"></a>
-                    <a href="#"><img src="img/youtube.png" alt="YouTube"></a>
+                    <a href="https://www.facebook.com/resineo.fr/?locale=fr_FR" target="_blank"><img
+                            src="img/facebook.png" alt="Facebook"></a>
+                    <a href="https://www.instagram.com/resineo.fr/?hl=fr" target="_blank"><img src="img/instagram.png"
+                            alt="Instagram"></a>
+                    <a href="https://www.linkedin.com/company/r%C3%A9sineo/?viewAsMember=true" target="_blank"><img
+                            src="img/linkedin.png" alt="LinkedIn"></a>
+                    <a href="https://www.youtube.com/channel/UCerY6ufm0D24UDzZZOY09uQ" target="_blank"><img
+                            src="img/youtube.png" alt="YouTube"></a>
                 </div>
 
                 <div class="legal-links">
-                    <span>Politique de confidentialité</span>
-                    <span>Mentions légales</span>
+                    <a href="index.php?action=politiqueConfidentialite">Politique de confidentialité</a>
+                    <a href="index.php?action=mentionsLegales">Mentions légales</a>
                 </div>
             </div>
         </div>

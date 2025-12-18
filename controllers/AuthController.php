@@ -29,18 +29,21 @@ class AuthController
 
         // Vérification basique (à améliorer)
         if (empty($email) || empty($password) || empty($firstname) || empty($lastname)) {
-            throw new Exception("Tous les champs sont obligatoires.");
+            $_SESSION['flash'] = "Tous les champs sont obligatoires.";
+            Utils::redirect("registerForm");
         }
 
         if ($password !== $confirmPassword) {
-            throw new Exception("Les mots de passe ne correspondent pas.");
+            $_SESSION['flash'] = "Les mots de passe ne correspondent pas.";
+            Utils::redirect("registerForm");
         }
 
         // On vérifie si l'email existe déjà
         $userManager = new UserManager();
         $existingUser = $userManager->getByEmail($email);
         if ($existingUser) {
-            throw new Exception("Cet email est déjà utilisé.");
+            $_SESSION['flash'] = "Cet email est déjà utilisé. Veuillez vous connecter ou utiliser une autre adresse.";
+            Utils::redirect("registerForm");
         }
 
         // On hash le mot de passe
@@ -53,7 +56,7 @@ class AuthController
             'firstname' => $firstname,
             'lastname' => $lastname,
             'role' => 'client',
-            'image' => 'avatar-default.png'
+            'image' => 'img/avatar-default.png'
         ]);
 
         $userManager->create($user);
@@ -84,14 +87,16 @@ class AuthController
         $password = Utils::request("password");
 
         if (empty($email) || empty($password)) {
-            throw new Exception("Tous les champs sont obligatoires.");
+            $_SESSION['flash'] = "Tous les champs sont obligatoires.";
+            Utils::redirect("loginForm");
         }
 
         $userManager = new UserManager();
         $user = $userManager->getByEmail($email);
 
         if (!$user) {
-            throw new Exception("Utilisateur inconnu.");
+            $_SESSION['flash'] = "Utilisateur inconnu.";
+            Utils::redirect("loginForm");
         }
 
         if (password_verify($password, $user->getPassword())) {
@@ -99,7 +104,8 @@ class AuthController
             $_SESSION['user'] = $user;
             Utils::redirect("home");
         } else {
-            throw new Exception("Mot de passe incorrect.");
+            $_SESSION['flash'] = "Mot de passe incorrect.";
+            Utils::redirect("loginForm");
         }
     }
 
