@@ -34,6 +34,7 @@ class UserController
         $lastname = Utils::request("lastname");
         $email = Utils::request("email");
         $password = Utils::request("password");
+        $confirmPassword = Utils::request("confirmPassword");
 
         $userManager = new UserManager();
         $user = $_SESSION['user'];
@@ -67,6 +68,10 @@ class UserController
 
         // Mise à jour du mot de passe uniquement s'il est fourni
         if (!empty($password)) {
+            if ($password !== $confirmPassword) {
+                $_SESSION['flash'] = "Erreur : Les mots de passe ne correspondent pas.";
+                Utils::redirect("compte");
+            }
             $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
         }
 

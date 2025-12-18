@@ -23,12 +23,17 @@ class AuthController
         // On récupère les données du formulaire
         $email = Utils::request("email");
         $password = Utils::request("password");
+        $confirmPassword = Utils::request("confirmPassword");
         $firstname = Utils::request("firstname");
         $lastname = Utils::request("lastname");
 
         // Vérification basique (à améliorer)
         if (empty($email) || empty($password) || empty($firstname) || empty($lastname)) {
             throw new Exception("Tous les champs sont obligatoires.");
+        }
+
+        if ($password !== $confirmPassword) {
+            throw new Exception("Les mots de passe ne correspondent pas.");
         }
 
         // On vérifie si l'email existe déjà

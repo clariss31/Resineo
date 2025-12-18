@@ -66,6 +66,12 @@
                 <input type="password" name="password" id="password" placeholder="Laisser vide pour ne pas changer">
             </div>
 
+            <div class="form-group">
+                <label for="confirmPassword">Confirmez votre mot de passe</label>
+                <input type="password" name="confirmPassword" id="confirmPassword"
+                    placeholder="Ressaisir le mot de passe">
+            </div>
+
             <div class="form-actions">
                 <button type="submit" class="btn btn-dark">Enregistrer</button>
                 <!-- Hidden submit for enter key -->

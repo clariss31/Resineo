@@ -19,6 +19,10 @@
             <label for="password">Mot de passe<span class="required">*</span></label>
             <input type="password" name="password" id="password" required>
         </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirmez votre mot de passe<span class="required">*</span></label>
+            <input type="password" name="confirmPassword" id="confirmPassword" required>
+        </div>
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">S'inscrire</button>
             <p class="register-link">Déjà inscrit ? <a href="index.php?action=loginForm">Connectez-vous !</a></p>
