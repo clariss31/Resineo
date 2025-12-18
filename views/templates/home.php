@@ -45,15 +45,14 @@
                     </a>
                 </div>
                 <div class="product-info">
-                    <a href="index.php?action=showProduct&id=<?= $product->getId() ?>"
-                        style="text-decoration: none; color: inherit;">
+                    <a href="index.php?action=showProduct&id=<?= $product->getId() ?>" class="product-card-link">
                         <h3><?= htmlspecialchars($product->getName()) ?></h3>
                     </a>
                     <p class="price"><?= number_format($product->getPrice(), 2, ',', ' ') ?> €</p>
                     <?php if (!isset($_SESSION['user']) || $_SESSION['user']->getRole() !== 'admin'): ?>
                         <form action="index.php?action=addToQuote" method="POST" class="add-to-quote-form">
                             <input type="hidden" name="product_id" value="<?= $product->getId() ?>">
-                            <button type="submit" class="btn btn-dark btn-small">Ajouter au devis</button>
+                            <button type="submit" class="btn-quote">Ajouter au devis</button>
                         </form>
                     <?php endif; ?>
                 </div>
@@ -67,7 +66,7 @@
 </div>
 
 <div class="features-section">
-    <h2>RÉSINEO, le revêtement de sol drainant <br> esthétique et certifié</h2>
+    <h2>Résineo, le revêtement de sol drainant <br> esthétique et certifié</h2>
 
     <div class="features-grid">
         <div class="feature-item">

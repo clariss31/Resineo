@@ -78,7 +78,7 @@
                         <img src="<?= $product->getImage() ?>" alt="<?= $product->getName() ?>">
                     </a>
                     <div class="product-info">
-                        <a href="index.php?action=showProduct&id=<?= $product->getId() ?>" style="text-decoration: none; color: inherit;">
+                        <a href="index.php?action=showProduct&id=<?= $product->getId() ?>" class="product-card-link">
                             <h3><?= $product->getName() ?></h3>
                         </a>
                         <p class="price"><?= number_format($product->getPrice(), 2) ?> €</p>

@@ -13,7 +13,7 @@
         <div class="user-summary">
             <div class="user-info">
                 <?php $avatar = $user->getImage() ? $user->getImage() : "img/avatar-default.png"; ?>
-                <img src="<?= $avatar ?>" alt="Avatar" class="avatar" style="cursor: pointer;"
+                <img src="<?= $avatar ?>" alt="Avatar" class="avatar cursor-pointer"
                     onclick="document.getElementById('avatar-input').click();">
             </div>
             <a href="index.php?action=disconnectUser" class="logout-link">Déconnexion</a>
@@ -41,7 +41,7 @@
         <?php endif; ?>
 
         <form action="index.php?action=updateAccount" method="post" class="account-form" enctype="multipart/form-data">
-            <input type="file" name="avatar" id="avatar-input" style="display: none;" onchange="this.form.submit()">
+            <input type="file" name="avatar" id="avatar-input" class="display-none" onchange="this.form.submit()">
 
             <div class="form-row">
                 <div class="form-group">

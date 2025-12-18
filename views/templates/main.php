@@ -89,7 +89,8 @@ $timestamp = filemtime($cssFile);
         <img src="img/resines.png" alt="Ambiance Résines" class="footer-top-image">
 
         <div class="applicator-banner">
-            <p class="applicator-text" style="margin: 0;">Vous souhaitez devenir applicateur ? Rejoignez notre réseau !
+            <p class="applicator-text applicator-text-nomargin">Vous souhaitez devenir applicateur ? Rejoignez notre
+                réseau !
             </p>
             <a href="index.php?action=messagerie" class="btn btn-white">Devenir applicateur</a>
         </div>
@@ -113,7 +114,7 @@ $timestamp = filemtime($cssFile);
             </div>
 
             <div class="footer-bottom">
-                <p style="font-size: 1rem;">Copyright © 2025 - Site web créé par Pichinov.</p>
+                <p class="footer-copyright-text">Copyright © 2025 - Site web créé par Pichinov.</p>
 
                 <div class="social-links">
                     <a href="https://www.facebook.com/resineo.fr/?locale=fr_FR" target="_blank"><img

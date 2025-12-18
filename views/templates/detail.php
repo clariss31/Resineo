@@ -121,7 +121,7 @@
                             </div>
 
                             <div class="form-group dynamic-field" id="edit-field-scent">
-                                <div class="checkbox-wrapper" style="margin-top: 2rem;">
+                                <div class="checkbox-wrapper mt-2rem">
                                     <input type="checkbox" name="no_scent" id="edit-no-scent"
                                         <?= $product->getScent() === 'Sans odeur' ? 'checked' : '' ?>>
                                     <label for="edit-no-scent">Sans odeur ?</label>
@@ -141,10 +141,8 @@
                     </div>
                 </div>
 
-                <div class="modal-actions"
-                    style="margin-top: 2rem; display: flex; justify-content: space-between; align-items: center;">
-                    <button type="button" id="btn-delete-product" class="btn btn-delete-custom">Supprimer le
-                        produit</button>
+                <div class="actions-row">
+                    <button type="button" id="btn-delete-product" class="btn btn-secondary">Supprimer le produit</button>
                     <button type="submit" class="btn btn-dark btn-small">Enregistrer</button>
                 </div>
             </form>
@@ -154,9 +152,9 @@
 
     <!-- Delete Confirmation Modal -->
     <div id="delete-modal" class="modal hidden">
-        <div class="modal-content" style="max-width: 500px; text-align: center;">
+        <div class="modal-content modal-content-centered">
             <h2>Voulez-vous vraiment supprimer le produit ?</h2>
-            <div class="modal-actions" style="justify-content: center; gap: 1rem; margin-top: 2rem;">
+            <div class="modal-actions modal-actions-centered">
                 <form action="index.php?action=deleteProduct" method="POST">
                     <input type="hidden" name="id" value="<?= $product->getId() ?>">
                     <button type="submit" class="btn btn-dark">Oui</button>

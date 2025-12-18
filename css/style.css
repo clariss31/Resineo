@@ -25,7 +25,7 @@ h1 {
 }
 
 h2 {
-    font-size: 30pt;
+    font-size: 25pt;
     font-weight: bold;
     color: #000;
 }
@@ -205,8 +205,6 @@ footer.global-footer {
 
 .product-card h3 {
     font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
     color: #000;
 }
 
@@ -225,7 +223,7 @@ footer.global-footer {
     border: none;
     border-radius: 8px;
     padding: 0.9rem 2rem;
-    font-weight: 600;
+    font-weight: bold;
     cursor: pointer;
     text-decoration: none;
     font-size: 1rem;
@@ -310,6 +308,16 @@ footer.global-footer {
     font-weight: bold;
 }
 
+.quote-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quote-list-header h2 {
+    margin-bottom: 0;
+}
+
 .btn-delete {
     background-color: #1a3c34;
     color: white;
@@ -330,8 +338,11 @@ footer.global-footer {
     margin: 2rem auto;
 }
 
-.quote-total h3 {
+.quote-total p {
     margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #000;
 }
 
 
@@ -346,7 +357,7 @@ footer.global-footer {
     padding: 0.9rem 2rem;
     border-radius: 8px;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: bold;
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -354,21 +365,15 @@ footer.global-footer {
     font-size: 1rem;
 }
 
-/* Bouton Primaire (Vert foncé) */
-.btn-primary {
-    background-color: var(--primary-dark);
-    color: #fff;
-}
-
-.btn-primary:hover {
-    background-color: #7b9e93;
-    color: #fff;
-}
-
 .btn-white {
     background-color: #fff;
     color: var(--primary-dark);
-    border: 2px solid #fff;
+    padding: 0.9rem 2rem;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    border: 2px solid var(--primary-dark);
+    transition: all 0.3s;
 }
 
 .btn-white:hover {
@@ -378,13 +383,12 @@ footer.global-footer {
 }
 
 /* Bouton Sombre (Reference: Devenir applicateur) */
-/* Bouton Sombre (Reference: Devenir applicateur) */
 .btn-dark {
     background-color: var(--primary-dark);
     color: white;
     padding: 0.9rem 2rem;
     border-radius: 8px;
-    font-weight: 600;
+    font-weight: bold;
     border: none;
     font-size: 1rem;
 }
@@ -569,7 +573,7 @@ footer.global-footer {
 /* Spécificités formulaire devis */
 .quote-form-container {
     margin: 0 auto;
-    max-width: 800px;
+    max-width: 1000px;
 }
 
 .quote-form-textarea {
@@ -638,10 +642,19 @@ footer.global-footer {
 }
 
 .btn-clear-all {
-    color: #1a3c34;
+    color: var(--primary-dark);
     text-decoration: underline;
     font-weight: bold;
     cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.btn-clear-all:hover {
+    color: #7b9e93;
 }
 
 /* Styles Modale */
@@ -679,10 +692,16 @@ footer.global-footer {
     color: #000;
 }
 
+#modal-message {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
 .modal-actions {
     display: flex;
-    justify-content: space-around;
-    gap: 1rem;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
 }
 
 .modal-actions .btn {
@@ -704,7 +723,7 @@ footer.global-footer {
 .modal-actions .btn-secondary {
     background-color: white;
     color: #1a3c34;
-    border: 1px solid #ccc;
+    border: 2px solid #1a3c34;
 }
 
 /* Styles Catalogue */
@@ -1238,7 +1257,6 @@ footer.global-footer {
 
 .product-info h3 {
     font-size: 1.1rem;
-    margin-bottom: 0.5rem;
     font-weight: bold;
     color: #000;
 }
@@ -1247,23 +1265,6 @@ footer.global-footer {
     font-weight: bold;
     margin-bottom: 1rem;
     font-size: 1rem;
-}
-
-.btn-small {
-    background-color: #1a3c34;
-    color: white;
-    padding: 0.8rem 1.7rem;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: background-color 0.2s;
-    width: auto;
-    display: inline-block;
-}
-
-.btn-small:hover {
-    background-color: #7b9e93;
 }
 
 /* Section Fonctionnalités */
@@ -1454,25 +1455,6 @@ footer.global-footer {
 .form-group {
     margin-bottom: 0;
 }
-
-/* Modale Admin */
-.btn-admin-add {
-    background-color: #1a3c34;
-    color: white;
-    border: none;
-    padding: 0.8rem 1.7rem;
-    border-radius: 6px;
-    font-weight: 500;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: background-color 0.2s;
-    text-decoration: none;
-}
-
-.btn-admin-add:hover {
-    background-color: #7b9e93;
-}
-
 
 /* --- Styles Page Détail Produit --- */
 
@@ -1704,7 +1686,6 @@ footer.global-footer {
 .form-group label {
     font-weight: 600;
     color: #1a3c34;
-    font-size: 0.95rem;
 }
 
 .form-group input,
@@ -1744,12 +1725,7 @@ footer.global-footer {
     width: auto;
 }
 
-.modal-actions {
-    margin-top: auto;
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-}
+
 
 .modal-close {
     position: absolute;
@@ -1770,25 +1746,6 @@ footer.global-footer {
     width: 100%;
     text-align: center;
     cursor: pointer;
-}
-
-/* Bouton suppression personnalisé */
-.btn-delete-custom {
-    background-color: white;
-    color: #1a3c34;
-    border: 3px solid #1a3c34;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 5px;
-    font-weight: 500;
-    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
-}
-
-.btn-delete-custom:hover {
-    background-color: #7b9e93;
-    color: white;
-    border-color: #7b9e93;
 }
 
 /* Alignement des labels à gauche dans les modales */
@@ -2815,4 +2772,85 @@ main.admin-chat-area {
     background: none;
     border-bottom: 1px solid #eee;
     color: #333;
+}
+
+/* Empty State Admin Messaging */
+.empty-state {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    height: 100%;
+    color: #1a3c34;
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+/* Utilities & Refactoring Inline Styles */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.display-none {
+    display: none;
+}
+
+.product-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+.legal-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header-bg-quote {
+    background-image: url('../img/devis.png');
+}
+
+.footer-copyright-text {
+    font-size: 1rem;
+}
+
+.applicator-text-nomargin {
+    margin: 0;
+}
+
+.mt-2rem {
+    margin-top: 2rem;
+}
+
+.actions-row {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-content-centered {
+    max-width: 500px;
+    text-align: center;
+}
+
+.modal-actions-centered {
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Admin Messaging JS Template Classes */
+.search-item-info {
+    flex: 1;
+}
+
+.search-item-name {
+    font-weight: bold;
+}
+
+.search-item-sub {
+    font-size: 0.85rem;
+    color: #666;
 }

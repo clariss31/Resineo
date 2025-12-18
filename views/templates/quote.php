@@ -1,12 +1,21 @@
-<h1>Produits ajoutés à la demande de devis</h1>
+<div class="page-header header-bg-quote">
+    <div class="header-content">
+        <h1>Demande de devis</h1>
+        <div class="breadcrumb">
+            <a href="index.php?action=home">Accueil</a> > Demande de devis
+        </div>
+    </div>
+</div>
 
 <?php if (empty($quoteItems)): ?>
     <p>Votre devis est vide.</p>
 <?php else: ?>
-    <div class="quote-actions-header">
-        <a href="#" id="clear-quote-btn" class="btn-clear-all">Tout supprimer</a>
-    </div>
+
     <div class="quote-list">
+        <div class="quote-list-header">
+            <h2>Liste des produits</h2>
+            <a href="#" id="clear-quote-btn" class="btn-clear-all">Tout supprimer</a>
+        </div>
         <?php foreach ($quoteItems as $item): ?>
             <div class="quote-item">
                 <div class="quote-item-info">
@@ -28,11 +37,10 @@
         <?php endforeach; ?>
     </div>
     <div class="quote-total">
-        <h3>Total estimé : <?= number_format($total, 2) ?> €</h3>
+        <p>Total : <?= number_format($total, 2) ?> €</p>
     </div>
 
     <div class="auth-container quote-form-container">
-        <h2>Demander un devis</h2>
         <form action="index.php?action=sendQuote" method="post" class="login-form">
             <div class="form-group">
                 <label for="message">Message<span class="required">*</span></label>
@@ -40,7 +48,7 @@
             </div>
 
             <div class="form-actions form-actions-centered">
-                <button type="submit" class="btn btn-primary">Envoyer une demande de devis</button>
+                <button type="submit" class="btn btn-dark">Envoyer une demande de devis</button>
             </div>
         </form>
     </div>

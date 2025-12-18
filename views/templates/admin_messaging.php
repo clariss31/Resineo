@@ -151,7 +151,7 @@
                                                         <?= nl2br(htmlspecialchars($data['user_message'])) ?>
                                                     </div>
                                                     <div class="quote-card-actions">
-                                                        <button type="button" class="btn btn-primary"
+                                                        <button type="button" class="btn btn-dark"
                                                             onclick='openOfferForm(<?= json_encode($data) ?>)'>
                                                             Faire une offre
                                                         </button>
@@ -232,7 +232,7 @@
                             <div class="offer-form-footer">
                                 <textarea id="offer-message" placeholder="Réponse..."
                                     class="offer-message-input"></textarea>
-                                <button type="button" class="btn btn-primary" onclick="submitOffer()">Envoyer</button>
+                                <button type="button" class="btn btn-dark" onclick="submitOffer()">Envoyer</button>
                             </div>
                         </div>
 
@@ -247,7 +247,7 @@
                     </div>
                 <?php else: ?>
                     <div class="empty-state">
-                        <p>Sélectionnez une conversation pour commencer.</p>
+                        <p>Aucune conversation</p>
                     </div>
                 <?php endif; ?>
             </main>
@@ -392,9 +392,9 @@
                                 // Display as a clear clickable list item
                                 div.innerHTML = `
                                     <img src="${product.image}" class="search-result-img">
-                                    <div style="flex:1;">
-                                        <div style="font-weight:bold;">${product.name}</div>
-                                        <div style="font-size:0.85rem; color:#666;">${product.price} €</div>
+                                    <div class="search-item-info">
+                                        <div class="search-item-name">${product.name}</div>
+                                        <div class="search-item-sub">${product.price} €</div>
                                     </div>
                                 `;
                                 div.onclick = () => {

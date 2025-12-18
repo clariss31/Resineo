@@ -55,7 +55,7 @@
             
             <div class="right-header-controls">
                 <?php if (isset($_SESSION['user']) && $_SESSION['user']->getRole() === 'admin'): ?>
-                    <button id="btn-add-product" class="btn-admin-add">+ Ajouter un produit</button>
+                    <button id="btn-add-product" class="btn btn-dark">+ Ajouter un produit</button>
                 <?php endif; ?>
 
                 <div class="sort-controls">
@@ -77,7 +77,7 @@
                         <img src="<?= $product->getImage() ?>" alt="<?= $product->getName() ?>">
                     </a>
                     <div class="product-info">
-                        <a href="index.php?action=showProduct&id=<?= $product->getId() ?>" style="text-decoration: none; color: inherit;">
+                        <a href="index.php?action=showProduct&id=<?= $product->getId() ?>" class="product-card-link">
                             <h3><?= $product->getName() ?></h3>
                         </a>
                         <p class="price"><?= number_format($product->getPrice(), 2) ?> €</p>
@@ -102,7 +102,7 @@
                 <!-- Left: Image -->
                 <div class="modal-left">
                     <div class="image-preview-container" id="image-preview-area">
-                        <img src="img/photo.png" alt="Aperçu" id="image-preview" style="cursor: pointer;" onclick="document.getElementById('product-image').click();">
+                        <img src="img/photo.png" alt="Aperçu" id="image-preview" class="cursor-pointer" onclick="document.getElementById('product-image').click();">
                     </div>
                     <label for="product-image" class="btn btn-dark btn-small btn-full">Ajouter une image</label>
                     <input type="file" name="image" id="product-image" accept="image/*" class="hidden">
@@ -149,7 +149,7 @@
                         </div>
 
                         <div class="form-group dynamic-field hidden" id="field-scent">
-                             <div class="checkbox-wrapper" style="margin-top: 2rem;">
+                             <div class="checkbox-wrapper mt-2rem">
                                 <input type="checkbox" name="no_scent" id="no-scent"> 
                                 <label for="no-scent">Sans odeur ?</label>
                              </div>

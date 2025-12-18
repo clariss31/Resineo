@@ -1,4 +1,4 @@
-<div class="legal-page-container" style="max-width: 800px; margin: 0 auto; padding: 20px;">
+<div class="legal-page-container legal-container">
     <h1>POLITIQUE DE CONFIDENTIALITÉ</h1>
 
     <section>
