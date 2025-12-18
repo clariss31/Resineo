@@ -143,6 +143,43 @@
                                                     <div class="quote-card-message">
                                                         <?= nl2br(htmlspecialchars($data['user_message'])) ?>
                                                     </div>
+                                                    <div class="quote-card-actions">
+                                                        <button type="button" class="btn btn-primary"
+                                                            onclick='openOfferForm(<?= json_encode($data) ?>)'>
+                                                            Faire une offre
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            <?php else: ?>
+                                                <?= nl2br(htmlspecialchars($msg->getContent())) ?>
+                                            <?php endif; ?>
+
+                                        <?php elseif ($msg->getType() === 'offer'): ?>
+                                            <?php
+                                            $data = json_decode($msg->getContent(), true);
+                                            if ($data):
+                                                ?>
+                                                <div class="quote-request-card offer-card">
+                                                    <div class="quote-card-header">
+                                                        <strong>Offre</strong>
+                                                    </div>
+                                                    <div class="quote-card-items">
+                                                        <?php foreach ($data['items'] as $item): ?>
+                                                            <div class="quote-card-item">
+                                                                <img src="<?= htmlspecialchars($item['image']) ?>" alt=""
+                                                                    class="quote-item-img">
+                                                                <div class="quote-item-details">
+                                                                    <span class="quote-item-name"><?= htmlspecialchars($item['name']) ?></span>
+                                                                    <span class="quote-item-price"><?= number_format($item['price'], 2) ?>
+                                                                        €</span>
+                                                                    <span class="quote-item-qty">Quantité : <?= $item['quantity'] ?></span>
+                                                                </div>
+                                                            </div>
+                                                        <?php endforeach; ?>
+                                                    </div>
+                                                    <div class="quote-card-message">
+                                                        <?= nl2br(htmlspecialchars($data['user_message'])) ?>
+                                                    </div>
                                                 </div>
                                             <?php else: ?>
                                                 <?= nl2br(htmlspecialchars($msg->getContent())) ?>
@@ -160,9 +197,35 @@
                     </div>
 
                     <div class="chat-input-area">
-                        <form action="index.php?action=sendMessage" method="POST" class="message-form">
+                        <!-- Formulaire d'offre (caché par défaut) -->
+                        <div id="offer-form-container" class="offer-form-container" style="display: none;">
+                            <div class="offer-form-header">
+                                <h3>Faire une offre</h3>
+                                <button type="button" class="close-offer-btn" onclick="closeOfferForm()">×</button>
+                            </div>
+                            <div class="offer-items-list" id="offer-items-list">
+                                <!-- Items will be injected here via JS -->
+                            </div>
+
+                            <!-- Search Product Input -->
+                            <div class="search-products-container">
+                                <input type="text" id="product-search-input"
+                                    placeholder="Ajouter un produit (rechercher...)">
+                                <div id="search-results"></div>
+                            </div>
+                            <div class="offer-form-footer">
+                                <textarea id="offer-message" placeholder="Réponse..."
+                                    class="offer-message-input"></textarea>
+                                <button type="button" class="btn btn-primary" onclick="submitOffer()">Envoyer</button>
+                            </div>
+                        </div>
+
+                        <form action="index.php?action=sendMessage" method="POST" class="message-form"
+                            id="main-message-form">
                             <input type="hidden" name="conversation_id" value="<?= $activeConversation->getId() ?>">
-                            <textarea name="content" placeholder="Répondre..." required></textarea>
+                            <input type="hidden" name="type" id="message-type" value="text">
+                            <!-- Support for message types -->
+                            <textarea name="content" id="message-content" placeholder="Répondre..." required></textarea>
                             <button type="submit" class="btn btn-dark">Envoyer</button>
                         </form>
                     </div>
@@ -176,9 +239,184 @@
     </div>
 </div>
 
+<!-- Template for Offer Item -->
+<template id="offer-item-template">
+    <div class="offer-item-row">
+        <img src="" alt="" class="offer-item-img">
+        <div class="offer-item-details">
+            <span class="offer-item-name-text"></span>
+            <input type="hidden" class="offer-item-name" value=""> <!-- Hidden input for name submission -->
+            <div class="offer-item-controls">
+                <div class="control-group">
+                    <span class="control-label">Prix (€)</span>
+                    <input type="number" class="offer-item-price" step="0.01" value="" placeholder="">
+                </div>
+                <div class="control-group">
+                    <span class="control-label">Qté</span>
+                    <div class="offer-qty-control">
+                        <button type="button" class="qty-btn" onclick="updateOfferQty(this, -1)">-</button>
+                        <input type="number" class="offer-item-qty offer-qty-input" step="1" value="" readonly>
+                        <button type="button" class="qty-btn" onclick="updateOfferQty(this, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="remove-item-btn" onclick="removeOfferItem(this)">×</button>
+    </div>
+</template>
+
+
+
 <script>
     const chatContainer = document.getElementById('chat-messages');
     if (chatContainer) {
         chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    function openOfferForm(quoteData) {
+        const container = document.getElementById('offer-form-container');
+        const list = document.getElementById('offer-items-list');
+        const template = document.getElementById('offer-item-template');
+
+        // Reset list
+        list.innerHTML = '';
+
+        // Populate items from quote
+        if (quoteData && quoteData.items) {
+            quoteData.items.forEach(item => {
+                addItemToForm(item.name, item.price, item.quantity, item.image);
+            });
+        }
+
+        container.style.display = 'block';
+        document.getElementById('main-message-form').style.display = 'none';
+        chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to see form
+    }
+
+    function closeOfferForm() {
+        document.getElementById('offer-form-container').style.display = 'none';
+        document.getElementById('main-message-form').style.display = 'flex';
+    }
+
+    // Helper to add item to list
+    function addItemToForm(name, price, qty, image) {
+        const list = document.getElementById('offer-items-list');
+        const template = document.getElementById('offer-item-template');
+        const clone = template.content.cloneNode(true);
+
+        clone.querySelector('.offer-item-img').src = image || 'img/camera-icon.png';
+        clone.querySelector('.offer-item-name-text').textContent = name;
+        clone.querySelector('.offer-item-name').value = name;
+        clone.querySelector('.offer-item-price').value = price;
+        clone.querySelector('.offer-item-qty').value = qty;
+
+        list.appendChild(clone);
+    }
+
+    function removeOfferItem(btn) {
+        btn.closest('.offer-item-row').remove();
+    }
+
+
+
+    function updateOfferQty(btn, delta) {
+        const wrapper = btn.closest('.offer-qty-control');
+        const input = wrapper.querySelector('.offer-qty-input');
+        let val = parseInt(input.value) || 0;
+        val += delta;
+        if (val < 1) val = 1;
+        input.value = val;
+    }
+
+    // Search Logic
+    const searchInput = document.getElementById('product-search-input');
+    const searchResults = document.getElementById('search-results');
+    let debounceTimer;
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function () {
+            clearTimeout(debounceTimer);
+            const term = this.value.trim();
+
+            // Allow search for even 1 char if user wants, or even empty to show recent? 
+            // User asked: "a chaque fois que je change un caractère"
+            if (term.length === 0) {
+                searchResults.style.display = 'none';
+                return;
+            }
+
+            // Reduced debounce to 50ms for "instant" feel as requested
+            debounceTimer = setTimeout(() => {
+                fetch('index.php?action=searchJson&term=' + encodeURIComponent(term))
+                    .then(response => response.json())
+                    .then(data => {
+                        searchResults.innerHTML = '';
+                        if (data.length > 0) {
+                            data.forEach(product => {
+                                const div = document.createElement('div');
+                                div.className = 'search-result-item';
+                                // Display as a clear clickable list item
+                                div.innerHTML = `
+                                    <img src="${product.image}" class="search-result-img">
+                                    <div style="flex:1;">
+                                        <div style="font-weight:bold;">${product.name}</div>
+                                        <div style="font-size:0.85rem; color:#666;">${product.price} €</div>
+                                    </div>
+                                `;
+                                div.onclick = () => {
+                                    addItemToForm(product.name, product.price, 1, product.image);
+                                    searchInput.value = '';
+                                    searchResults.style.display = 'none';
+                                };
+                                searchResults.appendChild(div);
+                            });
+                            searchResults.style.display = 'block';
+                        } else {
+                            searchResults.style.display = 'none';
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Search error:', err);
+                    });
+            }, 100); // 100ms debounce
+        });
+
+        // Close search results when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                searchResults.style.display = 'none';
+            }
+        });
+    }
+
+    function submitOffer() {
+        const items = [];
+        document.querySelectorAll('.offer-item-row').forEach(row => {
+            const name = row.querySelector('.offer-item-name').value;
+            const price = parseFloat(row.querySelector('.offer-item-price').value);
+            const quantity = parseInt(row.querySelector('.offer-item-qty').value);
+            const image = row.querySelector('.offer-item-img').getAttribute('src');
+
+            if (name && quantity > 0) {
+                items.push({ name, price, quantity, image });
+            }
+        });
+
+        const message = document.getElementById('offer-message').value;
+
+        const offerData = {
+            type: 'offer',
+            items: items,
+            user_message: message
+        };
+
+        const contentInput = document.getElementById('message-content');
+        const typeInput = document.getElementById('message-type');
+
+        contentInput.value = JSON.stringify(offerData);
+        typeInput.value = 'offer';
+        contentInput.removeAttribute('required');
+
+        document.getElementById('main-message-form').submit();
     }
 </script>

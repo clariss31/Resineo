@@ -44,6 +44,11 @@ try {
             $productController->search();
             break;
 
+        case 'searchJson':
+            $productController = new ProductController();
+            $productController->searchJson();
+            break;
+
         case 'showProduct':
             $productController = new ProductController();
             $productController->showProduct();

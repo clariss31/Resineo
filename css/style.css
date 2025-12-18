@@ -1292,7 +1292,7 @@ footer.global-footer {
 .features-grid {
     display: flex;
     justify-content: center;
-    gap: 4rem;
+    gap: 7rem;
     margin-top: 3rem;
 }
 
@@ -1300,7 +1300,7 @@ footer.global-footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 150px;
+    max-width: 170px;
 }
 
 .feature-item img {
@@ -1891,7 +1891,7 @@ footer.global-footer {
 /* Message Bubbles */
 .message-bubble {
     max-width: 70%;
-    padding: 1rem;
+    padding: 0.5rem 1rem 1rem 1rem;
     border-radius: 12px;
     position: relative;
     font-size: 0.95rem;
@@ -2098,8 +2098,6 @@ main.admin-chat-area {
 .quote-request-card {
     background-color: #f0f4f4;
     border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 5px;
     border: 1px solid #e1e8e8;
 }
 
@@ -2155,8 +2153,682 @@ main.admin-chat-area {
 }
 
 .quote-card-message {
-    padding-top: 10px;
     border-top: 1px solid #ddd;
     font-size: 0.95rem;
+    color: #333;
+}
+
+.quote-card-actions {
+    margin-top: 15px;
+    /* Space above button */
+}
+
+/* -------------------------------------------------------------------------- */
+/*                            Offer Form & Messaging                          */
+/* -------------------------------------------------------------------------- */
+
+/* General Quote/Offer Card */
+/* General Quote/Offer Card */
+/* General Quote/Offer Card */
+.quote-request-card {
+    background-color: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Remove default borders for clearer look as requested */
+.quote-card-header {
+    background-color: #f8f9fa;
+    padding: 8px 12px;
+    /* Remove border-bottom as requested "Supprime le trait" */
+    border-bottom: none;
+    color: #1a3c34;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.quote-card-message {
+    /* Remove border-top as requested "Supprime le trait" */
+    border-top: none;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+/* -------------------------------------------------------------------------- */
+/*             Seamless Integration in Message Bubbles (Client & Admin)       */
+/* -------------------------------------------------------------------------- */
+
+.message-bubble .quote-request-card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+}
+
+.message-bubble .quote-card-header {
+    background: transparent;
+    border-bottom: none;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 5px;
+    /* Reduced margin */
+}
+
+/* Text Colors based on Bubble Context */
+.message-sent .quote-card-header,
+.message-sent .quote-card-message {
+    color: #fff;
+}
+
+/* Remove message separator line in sent bubble explicitly */
+.message-sent .quote-card-message {
+    border-top: none;
+}
+
+.message-received .quote-card-header {
+    color: #1a3c34;
+}
+
+.message-received .quote-card-message {
+    border-top: none;
+    /* Removed for both */
+    color: #333;
+}
+
+/* Items in Sent (Green) Bubble -> White cards */
+.message-sent .quote-card-item {
+    background: #fff;
+    border-radius: 6px;
+    padding: 10px;
+    color: #333;
+    border: none;
+}
+
+/* Items in Received (White) Bubble */
+.message-received .quote-card-item {
+    background: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                            Offer Form (Interactive)                        */
+/* -------------------------------------------------------------------------- */
+
+.offer-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    /* Remove border as requested "Supprime le trait" */
+    border-bottom: none;
+    padding-bottom: 0;
+    /* Adjusted since border is gone */
+}
+
+.offer-form-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #1a3c34;
+    font-family: inherit;
+    font-weight: bold;
+}
+
+.close-offer-btn {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #1a3c34;
+    transition: color 0.3s;
+}
+
+.close-offer-btn:hover {
+    color: #0d2a23;
+}
+
+.offer-items-list {
+    margin-bottom: 20px;
+}
+
+.offer-item-row {
+    display: flex;
+    align-items: center;
+    background: #fafafa;
+    border: 1px solid #eee;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.offer-item-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 15px;
+}
+
+.offer-item-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.offer-item-name-text {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.offer-item-controls {
+    display: flex;
+    gap: 15px;
+    /* Spacing between price, qty, delete */
+    align-items: center;
+}
+
+/* Price Display (looks like text "26,00 €") */
+.price-display-wrapper {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #000;
+    white-space: nowrap;
+}
+
+/* Quantity Control (Dark Green Pill: - 1 +) */
+.offer-qty-control {
+    display: flex;
+    align-items: center;
+    background-color: #1a3c34;
+    /* Dark Green */
+    border-radius: 5px;
+    /* Rounded corners like image */
+    padding: 5px;
+    color: white;
+    gap: 0;
+    /* Buttons touch input area */
+}
+
+.qty-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0 10px;
+    line-height: 1;
+}
+
+.offer-qty-input {
+    width: 40px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.1rem;
+    -moz-appearance: textfield;
+    appearance: textfield;
+    /* Remove spinner */
+}
+
+.offer-qty-input::-webkit-outer-spin-button,
+.offer-qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.remove-item-btn {
+    background: none;
+    border: none;
+    color: #1a3c34;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 0 10px;
+    transition: transform 0.2s;
+}
+
+.remove-item-btn:hover {
+    transform: scale(1.1);
+}
+
+.search-products-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+#product-search-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #1a3c34;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+}
+
+#search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 100;
+    display: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-item {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background 0.2s;
+}
+
+.search-result-item:hover {
+    background: #f0f4f4;
+}
+
+.search-result-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-right: 12px;
+    border-radius: 4px;
+}
+
+/* Footer: Message + Button side by side */
+.offer-form-footer {
+    display: flex;
+    align-items: center;
+    /* Align items vertically */
+    gap: 15px;
+    /* Space between input and button */
+}
+
+.offer-message-input {
+    flex: 1;
+    /* Take available width */
+    height: 50px;
+    /* Match button height approx */
+    padding: 10px;
+    border: 2px solid #1a3c34;
+    border-radius: 6px;
+    /* Match standard or pill? Standard 4-6px */
+    resize: none;
+    /* Prevent resize breaking layout */
+    font-family: inherit;
+    font-size: 1rem;
+    margin-bottom: 0;
+    /* Remove bottom margin inside flex */
+}
+
+/* Ensure button matches height niceley */
+.offer-form-footer .btn {
+    height: 50px;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+/* Helper Clean Classes */
+.quote-request-card.no-bg {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.quote-card-header.no-bg {
+    background: none;
+    border-bottom: 1px solid #eee;
+    color: #333;
+}
+
+/* -------------------------------------------------------------------------- */
+/*             Seamless Integration in Message Bubbles (Client & Admin)       */
+/* -------------------------------------------------------------------------- */
+
+/* When a card is inside a message bubble, make it transparent and seamless */
+.message-bubble .quote-request-card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+}
+
+.message-bubble .quote-card-header {
+    background: transparent;
+    border-bottom: none;
+    padding-left: 0;
+    /* Remove left padding as requested to align with text */
+    padding-right: 0;
+    margin-bottom: 10px;
+}
+
+/* Text Colors based on Bubble Context */
+/* If Sent (Green Bubble): Text White */
+.message-sent .quote-card-header {
+    color: #fff;
+}
+
+.message-sent .quote-card-message {
+    color: #fff;
+}
+
+/* If Received (White Bubble): Text Dark */
+.message-received .quote-card-header {
+    color: #1a3c34;
+}
+
+.message-received .quote-card-message {
+    border-top: 1px solid #eee;
+    color: #333;
+}
+
+/* Items inside bubbles should remain as cards for clarity? 
+   User said "supprime les cadres à l'intérieur du devis et de l'offre".
+   This might mean the inner items too? 
+   "supprime les cadres à l'intérieur du devis et de l'offre" -> Remove frames INSIDE the quote/offer.
+   This strongly suggests the items (.quote-card-item) should also be seamless or simpler?
+   However, on the admin screenshot previously, the items were white cards inside the green.
+   If the user wants "style comme côté admin", then Admin Sent = White Item Cards.
+   Let's keep items as white cards for Sent (Green) to contrast.
+   For Received (White), white items on white bg might need a border?
+*/
+
+/* Items in Sent (Green) Bubble -> White cards */
+.message-sent .quote-card-item {
+    background: #fff;
+    border-radius: 6px;
+    padding: 10px;
+    color: #333;
+    border: none;
+}
+
+/* Items in Received (White) Bubble -> White cards with border? Or Transparent?
+   If we make them transparent, they might blend too much.
+   Let's keep them as cards for now unless specified "item frames". 
+   "Cadres à l'intérieur du devis" usually refers to the container border.
+*/
+.message-received .quote-card-item {
+    background: #f9f9f9;
+    /* Slight contrast */
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                            Offer Form (Interactive)                        */
+/* -------------------------------------------------------------------------- */
+
+
+
+.offer-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.offer-form-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #1a3c34;
+    font-family: inherit;
+    font-weight: bold;
+}
+
+.close-offer-btn {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #1a3c34;
+    transition: color 0.3s;
+}
+
+.close-offer-btn:hover {
+    color: #0d2a23;
+}
+
+.offer-items-list {
+    margin-bottom: 20px;
+}
+
+.offer-item-row {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.offer-item-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 15px;
+}
+
+.offer-item-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.offer-item-name-text {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.offer-item-controls {
+    display: flex;
+    gap: 20px;
+    font-size: 0.9rem;
+    color: #555;
+    align-items: center;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-label {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #1a3c34;
+    margin: 0;
+}
+
+.offer-item-price {
+    width: 80px;
+    height: 40px;
+    padding: 5px 8px;
+    border: 2px solid #1a3c34;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #1a3c34;
+    text-align: center;
+    font-size: 1.1rem;
+    font-family: inherit;
+}
+
+.offer-qty-control {
+    display: flex;
+    align-items: center;
+    background-color: #1a3c34;
+    border-radius: 5px;
+    padding: 0 5px;
+    color: white;
+    gap: 0;
+    height: 40px;
+}
+
+.qty-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0 10px;
+    line-height: 1;
+}
+
+.offer-qty-input {
+    width: 40px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.1rem;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.offer-qty-input::-webkit-outer-spin-button,
+.offer-qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.remove-item-btn {
+    background: none;
+    border: none;
+    color: #1a3c34;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 0 10px;
+    transition: transform 0.2s;
+}
+
+.remove-item-btn:hover {
+    transform: scale(1.1);
+}
+
+.search-products-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+#product-search-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #1a3c34;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+}
+
+#product-search-input:focus {
+    box-shadow: 0 0 0 3px rgba(26, 60, 52, 0.1);
+}
+
+#search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 100;
+    display: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-item {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background 0.2s;
+}
+
+.search-result-item:hover {
+    background: #f0f4f4;
+}
+
+.search-result-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-right: 12px;
+    border-radius: 4px;
+}
+
+.offer-form-footer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.offer-message-input {
+    flex: 1;
+    height: 50px;
+    padding: 10px;
+    border: 2px solid #1a3c34;
+    border-radius: 6px;
+    resize: none;
+    font-family: inherit;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+.offer-form-footer .btn {
+    height: 50px;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+/* Helper Clean Classes */
+.quote-request-card.no-bg {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.quote-card-header.no-bg {
+    background: none;
+    border-bottom: 1px solid #eee;
     color: #333;
 }

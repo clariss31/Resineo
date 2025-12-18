@@ -81,6 +81,34 @@
                                 <?php else: ?>
                                     <?= nl2br(htmlspecialchars($msg->getContent())) ?>
                                 <?php endif; ?>
+                            <?php elseif ($msg->getType() === 'offer'): ?>
+                                <?php
+                                $data = json_decode($msg->getContent(), true);
+                                if ($data):
+                                    ?>
+                                    <div class="quote-request-card offer-card">
+                                        <div class="quote-card-header">
+                                            <strong>Offre reçue</strong>
+                                        </div>
+                                        <div class="quote-card-items">
+                                            <?php foreach ($data['items'] as $item): ?>
+                                                <div class="quote-card-item">
+                                                    <img src="<?= htmlspecialchars($item['image']) ?>" alt="" class="quote-item-img">
+                                                    <div class="quote-item-details">
+                                                        <span class="quote-item-name"><?= htmlspecialchars($item['name']) ?></span>
+                                                        <span class="quote-item-price"><?= number_format($item['price'], 2) ?> €</span>
+                                                        <span class="quote-item-qty">Quantité : <?= $item['quantity'] ?></span>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
+                                        <div class="quote-card-message">
+                                            <?= nl2br(htmlspecialchars($data['user_message'])) ?>
+                                        </div>
+                                    </div>
+                                <?php else: ?>
+                                    <?= nl2br(htmlspecialchars($msg->getContent())) ?>
+                                <?php endif; ?>
                             <?php else: ?>
                                 <?= nl2br(htmlspecialchars($msg->getContent())) ?>
                             <?php endif; ?>

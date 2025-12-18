@@ -41,6 +41,11 @@ class QuoteController
         $message = "Erreur lors de l'ajout.";
         $success = false;
 
+        // Sécurité : Les administrateurs ne peuvent pas créer de devis
+        if (isset($_SESSION['user']) && $_SESSION['user']->getRole() === 'admin') {
+            Utils::redirect('catalogue');
+        }
+
         if ($productId) {
             if (!isset($_SESSION['quote'])) {
                 $_SESSION['quote'] = [];
@@ -142,6 +147,11 @@ class QuoteController
             // Pour l'instant on suppose connecté car le formulaire est dans une zone sécurisée ou on redirige.
             header('Location: index.php?action=connect');
             exit();
+        }
+
+        // Sécurité : Les administrateurs ne peuvent pas envoyer de devis
+        if ($_SESSION['user']->getRole() === 'admin') {
+            Utils::redirect('catalogue');
         }
 
         if (isset($_SESSION['quote']) && !empty($_SESSION['quote'])) {

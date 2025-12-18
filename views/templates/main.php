@@ -50,17 +50,19 @@ $timestamp = filemtime($cssFile);
             <a href="index.php?action=compte">
                 <img src="img/icone-compte.png" alt="Mon compte">
             </a>
-            <a href="index.php?action=devis" class="header-icon-link">
-                <img src="img/icone-devis.png" alt="Mon panier">
-                <?php
-                $quoteCount = 0;
-                if (isset($_SESSION['quote'])) {
-                    $quoteCount = array_sum($_SESSION['quote']);
-                }
-                if ($quoteCount > 0): ?>
-                    <span class="quote-badge"><?= $quoteCount ?></span>
-                <?php endif; ?>
-            </a>
+            <?php if (!isset($_SESSION['user']) || $_SESSION['user']->getRole() !== 'admin'): ?>
+                <a href="index.php?action=devis" class="header-icon-link">
+                    <img src="img/icone-devis.png" alt="Mon panier">
+                    <?php
+                    $quoteCount = 0;
+                    if (isset($_SESSION['quote'])) {
+                        $quoteCount = array_sum($_SESSION['quote']);
+                    }
+                    if ($quoteCount > 0): ?>
+                        <span class="quote-badge"><?= $quoteCount ?></span>
+                    <?php endif; ?>
+                </a>
+            <?php endif; ?>
         </div>
     </header>
 

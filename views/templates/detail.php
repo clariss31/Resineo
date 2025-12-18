@@ -34,17 +34,19 @@
                 <div class="price-action-row">
                     <span class="price-large"><?= number_format($product->getPrice(), 2, ',', ' ') ?> €</span>
 
-                    <form action="index.php?action=addToQuote" method="POST" class="add-to-quote-detail">
-                        <input type="hidden" name="product_id" value="<?= $product->getId() ?>">
+                    <?php if (!isset($_SESSION['user']) || $_SESSION['user']->getRole() !== 'admin'): ?>
+                        <form action="index.php?action=addToQuote" method="POST" class="add-to-quote-detail">
+                            <input type="hidden" name="product_id" value="<?= $product->getId() ?>">
 
-                        <div class="qty-group">
-                            <button type="button" class="qty-btn" onclick="decreaseQty()">-</button>
-                            <input type="number" name="quantity" id="quantity" value="1" min="1" readonly>
-                            <button type="button" class="qty-btn" onclick="increaseQty()">+</button>
-                        </div>
+                            <div class="qty-group">
+                                <button type="button" class="qty-btn" onclick="decreaseQty()">-</button>
+                                <input type="number" name="quantity" id="quantity" value="1" min="1" readonly>
+                                <button type="button" class="qty-btn" onclick="increaseQty()">+</button>
+                            </div>
 
-                        <button type="submit" class="btn btn-dark">Ajouter au devis</button>
-                    </form>
+                            <button type="submit" class="btn btn-dark">Ajouter au devis</button>
+                        </form>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

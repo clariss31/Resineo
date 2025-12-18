@@ -86,6 +86,7 @@ class MessageController
 
         $conversationId = (int) Utils::request('conversation_id');
         $content = Utils::request('content');
+        $type = Utils::request('type', 'text'); // Default to text
 
         if (!$conversationId || empty($content)) {
             // Gérer l'erreur (idéalement retour AJAX ou flash)
@@ -97,6 +98,7 @@ class MessageController
         $message->setConversationId($conversationId);
         $message->setSenderId($_SESSION['user']->getId());
         $message->setContent($content);
+        $message->setType($type);
 
         $messageManager = new MessageManager();
         $messageManager->create($message);

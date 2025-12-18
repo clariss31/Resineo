@@ -50,10 +50,12 @@
                         <h3><?= htmlspecialchars($product->getName()) ?></h3>
                     </a>
                     <p class="price"><?= number_format($product->getPrice(), 2, ',', ' ') ?> €</p>
-                    <form action="index.php?action=addToQuote" method="POST" class="add-to-quote-form">
-                        <input type="hidden" name="product_id" value="<?= $product->getId() ?>">
-                        <button type="submit" class="btn btn-dark btn-small">Ajouter au devis</button>
-                    </form>
+                    <?php if (!isset($_SESSION['user']) || $_SESSION['user']->getRole() !== 'admin'): ?>
+                        <form action="index.php?action=addToQuote" method="POST" class="add-to-quote-form">
+                            <input type="hidden" name="product_id" value="<?= $product->getId() ?>">
+                            <button type="submit" class="btn btn-dark btn-small">Ajouter au devis</button>
+                        </form>
+                    <?php endif; ?>
                 </div>
             </div>
         <?php endforeach; ?>

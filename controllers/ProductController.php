@@ -399,4 +399,36 @@ class ProductController
             'currentSort' => $_GET['sort'] ?? ''
         ]);
     }
+    /**
+     * Retourne les produits au format JSON pour la recherche AJAX (Admin).
+     */
+    public function searchJson()
+    {
+        // Vérification Admin (facultatif si on veut que ce soit public, mais mieux sécurisé)
+        if (!isset($_SESSION['user']) || $_SESSION['user']->getRole() !== 'admin') {
+            http_response_code(403);
+            echo json_encode(['error' => 'Forbidden']);
+            exit();
+        }
+
+        $term = Utils::request('term', '');
+        $productManager = new ProductManager();
+        // Limiting to 3 results as requested for better UX
+        $allProducts = $productManager->findByFilter(['search' => $term]);
+        $products = array_slice($allProducts, 0, 3);
+
+        $json = [];
+        foreach ($products as $p) {
+            $json[] = [
+                'id' => $p->getId(),
+                'name' => $p->getName(),
+                'price' => $p->getPrice(),
+                'image' => $p->getImage()
+            ];
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($json);
+        exit();
+    }
 }
