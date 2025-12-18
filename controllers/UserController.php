@@ -48,7 +48,7 @@ class UserController
 
             $allowedfileExtensions = array('jpg', 'gif', 'png', 'jpeg');
             if (in_array($fileExtension, $allowedfileExtensions)) {
-                $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
+                $newFileName = uniqid() . '_' . basename($fileName);
                 $uploadFileDir = 'img/';
                 $dest_path = $uploadFileDir . $newFileName;
 
@@ -82,7 +82,14 @@ class UserController
         $_SESSION['user'] = $user;
         $_SESSION['flash'] = "Informations mises à jour avec succès.";
 
-        Utils::redirect("compte");
+        $redirectTo = Utils::request("redirect_to");
+        if ($redirectTo === 'messagerie') {
+            Utils::redirect("messagerie");
+        } elseif ($redirectTo === 'adminMessages') {
+            Utils::redirect("adminMessages");
+        } else {
+            Utils::redirect("compte");
+        }
     }
 
     /**

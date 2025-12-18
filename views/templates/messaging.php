@@ -13,7 +13,13 @@
         <div class="user-summary">
             <div class="user-info">
                 <?php $avatar = $user->getImage() ? $user->getImage() : "img/avatar-default.png"; ?>
-                <img src="<?= $avatar ?>" alt="Avatar" class="avatar">
+                <img src="<?= $avatar ?>" alt="Avatar" class="avatar" style="cursor: pointer;"
+                    onclick="document.getElementById('avatar-messaging-input').click();">
+                <form action="index.php?action=updateAccount" method="post" enctype="multipart/form-data"
+                    style="display: none;">
+                    <input type="hidden" name="redirect_to" value="messagerie">
+                    <input type="file" name="avatar" id="avatar-messaging-input" onchange="this.form.submit()">
+                </form>
             </div>
             <a href="index.php?action=disconnectUser" class="logout-link">Déconnexion</a>
         </div>
@@ -44,13 +50,14 @@
                 <p class="no-messages">Commencez la discussion avec notre support.</p>
             <?php else: ?>
                 <?php foreach ($messages as $msg): ?>
-                    <div class="message-bubble <?= $msg->getSenderId() === $user->getId() ? 'message-sent' : 'message-received' ?>">
+                    <div
+                        class="message-bubble <?= $msg->getSenderId() === $user->getId() ? 'message-sent' : 'message-received' ?>">
                         <div class="message-content">
                             <?php if ($msg->getType() === 'quote_request'): ?>
-                                <?php 
-                                    $data = json_decode($msg->getContent(), true);
-                                    if ($data):
-                                ?>
+                                <?php
+                                $data = json_decode($msg->getContent(), true);
+                                if ($data):
+                                    ?>
                                     <div class="quote-request-card">
                                         <div class="quote-card-header">
                                             <strong>Demande de devis</strong>

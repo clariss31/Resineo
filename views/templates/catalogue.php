@@ -100,7 +100,7 @@
                 <!-- Left: Image -->
                 <div class="modal-left">
                     <div class="image-preview-container" id="image-preview-area">
-                        <img src="img/photo.png" alt="Aperçu" id="image-preview">
+                        <img src="img/photo.png" alt="Aperçu" id="image-preview" style="cursor: pointer;" onclick="document.getElementById('product-image').click();">
                     </div>
                     <label for="product-image" class="btn btn-dark btn-small btn-full">Ajouter une image</label>
                     <input type="file" name="image" id="product-image" accept="image/*" class="hidden">

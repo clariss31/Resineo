@@ -13,7 +13,13 @@
         <div class="user-summary">
             <div class="user-info">
                 <?php $avatar = $user->getImage() ? $user->getImage() : "img/avatar-default.png"; ?>
-                <img src="<?= $avatar ?>" alt="Avatar" class="avatar">
+                <img src="<?= $avatar ?>" alt="Avatar" class="avatar" style="cursor: pointer;"
+                    onclick="document.getElementById('avatar-admin-input').click();">
+                <form action="index.php?action=updateAccount" method="post" enctype="multipart/form-data"
+                    style="display: none;">
+                    <input type="hidden" name="redirect_to" value="adminMessages">
+                    <input type="file" name="avatar" id="avatar-admin-input" onchange="this.form.submit()">
+                </form>
             </div>
             <a href="index.php?action=disconnectUser" class="logout-link">Déconnexion</a>
         </div>
