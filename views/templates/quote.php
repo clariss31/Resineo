@@ -58,9 +58,9 @@
 <div id="confirmation-modal" class="modal-overlay hidden">
     <div class="modal-content">
         <p id="modal-message">Voulez-vous vraiment supprimer le produit ?</p>
-        <div class="modal-actions">
-            <button id="modal-confirm-btn" class="btn btn-primary">Oui</button>
-            <button id="modal-cancel-btn" class="btn btn-secondary">Annuler</button>
+        <div class="modal-actions modal-actions-centered">
+            <button id="modal-confirm-btn" class="btn btn-dark">Oui</button>
+            <button id="modal-cancel-btn" class="btn btn-white">Annuler</button>
         </div>
     </div>
 </div>

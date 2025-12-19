@@ -47,13 +47,16 @@ class QuoteController
         }
 
         if ($productId) {
+            // Si le devis n'existe pas encore en session, on l'initialise
             if (!isset($_SESSION['quote'])) {
                 $_SESSION['quote'] = [];
             }
 
+            // Si le produit est déjà dans le devis, on ajoute la quantité
             if (isset($_SESSION['quote'][$productId])) {
                 $_SESSION['quote'][$productId] += $quantity;
             } else {
+                // Sinon, on crée une nouvelle entrée pour ce produit
                 $_SESSION['quote'][$productId] = $quantity;
             }
 
@@ -65,22 +68,23 @@ class QuoteController
             $message = "$productName ajouté au devis !";
             $success = true;
 
-            // Message flash de confirmation (legacy)
+            // Message flash de confirmation
             $_SESSION['flash'] = $message;
         }
 
-        // Vérification d'une requête AJAX
+        // Vérification d'une requête AJAX (permet d'ajouter au devis sans recharger la page)
         if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
             header('Content-Type: application/json');
             echo json_encode([
                 'success' => $success,
                 'message' => $message,
+                // On renvoie le compte total d'articles pour mettre à jour la bulle du panier
                 'quoteCount' => array_sum($_SESSION['quote'] ?? [])
             ]);
             exit;
         }
 
-        // Redirection vers la page précédente ou le catalogue par défaut
+        // Redirection vers la page ou le catalogue par défaut
         $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php?action=catalogue';
         header("Location: $referer");
         exit();
@@ -120,7 +124,7 @@ class QuoteController
     public function updateQuantity()
     {
         $productId = Utils::request('product_id');
-        $direction = Utils::request('direction'); // 'increase' ou 'decrease'
+        $direction = Utils::request('direction'); // 'increase' ou 'decrease' (- ou + de la vue html)
 
         if ($productId && isset($_SESSION['quote'][$productId])) {
             if ($direction === 'increase') {
@@ -137,7 +141,7 @@ class QuoteController
     }
 
     /**
-     * Simule l'envoi du devis.
+     * Cas ou un utilisateur non connecté souhaite envoyer un devis.
      * @return void
      */
     public function sendQuote()
@@ -159,6 +163,7 @@ class QuoteController
             Utils::redirect('catalogue');
         }
 
+        // Vérification que le devis n'est pas vide
         if (isset($_SESSION['quote']) && !empty($_SESSION['quote'])) {
             $user = $_SESSION['user'];
             $userMessage = Utils::request('message');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 19 déc. 2025 à 10:58
+-- Généré le : ven. 19 déc. 2025 à 16:10
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -58,7 +58,12 @@ CREATE TABLE `conversations` (
 --
 
 INSERT INTO `conversations` (`id`, `user_id`, `created_at`) VALUES
-(4, 8, '2025-12-18 16:57:36');
+(4, 8, '2025-12-18 16:57:36'),
+(5, 19, '2025-12-19 11:01:05'),
+(6, 20, '2025-12-19 11:12:44'),
+(7, 21, '2025-12-19 11:13:35'),
+(8, 23, '2025-12-19 11:19:18'),
+(9, 24, '2025-12-19 14:37:35');
 
 -- --------------------------------------------------------
 
@@ -100,7 +105,16 @@ INSERT INTO `messages` (`id`, `conversation_id`, `sender_id`, `type`, `content`,
 (17, 4, 1, 'offer', '{\"type\":\"offer\",\"items\":[{\"name\":\"Résineo Drain 10kg\",\"price\":51.97,\"quantity\":4,\"image\":\"img/resineo-drain.png\"},{\"name\":\"Résineo Grip 10kg\",\"price\":54,\"quantity\":4,\"image\":\"img/resineo-grip.png\"},{\"name\":\"Résineo Drain 10kg\",\"price\":52,\"quantity\":1,\"image\":\"img/resineo-drain.png\"}],\"user_message\":\"test\"}', '2025-12-18 17:19:04'),
 (18, 4, 8, 'quote_request', '{\"user_message\":\"test\",\"items\":[{\"name\":\"R\\u00e9sineo Drain 10kg\",\"price\":52,\"image\":\"img\\/resineo-drain.png\",\"quantity\":1},{\"name\":\"R\\u00e9sineo Grip 10kg\",\"price\":54,\"image\":\"img\\/resineo-grip.png\",\"quantity\":1}]}', '2025-12-19 09:11:37'),
 (19, 4, 8, 'quote_request', '{\"user_message\":\"t\",\"items\":[{\"name\":\"Rateau \\u00e0 2 vis\",\"price\":24,\"image\":\"img\\/rateau.png\",\"quantity\":1},{\"name\":\"Platoir en Komadur\",\"price\":16,\"image\":\"img\\/platoir.png\",\"quantity\":1}]}', '2025-12-19 10:47:21'),
-(20, 4, 8, 'quote_request', '{\"user_message\":\"e\",\"items\":[{\"name\":\"R\\u00e9sineo Grip 10kg\",\"price\":54,\"image\":\"img\\/resineo-grip.png\",\"quantity\":1},{\"name\":\"R\\u00e9sineo Arbre 10kg\",\"price\":50,\"image\":\"img\\/resineo-arbre.png\",\"quantity\":1}]}', '2025-12-19 10:48:28');
+(20, 4, 8, 'quote_request', '{\"user_message\":\"e\",\"items\":[{\"name\":\"R\\u00e9sineo Grip 10kg\",\"price\":54,\"image\":\"img\\/resineo-grip.png\",\"quantity\":1},{\"name\":\"R\\u00e9sineo Arbre 10kg\",\"price\":50,\"image\":\"img\\/resineo-arbre.png\",\"quantity\":1}]}', '2025-12-19 10:48:28'),
+(21, 5, 19, 'quote_request', '{\"user_message\":\"zerty\",\"items\":[{\"name\":\"R\\u00e9sineo Grip 10kg\",\"price\":54,\"image\":\"img\\/resineo-grip.png\",\"quantity\":1},{\"name\":\"R\\u00e9sineo Arbre 10kg\",\"price\":50,\"image\":\"img\\/resineo-arbre.png\",\"quantity\":1}]}', '2025-12-19 11:01:05'),
+(22, 6, 20, 'text', 'Bonjour, je voudrais devenir applicateur', '2025-12-19 11:12:59'),
+(23, 8, 23, 'quote_request', '{\"user_message\":\"sdf\",\"items\":[{\"name\":\"R\\u00e9sineo Grip 10kg\",\"price\":54,\"image\":\"img\\/resineo-grip.png\",\"quantity\":1},{\"name\":\"R\\u00e9sineo Arbre 10kg\",\"price\":50,\"image\":\"img\\/resineo-arbre.png\",\"quantity\":1}]}', '2025-12-19 11:19:18'),
+(24, 4, 8, 'quote_request', '{\"user_message\":\"test\",\"items\":[{\"name\":\"R\\u00e9sineo Grip 10kg\",\"price\":54,\"image\":\"img\\/resineo-grip.png\",\"quantity\":1},{\"name\":\"R\\u00e9sineo Arbre 10kg\",\"price\":50,\"image\":\"img\\/resineo-arbre.png\",\"quantity\":1},{\"name\":\"Rateau \\u00e0 2 vis\",\"price\":24,\"image\":\"img\\/rateau.png\",\"quantity\":1},{\"name\":\"Platoir en Komadur\",\"price\":16,\"image\":\"img\\/platoir.png\",\"quantity\":1}]}', '2025-12-19 14:11:50'),
+(25, 4, 1, 'offer', '{\"type\":\"offer\",\"items\":[{\"name\":\"Résineo Grip 10kg\",\"price\":54,\"quantity\":1,\"image\":\"img/resineo-grip.png\"},{\"name\":\"Résineo Arbre 10kg\",\"price\":50,\"quantity\":2,\"image\":\"img/resineo-arbre.png\"},{\"name\":\"Rateau à 2 vis\",\"price\":23.98,\"quantity\":1,\"image\":\"img/rateau.png\"},{\"name\":\"Platoir en Komadur\",\"price\":16,\"quantity\":1,\"image\":\"img/platoir.png\"},{\"name\":\"Résineo Drain 10kg\",\"price\":52,\"quantity\":1,\"image\":\"img/resineo-drain.png\"}],\"user_message\":\"\"}', '2025-12-19 14:14:39'),
+(26, 8, 1, 'offer', '{\"type\":\"offer\",\"items\":[{\"name\":\"Résineo Grip 10kg\",\"price\":54.03,\"quantity\":2,\"image\":\"img/resineo-grip.png\"},{\"name\":\"Résineo Drain 10kg\",\"price\":52,\"quantity\":1,\"image\":\"img/resineo-drain.png\"}],\"user_message\":\"test\"}', '2025-12-19 14:33:55'),
+(27, 4, 8, 'quote_request', '{\"user_message\":\"je voudrais un devis\",\"items\":[{\"name\":\"Spatule dent\\u00e9e (260\\/8mm)\",\"price\":22,\"image\":\"img\\/spatule-dentee.png\",\"quantity\":4},{\"name\":\"Spatule dent\\u00e9e (250\\/7mm)\",\"price\":18,\"image\":\"img\\/spatule-dentee.png\",\"quantity\":1}]}', '2025-12-19 14:34:50'),
+(28, 9, 24, 'quote_request', '{\"user_message\":\"test\",\"items\":[{\"name\":\"R\\u00e9sineo Grip 10kg\",\"price\":54,\"image\":\"img\\/resineo-grip.png\",\"quantity\":1},{\"name\":\"R\\u00e9sineo Arbre 10kg\",\"price\":50,\"image\":\"img\\/resineo-arbre.png\",\"quantity\":1}]}', '2025-12-19 14:37:35'),
+(29, 4, 8, 'quote_request', '{\"user_message\":\"swd\",\"items\":[{\"name\":\"Rateau \\u00e0 2 vis\",\"price\":24,\"image\":\"img\\/rateau.png\",\"quantity\":2},{\"name\":\"Platoir en Komadur\",\"price\":16,\"image\":\"img\\/platoir.png\",\"quantity\":2},{\"name\":\"R\\u00e9sineo Grip 10kg\",\"price\":54,\"image\":\"img\\/resineo-grip.png\",\"quantity\":1},{\"name\":\"R\\u00e9sineo Arbre 10kg\",\"price\":50,\"image\":\"img\\/resineo-arbre.png\",\"quantity\":1}]}', '2025-12-19 15:57:00');
 
 -- --------------------------------------------------------
 
@@ -165,7 +179,14 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `password`, `firstname`, `lastname`, `role`, `created_at`, `image`) VALUES
 (1, 'clarisse.ferand@gmail.com', '$2y$10$lTESjTrO7BwBT2ctAFwKrusHlFXjXj2bvIywqC/4UsU5d7Eoz5/Ru', 'Clarisse', 'Ferand', 'admin', '2025-11-28 15:07:25', 'img/avatar-resineo.png'),
-(8, 'jean.dupont@gmail.com', '$2y$10$hcjTqunosTq1T6vVGl/jhOqbcCyhWgs7eH3Pthuvenp5aO2/YbFVq', 'Jean', 'Dupont', 'client', '2025-12-18 16:57:04', 'img/avatar-default.png');
+(8, 'jean.dupont@gmail.com', '$2y$10$hcjTqunosTq1T6vVGl/jhOqbcCyhWgs7eH3Pthuvenp5aO2/YbFVq', 'Jean', 'Dupont', 'client', '2025-12-18 16:57:04', 'img/avatar-default.png'),
+(18, 'clarisse.ffdqerand@gmail.com', '$2y$10$G0cB3tFCWWNWtoIoIltLmOmWyTiM0hv/.ggqC2/yn1q9QRd5lfCpi', 'Clarisse', 'Ferand', 'client', '2025-12-19 10:59:39', 'img/avatar-default.png'),
+(19, 'clarisserezrty@gmail.com', '$2y$10$8FTrUrbZfjevk6ZVE4W5N.OppgJkjPfflEpQLbM3Jyg9WrGxWMcKe', 'Clarisse', 'Ferand', 'client', '2025-12-19 11:01:05', 'img/avatar-default.png'),
+(20, 'clarisse.ezfrsnd@gmail.com', '$2y$10$71kjdMuYFcHQ00sl8WdQiu1BvSr9/3zAIwIGRDagoB8eCAN37m562', 'Clarisse', 'Ferand', 'client', '2025-12-19 11:11:20', 'img/avatar-default.png'),
+(21, 'clarisse.feraezfrsnd@gmail.com', '$2y$10$nFB7Po7FndX6EEZgd0BKqeXhjn/EOUpcNCoxyZB9nlyMnCBDJSdnS', 'Clarisse', 'Ferand', 'client', '2025-12-19 11:13:32', 'img/avatar-default.png'),
+(22, 'clarissefe@gmail.com', '$2y$10$cKg3aRDbZXh52QdGp1jqfOE6md.np/zXhg0YrS0ngzhJIg4IuDcYG', 'Clarisse', 'Ferand', 'client', '2025-12-19 11:18:41', 'img/avatar-default.png'),
+(23, 'clarisse.fedsvrand@gmail.com', '$2y$10$x6wVk/NTVTOeOAPFW6mibef7Cqg0WCQLra3rPw6IkOLwg4comzXF.', 'Clarisse', 'Ferand', 'client', '2025-12-19 11:19:18', 'img/avatar-default.png'),
+(24, 'clarissedzfsgd@gmail.com', '$2y$10$f93Ab5gB3KoU.x9JiAt6xei1WJmMVLTCqDERtxOEgJUylM4Oj7Enu', 'Clarisse', 'Ferand', 'client', '2025-12-19 14:37:35', 'img/avatar-default.png');
 
 --
 -- Index pour les tables déchargées
@@ -229,7 +250,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT pour la table `conversations`
 --
 ALTER TABLE `conversations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `conversation_items`
@@ -241,19 +262,19 @@ ALTER TABLE `conversation_items`
 -- AUTO_INCREMENT pour la table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT pour la table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Contraintes pour les tables déchargées

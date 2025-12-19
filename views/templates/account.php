@@ -79,7 +79,6 @@
 
             <div class="form-actions">
                 <button type="submit" class="btn btn-dark">Enregistrer</button>
-                <!-- Hidden submit for enter key -->
             </div>
         </form>
     </div>

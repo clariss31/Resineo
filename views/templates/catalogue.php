@@ -106,17 +106,14 @@ unset($_SESSION['form_submitted']);
     <div class="modal-content">
         <form id="product-form" action="index.php?action=addProduct" method="POST" enctype="multipart/form-data">
             <div class="modal-grid">
-                <!-- Left: Image -->
                 <div class="modal-left">
                     <div class="image-preview-container" id="image-preview-area">
                         <img src="img/photo.png" alt="Aperçu" id="image-preview" class="cursor-pointer" onclick="document.getElementById('product-image').click();">
                     </div>
                     <label for="product-image" class="btn btn-dark btn-small btn-full">Ajouter une image</label>
                     <input type="file" name="image" id="product-image" accept="image/*" class="hidden">
-                    <!-- Note: Cannot pre-fill file input for security reasons -->
                 </div>
 
-                <!-- Right: Fields -->
                 <div class="modal-right">
                     <div class="form-group">
                         <label for="product-name">Titre</label>
@@ -131,7 +128,7 @@ unset($_SESSION['form_submitted']);
                     <div class="form-row">
                         <div class="form-group">
                             <label for="product-category">Catégorie</label>
-                            <select name="category_id" id="product-category" required onchange="handleCategoryChange()">
+                            <select name="category_id" id="product-category" required>
                                 <option value="">Choisir une catégorie</option>
                                 <option value="1" <?= ($oldInput['category_id'] ?? '') == 1 ? 'selected' : '' ?>>Résines</option>
                                 <option value="2" <?= ($oldInput['category_id'] ?? '') == 2 ? 'selected' : '' ?>>Entretien</option>
@@ -146,9 +143,6 @@ unset($_SESSION['form_submitted']);
                             <input type="number" name="price" id="product-price" step="0.01" required value="<?= htmlspecialchars($oldInput['price'] ?? '') ?>">
                         </div>
                         
-                        <!-- Dynamic Filters -->
-                        <!-- PHP Logic to show/hide based on oldInput category would be complex here without JS -->
-                        <!-- But we can pre-select the values correctly -->
                         <div class="form-group dynamic-field hidden" id="field-color">
                             <label for="product-color">Couleur</label>
                             <select name="color" id="product-color">
@@ -179,7 +173,7 @@ unset($_SESSION['form_submitted']);
                     </div>
 
                     <div class="modal-actions">
-                        <button type="submit" class="btn btn-dark btn-small">Enregistrer</button>
+                        <button type="submit" class="btn btn-dark">Enregistrer</button>
                     </div>
                 </div>
             </div>
@@ -189,13 +183,9 @@ unset($_SESSION['form_submitted']);
 </div>
 
 <script>
-// Trigger category change manually if needed to show correct fields on reload
 document.addEventListener('DOMContentLoaded', function() {
     const categorySelect = document.getElementById('product-category');
     if (categorySelect.value) {
-        // We need the handleCategoryChange function to availability. 
-        // It resides in admin-products.js. We need to ensure it runs.
-        // Or we manually trigger the change event.
         categorySelect.dispatchEvent(new Event('change'));
     }
 });

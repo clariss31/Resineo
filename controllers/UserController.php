@@ -43,6 +43,7 @@ class UserController
         if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
             $fileTmpPath = $_FILES['avatar']['tmp_name'];
             $fileName = $_FILES['avatar']['name'];
+            // Vérification de l'extension du fichier
             $fileNameCmps = explode(".", $fileName);
             $fileExtension = strtolower(end($fileNameCmps));
 
@@ -82,6 +83,7 @@ class UserController
         $_SESSION['user'] = $user;
         $_SESSION['flash'] = "Informations mises à jour avec succès.";
 
+        // Vérification de la page de redirection (informations ou messagerie)
         $redirectTo = Utils::request("redirect_to");
         if ($redirectTo === 'messagerie') {
             Utils::redirect("messagerie");

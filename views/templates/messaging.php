@@ -9,7 +9,6 @@
 
 <div class="account-container">
     <div class="account-sidebar">
-        <!-- User Summary Box -->
         <div class="user-summary">
             <div class="user-info">
                 <?php $avatar = $user->getImage() ? $user->getImage() : "img/avatar-default.png"; ?>
@@ -18,13 +17,13 @@
                 <form action="index.php?action=updateAccount" method="post" enctype="multipart/form-data"
                     class="display-none">
                     <input type="hidden" name="redirect_to" value="messagerie">
-                    <input type="file" name="avatar" id="avatar-messaging-input" onchange="this.form.submit()" aria-label="Changer de photo de profil">
+                    <input type="file" name="avatar" id="avatar-messaging-input" onchange="this.form.submit()"
+                        aria-label="Changer de photo de profil">
                 </form>
             </div>
             <span class="user-name"><?= htmlspecialchars($user->getFirstname() . ' ' . $user->getLastname()) ?></span>
         </div>
 
-        <!-- Navigation -->
         <nav class="account-nav">
             <a href="index.php?action=compte" class="account-nav-item">
                 <img src="img/icone-compte.png" alt="Infos">

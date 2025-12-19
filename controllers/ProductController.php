@@ -61,7 +61,7 @@ class ProductController
         $view->render("catalogue", [
             'products' => $products,
             'categories' => $categories,
-            'currentCategories' => $filters['category_id'] ?? [],
+            'currentCategories' => $filters['category_id'] ?? [], // Tableau vide si aucun filtre de catégorie
             'currentMinPrice' => $filters['min_price'] ?? $priceRange['min_price'],
             'currentMaxPrice' => $filters['max_price'] ?? $priceRange['max_price'],
             'minPrice' => $priceRange['min_price'],
@@ -227,7 +227,7 @@ class ProductController
 
         $product->setColor(Utils::request('color') ?: null);
 
-        // Correction gestion Scent (Odeur)
+        // Gestion Odeur
         $noScent = Utils::request('no_scent'); // Valeur attendue : 'yes' (Sans odeur = Oui) ou 'no' (Sans odeur = Non)
         if ($product->getCategoryId() === 2) {
             if ($noScent === 'yes') {
@@ -279,7 +279,6 @@ class ProductController
 
         if ($productManager->delete($id)) {
             $_SESSION['flash'] = "Produit supprimé avec succès.";
-            // Redirection vers la catégorie appropriée ou l'accueil
             header('Location: index.php?action=home');
         } else {
             $_SESSION['flash'] = "Erreur lors de la suppression.";
@@ -324,14 +323,14 @@ class ProductController
 
         $productManager = new ProductManager();
 
-        // Gestion dynamique des champs spécifiques et VALIDATION
+        // Gestion dynamique des champs spécifiques et validation
         $color = null;
         $scent = null;
         $toolType = null;
 
         if ($categoryId === 1) { // Résines
             $color = Utils::request('color');
-            // VAL: 3. Vérification option Résines
+            // Option Résines
             if (empty($color)) {
                 $_SESSION['flash'] = "Veuillez sélectionner une couleur pour les résines.";
                 $_SESSION['form_submitted'] = $_POST;
@@ -344,12 +343,15 @@ class ProductController
                 $scent = "Oui";
             } elseif ($noScent === 'no') {
                 $scent = "Non";
+            } else {
+                $_SESSION['flash'] = "Veuillez préciser si le produit est sans odeur.";
+                $_SESSION['form_submitted'] = $_POST;
+                $_SESSION['open_modal'] = true;
+                Utils::redirect('catalogue');
             }
-            // Note: Le champ 'scent' (Odeur) n'est pas strictement obligatoire si pas sélectionné, on laisse null.
-            // Sauf si on veut forcer une réponse Oui/Non. Pour l'instant on laisse souple.
         } elseif ($categoryId === 3) { // Outillage
             $toolType = Utils::request('tool_type');
-            // VAL: 4. Vérification option Outillage
+            // Option Outillage
             if (empty($toolType)) {
                 $_SESSION['flash'] = "Veuillez sélectionner un type d'outil pour l'outillage.";
                 $_SESSION['form_submitted'] = $_POST;
@@ -358,11 +360,11 @@ class ProductController
             }
         }
 
-        // Téléchargement de l'image (On sait qu'elle est valide grâce au check #2)
+        // Téléchargement de l'image
         $uploadDir = 'img/';
-        $filename = uniqid() . '_' . basename($_FILES['image']['name']);
+        $filename = uniqid() . '_' . basename($_FILES['image']['name']); // Nom unique de l'image
         $targetPath = $uploadDir . $filename;
-        $imagePath = 'img/camera-icon.png'; // Fallback theorique, mais bloqué par validation
+        $imagePath = 'img/camera-icon.png'; // Image de sécurité
 
         if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
             $imagePath = $targetPath;
@@ -402,7 +404,7 @@ class ProductController
         $productManager = new ProductManager();
         $filters = ['search' => $searchTerm];
 
-        // Filtres de recherche (facettes)
+        // Filtres de recherche
         if (isset($_GET['categories']) && is_array($_GET['categories'])) {
             $filters['category_id'] = $_GET['categories'];
         }
@@ -426,7 +428,7 @@ class ProductController
 
         $products = $productManager->findByFilter($filters);
 
-        // Plages de prix globales (ou on pourrait filtrer par recherche aussi si on voulait affiner le slider)
+        // Plages de prix globales
         $priceRange = $productManager->getMinMaxPrices();
 
         $categories = [
@@ -449,11 +451,11 @@ class ProductController
         ]);
     }
     /**
-     * Retourne les produits au format JSON pour la recherche AJAX (Admin).
+     * Retourne les produits au format JSON pour la recherche AJAX (Admin) de le la réponse à une offre ("Faire une offre").
      */
     public function searchJson()
     {
-        // Vérification Admin (facultatif si on veut que ce soit public, mais mieux sécurisé)
+        // Vérification Admin
         if (!isset($_SESSION['user']) || $_SESSION['user']->getRole() !== 'admin') {
             http_response_code(403);
             echo json_encode(['error' => 'Forbidden']);
@@ -462,8 +464,8 @@ class ProductController
 
         $term = Utils::request('term', '');
         $productManager = new ProductManager();
-        // Limiting to 3 results as requested for better UX
         $allProducts = $productManager->findByFilter(['search' => $term]);
+        // Affiche les 3 produits les plus cohérents avec la recherche
         $products = array_slice($allProducts, 0, 3);
 
         $json = [];
@@ -476,8 +478,8 @@ class ProductController
             ];
         }
 
-        header('Content-Type: application/json');
-        echo json_encode($json);
+        header('Content-Type: application/json'); // Indique que la réponse est au format JSON
+        echo json_encode($json); // Retourne les produits au format JSON
         exit();
     }
 }
