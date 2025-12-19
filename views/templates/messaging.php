@@ -21,7 +21,7 @@
                     <input type="file" name="avatar" id="avatar-messaging-input" onchange="this.form.submit()">
                 </form>
             </div>
-            <a href="index.php?action=disconnectUser" class="logout-link">Déconnexion</a>
+            <span class="user-name"><?= htmlspecialchars($user->getFirstname() . ' ' . $user->getLastname()) ?></span>
         </div>
 
         <!-- Navigation -->
@@ -33,6 +33,10 @@
             <a href="index.php?action=messagerie" class="account-nav-item active">
                 <img src="img/icone-messagerie-active.png" alt="Messagerie">
                 Messagerie
+            </a>
+            <a href="index.php?action=disconnectUser" class="account-nav-item">
+                <img src="img/deconnexion.png" alt="Déconnexion">
+                Déconnexion
             </a>
         </nav>
     </div>
@@ -50,8 +54,9 @@
                 <p class="no-messages">Commencez la discussion avec notre support.</p>
             <?php else: ?>
                 <?php foreach ($messages as $msg): ?>
+                    <?php $isWide = in_array($msg->getType(), ['quote_request', 'offer']); ?>
                     <div
-                        class="message-bubble <?= $msg->getSenderId() === $user->getId() ? 'message-sent' : 'message-received' ?>">
+                        class="message-bubble <?= $msg->getSenderId() === $user->getId() ? 'message-sent' : 'message-received' ?> <?= $isWide ? 'wide-bubble' : '' ?>">
                         <div class="message-content">
                             <?php if ($msg->getType() === 'quote_request'): ?>
                                 <?php

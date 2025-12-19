@@ -55,7 +55,7 @@
             
             <div class="right-header-controls">
                 <?php if (isset($_SESSION['user']) && $_SESSION['user']->getRole() === 'admin'): ?>
-                    <button id="btn-add-product" class="btn btn-dark">+ Ajouter un produit</button>
+                    <button id="btn-add-product" class="btn btn-dark">+ Créer un produit</button>
                 <?php endif; ?>
 
                 <div class="sort-controls">
@@ -149,10 +149,11 @@
                         </div>
 
                         <div class="form-group dynamic-field hidden" id="field-scent">
-                             <div class="checkbox-wrapper mt-2rem">
-                                <input type="checkbox" name="no_scent" id="no-scent"> 
-                                <label for="no-scent">Sans odeur ?</label>
-                             </div>
+                            <label for="no-scent">Sans odeur ?</label>
+                            <select name="no_scent" id="no-scent">
+                                <option value="no">Non</option>
+                                <option value="yes">Oui</option>
+                            </select>
                         </div>
 
                         <div class="form-group dynamic-field hidden" id="field-tool-type">

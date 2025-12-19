@@ -16,7 +16,7 @@
                 <img src="<?= $avatar ?>" alt="Avatar" class="avatar cursor-pointer"
                     onclick="document.getElementById('avatar-input').click();">
             </div>
-            <a href="index.php?action=disconnectUser" class="logout-link">Déconnexion</a>
+            <span class="user-name"><?= htmlspecialchars($user->getFirstname() . ' ' . $user->getLastname()) ?></span>
         </div>
 
         <!-- Navigation -->
@@ -28,6 +28,10 @@
             <a href="index.php?action=messagerie" class="account-nav-item">
                 <img src="img/icone-messagerie.png" alt="Messagerie">
                 Messagerie
+            </a>
+            <a href="index.php?action=disconnectUser" class="account-nav-item">
+                <img src="img/deconnexion.png" alt="Déconnexion">
+                Déconnexion
             </a>
         </nav>
     </div>

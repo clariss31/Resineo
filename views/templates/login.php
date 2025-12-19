@@ -1,5 +1,5 @@
 <div class="auth-container">
-    <h2>Se connecter</h2>
+    <h1>Se connecter</h1>
     <form action="index.php?action=connectUser" method="post" class="login-form">
         <div class="form-group">
             <label for="email">Email<span class="required">*</span></label>

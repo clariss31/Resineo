@@ -21,7 +21,7 @@
                     <input type="file" name="avatar" id="avatar-admin-input" onchange="this.form.submit()">
                 </form>
             </div>
-            <a href="index.php?action=disconnectUser" class="logout-link">Déconnexion</a>
+            <span class="user-name"><?= htmlspecialchars($user->getFirstname() . ' ' . $user->getLastname()) ?></span>
         </div>
 
         <!-- Navigation -->
@@ -33,6 +33,10 @@
             <a href="index.php?action=adminMessages" class="account-nav-item active">
                 <img src="img/icone-messagerie-active.png" alt="Messagerie">
                 Messagerie
+            </a>
+            <a href="index.php?action=disconnectUser" class="account-nav-item">
+                <img src="img/deconnexion.png" alt="Déconnexion">
+                Déconnexion
             </a>
         </nav>
     </div>
@@ -114,8 +118,10 @@
                             <?php foreach ($messages as $msg): ?>
                                 <?php
                                 $isSentByMe = $msg->getSenderId() === $user->getId();
+                                $isWide = in_array($msg->getType(), ['quote_request', 'offer']);
                                 ?>
-                                <div class="message-bubble <?= $isSentByMe ? 'message-sent' : 'message-received' ?>">
+                                <div
+                                    class="message-bubble <?= $isSentByMe ? 'message-sent' : 'message-received' ?> <?= $isWide ? 'wide-bubble' : '' ?>">
                                     <div class="message-content">
                                         <?php if ($msg->getType() === 'quote_request'): ?>
                                             <?php

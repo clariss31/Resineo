@@ -69,6 +69,7 @@ p {
     display: flex;
     align-items: center;
     border: 2px solid #1a3c34;
+    border-radius: 8px;
     padding: 5px;
     background-color: #fff;
 }
@@ -488,10 +489,11 @@ footer.global-footer {
 /* Styles Authentification */
 .auth-container {
     max-width: 600px;
-    margin: 4rem 0;
+    margin: 4rem auto;
 }
 
-.auth-container h2 {
+.auth-container h2,
+.auth-container h1 {
     font-size: 2rem;
     margin-bottom: 2rem;
     font-weight: 700;
@@ -516,13 +518,15 @@ footer.global-footer {
 
 .login-form input[type="email"],
 .login-form input[type="password"],
-.login-form input[type="text"] {
+.login-form input[type="text"],
+.form-group select {
     width: 100%;
     padding: 12px;
     border: 2px solid #1a3c34;
-    border-radius: 0;
+    border-radius: 8px;
     font-size: 1rem;
     outline: none;
+    background-color: white;
 }
 
 .login-form input:focus {
@@ -792,14 +796,23 @@ footer.global-footer {
     width: 100%;
 }
 
-.product-card {
-    background: #eef4f5;
+/* Specific override for grid layout */
+.product-grid .product-card {
     border-radius: 8px;
     padding: 15px;
-    text-align: center;
     box-shadow: none;
     width: 100%;
     max-width: none;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+.actions-row.centered {
+    justify-content: center;
 }
 
 .product-card img {
@@ -837,7 +850,7 @@ footer.global-footer {
 }
 
 /* Styles Checkbox */
-.category-filters .checkbox-group {
+.checkbox-group {
     margin-bottom: 15px;
     position: relative;
     padding-left: 35px;
@@ -963,8 +976,9 @@ footer.global-footer {
 }
 
 .sort-controls select {
-    padding: 0.5rem;
+    padding: 0.8rem;
     border: 2px solid #12382f;
+    border-radius: 8px;
     font-size: 1rem;
     padding-right: 2rem;
     min-width: 200px;
@@ -1333,6 +1347,10 @@ footer.global-footer {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
+    border: 3px solid #1a3c34;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
 }
 
 /* Boîte Résumé Utilisateur */
@@ -1341,7 +1359,8 @@ footer.global-footer {
     align-items: center;
     gap: 1rem;
     padding: 1rem;
-    border: 3px solid #1a3c34;
+    border: none;
+    border-bottom: 3px solid #1a3c34;
     background-color: #fff;
     position: relative;
     z-index: 2;
@@ -1384,12 +1403,17 @@ footer.global-footer {
     font-weight: 500;
     font-size: 1.1rem;
     background-color: #1a3c34;
-    border: 3px solid #1a3c34;
+    border: none;
+    border-bottom: 3px solid #1a3c34;
     cursor: pointer;
-    margin-top: -3px;
+    margin-top: 0;
     /* Chevauchement bordure item précédent */
     position: relative;
     z-index: 1;
+}
+
+.account-nav-item:last-child {
+    border-bottom: none;
 }
 
 /* État inactif */
@@ -1489,22 +1513,20 @@ footer.global-footer {
 }
 
 .product-image-large {
-    flex: 1;
+    flex: 0 0 45%;
     background-color: white;
-    padding: 2rem;
     border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     aspect-ratio: 1 / 1;
+    overflow: hidden;
 }
 
 .product-image-large img {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .product-info-detail {
@@ -1693,7 +1715,7 @@ footer.global-footer {
 .form-group textarea {
     padding: 0.7rem;
     border: 3px solid #1a3c34;
-    border-radius: 0px;
+    border-radius: 8px;
     font-family: inherit;
     font-size: 0.95rem;
     background-color: white;
@@ -1928,10 +1950,11 @@ footer.global-footer {
     flex: 1;
     padding: 10px;
     border: 2px solid #1a3c34;
-    border-radius: 4px;
+    border-radius: 8px;
     resize: none;
     height: 50px;
     font-family: inherit;
+    font-size: 1rem;
 }
 
 .message-form button {
@@ -2853,4 +2876,9 @@ main.admin-chat-area {
 .search-item-sub {
     font-size: 0.85rem;
     color: #666;
+}
+
+/* Wide Bubble for Quotes/Offers */
+.message-bubble.wide-bubble {
+    width: 70%;
 }
