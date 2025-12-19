@@ -18,7 +18,7 @@
                 <form action="index.php?action=updateAccount" method="post" enctype="multipart/form-data"
                     class="display-none">
                     <input type="hidden" name="redirect_to" value="messagerie">
-                    <input type="file" name="avatar" id="avatar-messaging-input" onchange="this.form.submit()">
+                    <input type="file" name="avatar" id="avatar-messaging-input" onchange="this.form.submit()" aria-label="Changer de photo de profil">
                 </form>
             </div>
             <span class="user-name"><?= htmlspecialchars($user->getFirstname() . ' ' . $user->getLastname()) ?></span>
@@ -143,7 +143,7 @@
         <div class="chat-input-area">
             <form action="index.php?action=sendMessage" method="POST" class="message-form">
                 <input type="hidden" name="conversation_id" value="<?= $conversation->getId() ?>">
-                <textarea name="content" placeholder="Entrez votre message ici..."
+                <textarea name="content" placeholder="Entrez votre message ici..." aria-label="Votre message"
                     required><?= isset($prefillContent) ? htmlspecialchars($prefillContent) : '' ?></textarea>
                 <button type="submit" class="btn btn-dark">Envoyer</button>
             </form>

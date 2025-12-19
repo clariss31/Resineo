@@ -18,7 +18,8 @@
                 <form action="index.php?action=updateAccount" method="post" enctype="multipart/form-data"
                     class="display-none">
                     <input type="hidden" name="redirect_to" value="adminMessages">
-                    <input type="file" name="avatar" id="avatar-admin-input" onchange="this.form.submit()">
+                    <input type="file" name="avatar" id="avatar-admin-input" onchange="this.form.submit()"
+                        aria-label="Changer de photo de profil">
                 </form>
             </div>
             <span class="user-name"><?= htmlspecialchars($user->getFirstname() . ' ' . $user->getLastname()) ?></span>
@@ -232,12 +233,13 @@
                             <!-- Search Product Input -->
                             <div class="search-products-container">
                                 <input type="text" id="product-search-input"
-                                    placeholder="Ajouter un produit (rechercher...)">
+                                    placeholder="Ajouter un produit (rechercher...)"
+                                    aria-label="Rechercher un produit à ajouter">
                                 <div id="search-results"></div>
                             </div>
                             <div class="offer-form-footer">
                                 <textarea id="offer-message" placeholder="Réponse..."
-                                    class="offer-message-input"></textarea>
+                                    class="offer-message-input" aria-label="Message de l'offre"></textarea>
                                 <button type="button" class="btn btn-dark" onclick="submitOffer()">Envoyer</button>
                             </div>
                         </div>
@@ -247,7 +249,7 @@
                             <input type="hidden" name="conversation_id" value="<?= $activeConversation->getId() ?>">
                             <input type="hidden" name="type" id="message-type" value="text">
                             <!-- Support for message types -->
-                            <textarea name="content" id="message-content" placeholder="Répondre..." required></textarea>
+                            <textarea name="content" id="message-content" placeholder="Répondre..." required aria-label="Votre message"></textarea>
                             <button type="submit" class="btn btn-dark">Envoyer</button>
                         </form>
                     </div>

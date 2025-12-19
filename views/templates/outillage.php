@@ -20,11 +20,11 @@
                         <input type="range" id="price-min" name="min_price" 
                                min="<?= $minPrice ?>" max="<?= $maxPrice ?>" 
                                value="<?= $currentMinPrice ?>" step="1"
-                               oninput="updatePriceDisplay()" onchange="this.form.submit()">
+                               oninput="updatePriceDisplay()" onchange="this.form.submit()" aria-label="Prix minimum">
                         <input type="range" id="price-max" name="max_price" 
                                min="<?= $minPrice ?>" max="<?= $maxPrice ?>" 
                                value="<?= $currentMaxPrice ?>" step="1"
-                               oninput="updatePriceDisplay()" onchange="this.form.submit()">
+                               oninput="updatePriceDisplay()" onchange="this.form.submit()" aria-label="Prix maximum">
                     </div>
                 </div>
                 <div class="price-values">

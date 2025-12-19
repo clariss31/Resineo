@@ -21,11 +21,11 @@
                         <input type="range" id="price-min" name="min_price" 
                                min="<?= $minPrice ?>" max="<?= $maxPrice ?>" 
                                value="<?= $currentMinPrice ?>" step="1"
-                               oninput="updatePriceDisplay()" onchange="this.form.submit()">
+                               oninput="updatePriceDisplay()" onchange="this.form.submit()" aria-label="Prix minimum">
                         <input type="range" id="price-max" name="max_price" 
                                min="<?= $minPrice ?>" max="<?= $maxPrice ?>" 
                                value="<?= $currentMaxPrice ?>" step="1"
-                               oninput="updatePriceDisplay()" onchange="this.form.submit()">
+                               oninput="updatePriceDisplay()" onchange="this.form.submit()" aria-label="Prix maximum">
                     </div>
                 </div>
                 <div class="price-values">
@@ -58,10 +58,10 @@
                 <div class="sort-controls">
                     <select name="sort" form="filter-form" onchange="this.form.submit()">
                         <option value="">Trier par</option>
-                        <option value="price-ASC" <?= $currentSort === 'price-ASC' ? 'selected' : '' ?>>Prix croissant</option>
-                        <option value="price-DESC" <?= $currentSort === 'price-DESC' ? 'selected' : '' ?>>Prix décroissant</option>
-                        <option value="id-DESC" <?= $currentSort === 'id-DESC' ? 'selected' : '' ?>>Plus récents</option>
-                        <option value="id-ASC" <?= $currentSort === 'id-ASC' ? 'selected' : '' ?>>Plus anciens</option>
+                        <option value="price-ASC" <?= $currentSort === 'price-ASC' ? 'selected' : '' ?>>Prix croissant</option aria-label="Prix minimum">
+                        <option value="price-DESC" <?= $currentSort === 'price-DESC' ? 'selected' : '' ?>>Prix décroissant</option aria-label="Prix maximum">
+                        <option value="id-DESC" <?= $currentSort === 'id-DESC' ? 'selected' : '' ?>>Plus récents</option aria-label="Plus récents">
+                        <option value="id-ASC" <?= $currentSort === 'id-ASC' ? 'selected' : '' ?>>Plus anciens</option aria-label="Plus anciens">
                     </select>
                 </div>
             </div>

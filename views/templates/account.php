@@ -45,7 +45,8 @@
         <?php endif; ?>
 
         <form action="index.php?action=updateAccount" method="post" class="account-form" enctype="multipart/form-data">
-            <input type="file" name="avatar" id="avatar-input" class="display-none" onchange="this.form.submit()">
+            <input type="file" name="avatar" id="avatar-input" class="display-none" onchange="this.form.submit()"
+                aria-label="Changer de photo de profil">
 
             <div class="form-row">
                 <div class="form-group">

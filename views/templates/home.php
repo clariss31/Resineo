@@ -40,7 +40,7 @@
         <?php foreach ($newProducts as $product): ?>
             <div class="product-card">
                 <div class="product-image">
-                    <a href="index.php?action=showProduct&id=<?= $product->getId() ?>">
+                    <a href="index.php?action=showProduct&id=<?= $product->getId() ?>" aria-hidden="true" tabindex="-1">
                         <img src="<?= htmlspecialchars($product->getImage()) ?>"
                             alt="<?= htmlspecialchars($product->getName()) ?>">
                     </a>
