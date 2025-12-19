@@ -51,7 +51,7 @@
 
         <div class="chat-messages" id="chat-messages">
             <?php if (empty($messages)): ?>
-                <p class="no-messages">Commencez la discussion avec notre support.</p>
+                <p class="empty-state">Commencez la discussion avec notre support.</p>
             <?php else: ?>
                 <?php foreach ($messages as $msg): ?>
                     <?php $isWide = in_array($msg->getType(), ['quote_request', 'offer']); ?>
@@ -143,7 +143,8 @@
         <div class="chat-input-area">
             <form action="index.php?action=sendMessage" method="POST" class="message-form">
                 <input type="hidden" name="conversation_id" value="<?= $conversation->getId() ?>">
-                <textarea name="content" placeholder="Entrez votre message ici..." required></textarea>
+                <textarea name="content" placeholder="Entrez votre message ici..."
+                    required><?= isset($prefillContent) ? htmlspecialchars($prefillContent) : '' ?></textarea>
                 <button type="submit" class="btn btn-dark">Envoyer</button>
             </form>
         </div>

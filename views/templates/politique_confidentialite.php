@@ -1,7 +1,7 @@
 <div class="legal-page-container legal-container">
     <h1>POLITIQUE DE CONFIDENTIALITÉ</h1>
 
-    <section>
+    <div>
         <p>La présente politique de confidentialité définit et vous informe de la manière dont LRVISION utilise et
             protège les informations que vous nous transmettez, le cas échéant, lorsque vous utilisez le présent site
             accessible à partir de l’URL suivante : <a href="https://www.resineo.com">www.resineo.com</a> (ci-après le «
@@ -12,7 +12,7 @@
             tête de la présente politique. Ces modifications engagent l’Utilisateur dès leur mise en ligne. Il convient
             par conséquent que l’Utilisateur consulte régulièrement la présente politique de confidentialité et
             d’utilisation des cookies afin de prendre connaissance de ses éventuelles modifications.</p>
-    </section>
+    </div>
 
     <section>
         <h2>DONNÉES PERSONNELLES</h2>

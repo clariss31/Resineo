@@ -27,7 +27,7 @@ class AuthController
         $firstname = Utils::request("firstname");
         $lastname = Utils::request("lastname");
 
-        // Vérification basique (à améliorer)
+        // Vérification
         if (empty($email) || empty($password) || empty($firstname) || empty($lastname)) {
             $_SESSION['flash'] = "Tous les champs sont obligatoires.";
             Utils::redirect("registerForm");
@@ -61,8 +61,18 @@ class AuthController
 
         $userManager->create($user);
 
-        // On redirige vers la connexion
-        Utils::redirect("loginForm");
+        // Connexion automatique après inscription
+        $createdUser = $userManager->getByEmail($email);
+        if ($createdUser) {
+            $_SESSION['user'] = $createdUser;
+        }
+
+        // Si un devis est en attente, on redirige vers l'action d'envoi
+        if (isset($_SESSION['pending_quote_message'])) {
+            Utils::redirect("sendQuote");
+        }
+
+        Utils::redirect("home");
     }
 
     /**
@@ -102,6 +112,12 @@ class AuthController
         if (password_verify($password, $user->getPassword())) {
             // Connexion réussie
             $_SESSION['user'] = $user;
+
+            // Si un devis est en attente, on redirige vers l'action d'envoi
+            if (isset($_SESSION['pending_quote_message'])) {
+                Utils::redirect("sendQuote");
+            }
+
             Utils::redirect("home");
         } else {
             $_SESSION['flash'] = "Mot de passe incorrect.";

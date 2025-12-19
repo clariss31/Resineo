@@ -26,11 +26,15 @@ class MessageController
         $conversation = $conversationManager->getClientConversation($user->getId());
         $messages = $messageManager->findByConversation($conversation->getId());
 
+        // Récupère le message pré-rempli s'il existe
+        $prefillContent = Utils::request('prefill', '');
+
         $view = new View("Messagerie");
         $view->render("messaging", [
             'conversation' => $conversation,
             'messages' => $messages,
-            'user' => $user
+            'user' => $user,
+            'prefillContent' => $prefillContent
         ]);
     }
 
@@ -52,15 +56,19 @@ class MessageController
 
         // Conversation active (par défaut la première ou celle demandée)
         $activeConversationId = (int) Utils::request('id', 0);
+
+        // Initialisation des variables
         $activeConversation = null;
         $messages = [];
 
         if ($activeConversationId) {
             $activeConversation = $conversationManager->findOneById($activeConversationId);
         } elseif (!empty($conversations)) {
+            // Si aucune conversation n'est active, on prend la première
             $activeConversation = $conversations[0];
         }
 
+        // Récupération des messages de la conversation active
         if ($activeConversation) {
             $messages = $messageManager->findByConversation($activeConversation->getId());
         }
@@ -86,10 +94,9 @@ class MessageController
 
         $conversationId = (int) Utils::request('conversation_id');
         $content = Utils::request('content');
-        $type = Utils::request('type', 'text'); // Default to text
+        $type = Utils::request('type', 'text');
 
         if (!$conversationId || empty($content)) {
-            // Gérer l'erreur (idéalement retour AJAX ou flash)
             header('Location: index.php?action=messagerie');
             exit();
         }

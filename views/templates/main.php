@@ -92,7 +92,8 @@ $timestamp = filemtime($cssFile);
             <p class="applicator-text applicator-text-nomargin">Vous souhaitez devenir applicateur ? Rejoignez notre
                 réseau !
             </p>
-            <a href="index.php?action=messagerie" class="btn btn-white">Devenir applicateur</a>
+            <a href="index.php?action=messagerie&prefill=Bonjour%2C%20je%20voudrais%20devenir%20applicateur"
+                class="btn btn-white">Devenir applicateur</a>
         </div>
 
         <div class="main-footer">

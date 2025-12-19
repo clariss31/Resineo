@@ -50,7 +50,7 @@
         </form>
     </aside>
 
-    <main class="catalogue-content">
+    <div class="catalogue-content">
         <div class="results-header">
             <span class="results-count"><?= count($products) ?> résultat<?= count($products) > 1 ? 's' : '' ?></span>
             
@@ -92,7 +92,7 @@
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
-    </main>
+    </div>
 </div>
 
 <script>

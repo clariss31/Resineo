@@ -57,7 +57,7 @@
         </form>
     </aside>
 
-    <main class="catalogue-content">
+    <div class="catalogue-content">
         <div class="results-header">
             <span class="results-count"><?= count($products) ?> résultats</span>
             <div class="sort-controls">
@@ -92,7 +92,7 @@
                 </div>
             <?php endforeach; ?>
         </div>
-    </main>
+    </div>
 </div>
 
 <script>

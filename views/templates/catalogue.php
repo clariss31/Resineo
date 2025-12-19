@@ -49,7 +49,7 @@
         </form>
     </aside>
 
-    <main class="catalogue-content">
+    <div class="catalogue-content">
         <div class="results-header">
             <span class="results-count"><?= count($products) ?> résultats</span>
             
@@ -91,11 +91,18 @@
                 </div>
             <?php endforeach; ?>
         </div>
-    </main>
+    </div>
 </div>
 
 <!-- Admin Modal -->
-<div id="product-modal" class="modal hidden">
+<?php
+$openModal = isset($_SESSION['open_modal']);
+$oldInput = $_SESSION['form_submitted'] ?? [];
+// Nettoyage de la session pour la prochaine fois
+unset($_SESSION['open_modal']);
+unset($_SESSION['form_submitted']);
+?>
+<div id="product-modal" class="modal <?= $openModal ? '' : 'hidden' ?>">
     <div class="modal-content">
         <form id="product-form" action="index.php?action=addProduct" method="POST" enctype="multipart/form-data">
             <div class="modal-grid">
@@ -106,27 +113,29 @@
                     </div>
                     <label for="product-image" class="btn btn-dark btn-small btn-full">Ajouter une image</label>
                     <input type="file" name="image" id="product-image" accept="image/*" class="hidden">
+                    <!-- Note: Cannot pre-fill file input for security reasons -->
                 </div>
 
                 <!-- Right: Fields -->
                 <div class="modal-right">
                     <div class="form-group">
                         <label for="product-name">Titre</label>
-                        <input type="text" name="name" id="product-name" required>
+                        <input type="text" name="name" id="product-name" required value="<?= htmlspecialchars($oldInput['name'] ?? '') ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="product-description">Description</label>
-                        <textarea name="description" id="product-description" rows="4"></textarea>
+                        <textarea name="description" id="product-description" rows="4"><?= htmlspecialchars($oldInput['description'] ?? '') ?></textarea>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label for="product-category">Catégorie</label>
-                            <select name="category_id" id="product-category" required>
-                                <option value="1">Résines</option>
-                                <option value="2">Entretien</option>
-                                <option value="3">Outillage</option>
+                            <select name="category_id" id="product-category" required onchange="handleCategoryChange()">
+                                <option value="">Choisir une catégorie</option>
+                                <option value="1" <?= ($oldInput['category_id'] ?? '') == 1 ? 'selected' : '' ?>>Résines</option>
+                                <option value="2" <?= ($oldInput['category_id'] ?? '') == 2 ? 'selected' : '' ?>>Entretien</option>
+                                <option value="3" <?= ($oldInput['category_id'] ?? '') == 3 ? 'selected' : '' ?>>Outillage</option>
                             </select>
                         </div>
                     </div>
@@ -134,16 +143,18 @@
                     <div class="form-row">
                          <div class="form-group">
                             <label for="product-price">Prix</label>
-                            <input type="number" name="price" id="product-price" step="0.01" required>
+                            <input type="number" name="price" id="product-price" step="0.01" required value="<?= htmlspecialchars($oldInput['price'] ?? '') ?>">
                         </div>
                         
                         <!-- Dynamic Filters -->
+                        <!-- PHP Logic to show/hide based on oldInput category would be complex here without JS -->
+                        <!-- But we can pre-select the values correctly -->
                         <div class="form-group dynamic-field hidden" id="field-color">
                             <label for="product-color">Couleur</label>
                             <select name="color" id="product-color">
                                 <option value="">Choisir une couleur</option>
                                 <?php foreach ($distinctColors as $color): ?>
-                                    <option value="<?= htmlspecialchars($color) ?>"><?= htmlspecialchars($color) ?></option>
+                                    <option value="<?= htmlspecialchars($color) ?>" <?= ($oldInput['color'] ?? '') == $color ? 'selected' : '' ?>><?= htmlspecialchars($color) ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -151,8 +162,8 @@
                         <div class="form-group dynamic-field hidden" id="field-scent">
                             <label for="no-scent">Sans odeur ?</label>
                             <select name="no_scent" id="no-scent">
-                                <option value="no">Non</option>
-                                <option value="yes">Oui</option>
+                                <option value="no" <?= ($oldInput['no_scent'] ?? '') == 'no' ? 'selected' : '' ?>>Non</option>
+                                <option value="yes" <?= ($oldInput['no_scent'] ?? '') == 'yes' ? 'selected' : '' ?>>Oui</option>
                             </select>
                         </div>
 
@@ -161,7 +172,7 @@
                             <select name="tool_type" id="product-tool-type">
                                 <option value="">Choisir un type</option>
                                 <?php foreach ($distinctToolTypes as $type): ?>
-                                    <option value="<?= htmlspecialchars($type) ?>"><?= htmlspecialchars($type) ?></option>
+                                    <option value="<?= htmlspecialchars($type) ?>" <?= ($oldInput['tool_type'] ?? '') == $type ? 'selected' : '' ?>><?= htmlspecialchars($type) ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -176,6 +187,19 @@
         <button id="close-modal" class="modal-close">&times;</button>
     </div>
 </div>
+
+<script>
+// Trigger category change manually if needed to show correct fields on reload
+document.addEventListener('DOMContentLoaded', function() {
+    const categorySelect = document.getElementById('product-category');
+    if (categorySelect.value) {
+        // We need the handleCategoryChange function to availability. 
+        // It resides in admin-products.js. We need to ensure it runs.
+        // Or we manually trigger the change event.
+        categorySelect.dispatchEvent(new Event('change'));
+    }
+});
+</script>
 
 <script src="js/admin-products.js"></script>
 

@@ -12,7 +12,8 @@
             <span>Rejoignez nos 500+ applicateurs !</span>
         </div>
 
-        <a href="index.php?action=messagerie" class="btn btn-dark">Devenir applicateur</a>
+        <a href="index.php?action=messagerie&prefill=Bonjour%2C%20je%20voudrais%20devenir%20applicateur"
+            class="btn btn-dark">Devenir applicateur</a>
     </div>
 
     <div class="hero-right-grid">

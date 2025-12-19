@@ -84,8 +84,8 @@ class ConversationManager extends AbstractEntityManager
 
     private function createConversation(int $userId): void
     {
-        $sql = "INSERT INTO conversations (user_id, title, status, created_at) 
-                VALUES (:user_id, 'Support Client', 'open', NOW())";
+        $sql = "INSERT INTO conversations (user_id, created_at) 
+                VALUES (:user_id, NOW())";
 
         $this->db->query($sql, [
             'user_id' => $userId

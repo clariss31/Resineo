@@ -226,7 +226,21 @@ class ProductController
         $product->setCategoryId((int) Utils::request('category_id'));
 
         $product->setColor(Utils::request('color') ?: null);
-        $product->setScent(isset($_POST['no_scent']) ? 'Sans odeur' : null); // Simple vérification basée sur la case à cocher
+
+        // Correction gestion Scent (Odeur)
+        $noScent = Utils::request('no_scent'); // Valeur attendue : 'yes' (Sans odeur = Oui) ou 'no' (Sans odeur = Non)
+        if ($product->getCategoryId() === 2) {
+            if ($noScent === 'yes') {
+                $product->setScent('Oui');
+            } elseif ($noScent === 'no') {
+                $product->setScent('Non');
+            } else {
+                $product->setScent(null);
+            }
+        } else {
+            $product->setScent(null);
+        }
+
         $product->setToolType(Utils::request('tool_type') ?: null);
 
         // Gestion de l'image
@@ -286,42 +300,77 @@ class ProductController
             Utils::redirect('catalogue');
         }
 
-        $productManager = new ProductManager();
-
         // Récupération des données du formulaire
         $name = Utils::request('name');
         $description = Utils::request('description');
         $categoryId = (int) Utils::request('category_id');
         $price = (float) Utils::request('price');
 
-        // Gestion dynamique des champs spécifiques
+        // VAL: 1. Vérification des champs obligatoires de base
+        if (empty($name) || empty($description) || empty($price) || !$categoryId) {
+            $_SESSION['flash'] = "Veuillez remplir tous les champs obligatoires.";
+            $_SESSION['form_submitted'] = $_POST;
+            $_SESSION['open_modal'] = true;
+            Utils::redirect('catalogue');
+        }
+
+        // VAL: 2. Vérification de l'image (Obligatoire)
+        if (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+            $_SESSION['flash'] = "L'ajout d'une image est obligatoire.";
+            $_SESSION['form_submitted'] = $_POST;
+            $_SESSION['open_modal'] = true;
+            Utils::redirect('catalogue');
+        }
+
+        $productManager = new ProductManager();
+
+        // Gestion dynamique des champs spécifiques et VALIDATION
         $color = null;
         $scent = null;
         $toolType = null;
 
         if ($categoryId === 1) { // Résines
             $color = Utils::request('color');
+            // VAL: 3. Vérification option Résines
+            if (empty($color)) {
+                $_SESSION['flash'] = "Veuillez sélectionner une couleur pour les résines.";
+                $_SESSION['form_submitted'] = $_POST;
+                $_SESSION['open_modal'] = true;
+                Utils::redirect('catalogue');
+            }
         } elseif ($categoryId === 2) { // Entretien
             $noScent = Utils::request('no_scent');
-            if ($noScent) {
-                $scent = "Sans odeur";
-            } else {
-                $scent = Utils::request('scent');
+            if ($noScent === 'yes') {
+                $scent = "Oui";
+            } elseif ($noScent === 'no') {
+                $scent = "Non";
             }
+            // Note: Le champ 'scent' (Odeur) n'est pas strictement obligatoire si pas sélectionné, on laisse null.
+            // Sauf si on veut forcer une réponse Oui/Non. Pour l'instant on laisse souple.
         } elseif ($categoryId === 3) { // Outillage
             $toolType = Utils::request('tool_type');
+            // VAL: 4. Vérification option Outillage
+            if (empty($toolType)) {
+                $_SESSION['flash'] = "Veuillez sélectionner un type d'outil pour l'outillage.";
+                $_SESSION['form_submitted'] = $_POST;
+                $_SESSION['open_modal'] = true;
+                Utils::redirect('catalogue');
+            }
         }
 
-        // Téléchargement de l'image
-        $imagePath = 'img/camera-icon.png'; // Défaut
-        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            $uploadDir = 'img/';
-            $filename = uniqid() . '_' . basename($_FILES['image']['name']);
-            $targetPath = $uploadDir . $filename;
+        // Téléchargement de l'image (On sait qu'elle est valide grâce au check #2)
+        $uploadDir = 'img/';
+        $filename = uniqid() . '_' . basename($_FILES['image']['name']);
+        $targetPath = $uploadDir . $filename;
+        $imagePath = 'img/camera-icon.png'; // Fallback theorique, mais bloqué par validation
 
-            if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
-                $imagePath = $targetPath;
-            }
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+            $imagePath = $targetPath;
+        } else {
+            $_SESSION['flash'] = "Erreur lors du téléchargement de l'image.";
+            $_SESSION['form_submitted'] = $_POST;
+            $_SESSION['open_modal'] = true;
+            Utils::redirect('catalogue');
         }
 
         $product = new Product();

@@ -96,7 +96,7 @@
             </aside>
 
             <!-- Main: Chat Area -->
-            <main class="admin-chat-area">
+            <div class="admin-chat-area">
                 <?php if ($activeConversation): ?>
                     <div class="chat-header admin-header">
                         <div class="user-info">
@@ -256,7 +256,7 @@
                         <p>Aucune conversation</p>
                     </div>
                 <?php endif; ?>
-            </main>
+            </div>
         </div>
     </div>
 </div>

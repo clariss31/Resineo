@@ -143,9 +143,14 @@ class QuoteController
     public function sendQuote()
     {
         if (!isset($_SESSION['user'])) {
-            // Si pas connecté, redirection ou gestion (normalement le bouton n'est pas accessible, ou on redirige vers connect)
-            // Pour l'instant on suppose connecté car le formulaire est dans une zone sécurisée ou on redirige.
-            header('Location: index.php?action=connect');
+            // Sauvegarde du message utilisateur pour l'envoi après connexion
+            if (isset($_POST['message'])) {
+                $_SESSION['pending_quote_message'] = $_POST['message'];
+            }
+            $_SESSION['flash'] = "Veuillez vous connecter ou créer un compte pour envoyer votre devis.";
+
+            // Redirection vers la page de connexion
+            Utils::redirect('loginForm');
             exit();
         }
 
@@ -157,6 +162,12 @@ class QuoteController
         if (isset($_SESSION['quote']) && !empty($_SESSION['quote'])) {
             $user = $_SESSION['user'];
             $userMessage = Utils::request('message');
+
+            // Récupération du message en attente si non présent dans la requête
+            if (empty($userMessage) && isset($_SESSION['pending_quote_message'])) {
+                $userMessage = $_SESSION['pending_quote_message'];
+                unset($_SESSION['pending_quote_message']);
+            }
 
             // 1. Récupérer les produits du devis
             $products = [];
