@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 19 déc. 2025 à 16:10
+-- Généré le : sam. 20 déc. 2025 à 14:11
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -58,25 +58,7 @@ CREATE TABLE `conversations` (
 --
 
 INSERT INTO `conversations` (`id`, `user_id`, `created_at`) VALUES
-(4, 8, '2025-12-18 16:57:36'),
-(5, 19, '2025-12-19 11:01:05'),
-(6, 20, '2025-12-19 11:12:44'),
-(7, 21, '2025-12-19 11:13:35'),
-(8, 23, '2025-12-19 11:19:18'),
-(9, 24, '2025-12-19 14:37:35');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `conversation_items`
---
-
-CREATE TABLE `conversation_items` (
-  `id` int(11) NOT NULL,
-  `conversation_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(11, 26, '2025-12-20 13:41:23');
 
 -- --------------------------------------------------------
 
@@ -98,23 +80,12 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`id`, `conversation_id`, `sender_id`, `type`, `content`, `created_at`) VALUES
-(13, 4, 8, 'quote_request', '{\"user_message\":\"Je voudrais un devis sur ces produits svp et me conseiller sur les outils compl\\u00e9mentaires\",\"items\":[{\"name\":\"Rateau \\u00e0 2 vis\",\"price\":24,\"image\":\"img\\/rateau.png\",\"quantity\":1},{\"name\":\"Platoir en Komadur\",\"price\":16,\"image\":\"img\\/platoir.png\",\"quantity\":1}]}', '2025-12-18 16:57:36'),
-(14, 4, 8, 'quote_request', '{\"user_message\":\"bonjour je voudrais un devis\",\"items\":[{\"name\":\"R\\u00e9sineo Drain 10kg\",\"price\":52,\"image\":\"img\\/resineo-drain.png\",\"quantity\":3},{\"name\":\"R\\u00e9sineo Grip 10kg\",\"price\":54,\"image\":\"img\\/resineo-grip.png\",\"quantity\":4}]}', '2025-12-18 17:17:16'),
-(15, 4, 8, 'text', 'bonjour', '2025-12-18 17:17:41'),
-(16, 4, 1, 'text', 'ok', '2025-12-18 17:18:40'),
-(17, 4, 1, 'offer', '{\"type\":\"offer\",\"items\":[{\"name\":\"Résineo Drain 10kg\",\"price\":51.97,\"quantity\":4,\"image\":\"img/resineo-drain.png\"},{\"name\":\"Résineo Grip 10kg\",\"price\":54,\"quantity\":4,\"image\":\"img/resineo-grip.png\"},{\"name\":\"Résineo Drain 10kg\",\"price\":52,\"quantity\":1,\"image\":\"img/resineo-drain.png\"}],\"user_message\":\"test\"}', '2025-12-18 17:19:04'),
-(18, 4, 8, 'quote_request', '{\"user_message\":\"test\",\"items\":[{\"name\":\"R\\u00e9sineo Drain 10kg\",\"price\":52,\"image\":\"img\\/resineo-drain.png\",\"quantity\":1},{\"name\":\"R\\u00e9sineo Grip 10kg\",\"price\":54,\"image\":\"img\\/resineo-grip.png\",\"quantity\":1}]}', '2025-12-19 09:11:37'),
-(19, 4, 8, 'quote_request', '{\"user_message\":\"t\",\"items\":[{\"name\":\"Rateau \\u00e0 2 vis\",\"price\":24,\"image\":\"img\\/rateau.png\",\"quantity\":1},{\"name\":\"Platoir en Komadur\",\"price\":16,\"image\":\"img\\/platoir.png\",\"quantity\":1}]}', '2025-12-19 10:47:21'),
-(20, 4, 8, 'quote_request', '{\"user_message\":\"e\",\"items\":[{\"name\":\"R\\u00e9sineo Grip 10kg\",\"price\":54,\"image\":\"img\\/resineo-grip.png\",\"quantity\":1},{\"name\":\"R\\u00e9sineo Arbre 10kg\",\"price\":50,\"image\":\"img\\/resineo-arbre.png\",\"quantity\":1}]}', '2025-12-19 10:48:28'),
-(21, 5, 19, 'quote_request', '{\"user_message\":\"zerty\",\"items\":[{\"name\":\"R\\u00e9sineo Grip 10kg\",\"price\":54,\"image\":\"img\\/resineo-grip.png\",\"quantity\":1},{\"name\":\"R\\u00e9sineo Arbre 10kg\",\"price\":50,\"image\":\"img\\/resineo-arbre.png\",\"quantity\":1}]}', '2025-12-19 11:01:05'),
-(22, 6, 20, 'text', 'Bonjour, je voudrais devenir applicateur', '2025-12-19 11:12:59'),
-(23, 8, 23, 'quote_request', '{\"user_message\":\"sdf\",\"items\":[{\"name\":\"R\\u00e9sineo Grip 10kg\",\"price\":54,\"image\":\"img\\/resineo-grip.png\",\"quantity\":1},{\"name\":\"R\\u00e9sineo Arbre 10kg\",\"price\":50,\"image\":\"img\\/resineo-arbre.png\",\"quantity\":1}]}', '2025-12-19 11:19:18'),
-(24, 4, 8, 'quote_request', '{\"user_message\":\"test\",\"items\":[{\"name\":\"R\\u00e9sineo Grip 10kg\",\"price\":54,\"image\":\"img\\/resineo-grip.png\",\"quantity\":1},{\"name\":\"R\\u00e9sineo Arbre 10kg\",\"price\":50,\"image\":\"img\\/resineo-arbre.png\",\"quantity\":1},{\"name\":\"Rateau \\u00e0 2 vis\",\"price\":24,\"image\":\"img\\/rateau.png\",\"quantity\":1},{\"name\":\"Platoir en Komadur\",\"price\":16,\"image\":\"img\\/platoir.png\",\"quantity\":1}]}', '2025-12-19 14:11:50'),
-(25, 4, 1, 'offer', '{\"type\":\"offer\",\"items\":[{\"name\":\"Résineo Grip 10kg\",\"price\":54,\"quantity\":1,\"image\":\"img/resineo-grip.png\"},{\"name\":\"Résineo Arbre 10kg\",\"price\":50,\"quantity\":2,\"image\":\"img/resineo-arbre.png\"},{\"name\":\"Rateau à 2 vis\",\"price\":23.98,\"quantity\":1,\"image\":\"img/rateau.png\"},{\"name\":\"Platoir en Komadur\",\"price\":16,\"quantity\":1,\"image\":\"img/platoir.png\"},{\"name\":\"Résineo Drain 10kg\",\"price\":52,\"quantity\":1,\"image\":\"img/resineo-drain.png\"}],\"user_message\":\"\"}', '2025-12-19 14:14:39'),
-(26, 8, 1, 'offer', '{\"type\":\"offer\",\"items\":[{\"name\":\"Résineo Grip 10kg\",\"price\":54.03,\"quantity\":2,\"image\":\"img/resineo-grip.png\"},{\"name\":\"Résineo Drain 10kg\",\"price\":52,\"quantity\":1,\"image\":\"img/resineo-drain.png\"}],\"user_message\":\"test\"}', '2025-12-19 14:33:55'),
-(27, 4, 8, 'quote_request', '{\"user_message\":\"je voudrais un devis\",\"items\":[{\"name\":\"Spatule dent\\u00e9e (260\\/8mm)\",\"price\":22,\"image\":\"img\\/spatule-dentee.png\",\"quantity\":4},{\"name\":\"Spatule dent\\u00e9e (250\\/7mm)\",\"price\":18,\"image\":\"img\\/spatule-dentee.png\",\"quantity\":1}]}', '2025-12-19 14:34:50'),
-(28, 9, 24, 'quote_request', '{\"user_message\":\"test\",\"items\":[{\"name\":\"R\\u00e9sineo Grip 10kg\",\"price\":54,\"image\":\"img\\/resineo-grip.png\",\"quantity\":1},{\"name\":\"R\\u00e9sineo Arbre 10kg\",\"price\":50,\"image\":\"img\\/resineo-arbre.png\",\"quantity\":1}]}', '2025-12-19 14:37:35'),
-(29, 4, 8, 'quote_request', '{\"user_message\":\"swd\",\"items\":[{\"name\":\"Rateau \\u00e0 2 vis\",\"price\":24,\"image\":\"img\\/rateau.png\",\"quantity\":2},{\"name\":\"Platoir en Komadur\",\"price\":16,\"image\":\"img\\/platoir.png\",\"quantity\":2},{\"name\":\"R\\u00e9sineo Grip 10kg\",\"price\":54,\"image\":\"img\\/resineo-grip.png\",\"quantity\":1},{\"name\":\"R\\u00e9sineo Arbre 10kg\",\"price\":50,\"image\":\"img\\/resineo-arbre.png\",\"quantity\":1}]}', '2025-12-19 15:57:00');
+(31, 11, 26, 'text', 'Bonjour, je voudrais devenir applicateur', '2025-12-20 13:41:27'),
+(32, 11, 1, 'text', 'Bonjour, bien sûr ! Je vous envoie le formulaire d\'inscription', '2025-12-20 13:42:04'),
+(33, 11, 26, 'quote_request', '{\"user_message\":\"Bonjour, je voudrais un devis pour ces produits s\'il vous pla\\u00eet. Pouvez-vous me proposer un tarif pr\\u00e9f\\u00e9rentiel et me conseiller sur les produits d\'entretien ?\",\"items\":[{\"name\":\"Rateau \\u00e0 2 vis\",\"price\":24,\"image\":\"img\\/rateau.png\",\"quantity\":1},{\"name\":\"Platoir en Komadur\",\"price\":16,\"image\":\"img\\/platoir.png\",\"quantity\":2},{\"name\":\"Spatule dent\\u00e9e (250\\/7mm)\",\"price\":18,\"image\":\"img\\/spatule-dentee.png\",\"quantity\":1}]}', '2025-12-20 13:43:23'),
+(34, 11, 1, 'offer', '{\"type\":\"offer\",\"items\":[{\"name\":\"Rateau à 2 vis\",\"price\":24,\"quantity\":1,\"image\":\"img/rateau.png\"},{\"name\":\"Platoir en Komadur\",\"price\":15,\"quantity\":2,\"image\":\"img/platoir.png\"},{\"name\":\"Spatule dentée (250/7mm)\",\"price\":17,\"quantity\":1,\"image\":\"img/spatule-dentee.png\"},{\"name\":\"Résineo Lissant 5L\",\"price\":26,\"quantity\":1,\"image\":\"img/resineo-lissant.png\"}],\"user_message\":\"Bonjour, voici une offre. Je vous propose le résineo lissant pour l\'entretien.\"}', '2025-12-20 13:47:11'),
+(35, 11, 26, 'text', 'J\'achète !', '2025-12-20 13:47:40'),
+(36, 11, 1, 'text', 'Très bien je vous envoie le devis par mail à signer.', '2025-12-20 13:48:10');
 
 -- --------------------------------------------------------
 
@@ -179,14 +150,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `password`, `firstname`, `lastname`, `role`, `created_at`, `image`) VALUES
 (1, 'clarisse.ferand@gmail.com', '$2y$10$lTESjTrO7BwBT2ctAFwKrusHlFXjXj2bvIywqC/4UsU5d7Eoz5/Ru', 'Clarisse', 'Ferand', 'admin', '2025-11-28 15:07:25', 'img/avatar-resineo.png'),
-(8, 'jean.dupont@gmail.com', '$2y$10$hcjTqunosTq1T6vVGl/jhOqbcCyhWgs7eH3Pthuvenp5aO2/YbFVq', 'Jean', 'Dupont', 'client', '2025-12-18 16:57:04', 'img/avatar-default.png'),
-(18, 'clarisse.ffdqerand@gmail.com', '$2y$10$G0cB3tFCWWNWtoIoIltLmOmWyTiM0hv/.ggqC2/yn1q9QRd5lfCpi', 'Clarisse', 'Ferand', 'client', '2025-12-19 10:59:39', 'img/avatar-default.png'),
-(19, 'clarisserezrty@gmail.com', '$2y$10$8FTrUrbZfjevk6ZVE4W5N.OppgJkjPfflEpQLbM3Jyg9WrGxWMcKe', 'Clarisse', 'Ferand', 'client', '2025-12-19 11:01:05', 'img/avatar-default.png'),
-(20, 'clarisse.ezfrsnd@gmail.com', '$2y$10$71kjdMuYFcHQ00sl8WdQiu1BvSr9/3zAIwIGRDagoB8eCAN37m562', 'Clarisse', 'Ferand', 'client', '2025-12-19 11:11:20', 'img/avatar-default.png'),
-(21, 'clarisse.feraezfrsnd@gmail.com', '$2y$10$nFB7Po7FndX6EEZgd0BKqeXhjn/EOUpcNCoxyZB9nlyMnCBDJSdnS', 'Clarisse', 'Ferand', 'client', '2025-12-19 11:13:32', 'img/avatar-default.png'),
-(22, 'clarissefe@gmail.com', '$2y$10$cKg3aRDbZXh52QdGp1jqfOE6md.np/zXhg0YrS0ngzhJIg4IuDcYG', 'Clarisse', 'Ferand', 'client', '2025-12-19 11:18:41', 'img/avatar-default.png'),
-(23, 'clarisse.fedsvrand@gmail.com', '$2y$10$x6wVk/NTVTOeOAPFW6mibef7Cqg0WCQLra3rPw6IkOLwg4comzXF.', 'Clarisse', 'Ferand', 'client', '2025-12-19 11:19:18', 'img/avatar-default.png'),
-(24, 'clarissedzfsgd@gmail.com', '$2y$10$f93Ab5gB3KoU.x9JiAt6xei1WJmMVLTCqDERtxOEgJUylM4Oj7Enu', 'Clarisse', 'Ferand', 'client', '2025-12-19 14:37:35', 'img/avatar-default.png');
+(26, 'jean.dupont@gmail.com', '$2y$10$Ga6CZ1kMBipHp5P.o1t64uLBpfrjrXDhgD4cQz7cRXjyhCxvIkZOC', 'Jean', 'Dupont', 'client', '2025-12-20 13:41:17', 'img/avatar-default.png');
 
 --
 -- Index pour les tables déchargées
@@ -204,14 +168,6 @@ ALTER TABLE `categories`
 ALTER TABLE `conversations`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
-
---
--- Index pour la table `conversation_items`
---
-ALTER TABLE `conversation_items`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `conversation_id` (`conversation_id`),
-  ADD KEY `product_id` (`product_id`);
 
 --
 -- Index pour la table `messages`
@@ -250,31 +206,25 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT pour la table `conversations`
 --
 ALTER TABLE `conversations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT pour la table `conversation_items`
---
-ALTER TABLE `conversation_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT pour la table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Contraintes pour les tables déchargées
@@ -285,13 +235,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `conversations`
   ADD CONSTRAINT `conversations_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Contraintes pour la table `conversation_items`
---
-ALTER TABLE `conversation_items`
-  ADD CONSTRAINT `conversation_items_ibfk_1` FOREIGN KEY (`conversation_id`) REFERENCES `conversations` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `conversation_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
 -- Contraintes pour la table `messages`
