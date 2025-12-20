@@ -85,9 +85,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     imagePreview.src = e.target.result;
-                    // L'opacité et les dimensions sont gérées par le CSS (.image-preview-container img)
-                    // On s'assure juste que l'opacité est à 1 si elle avait été baissée pour le placeholder
-                    imagePreview.style.opacity = '1';
                 }
                 reader.readAsDataURL(file);
             }

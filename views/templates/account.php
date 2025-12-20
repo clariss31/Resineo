@@ -9,7 +9,7 @@
 
 <div class="account-container">
     <div class="account-sidebar">
-        <!-- User Summary Box -->
+        <!-- Bloc résumé utilisateur -->
         <div class="user-summary">
             <div class="user-info">
                 <?php $avatar = $user->getImage() ? $user->getImage() : "img/avatar-default.png"; ?>

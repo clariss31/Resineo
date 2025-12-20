@@ -2,7 +2,7 @@
  * Gestion centralisée du devis (Ajout AJAX et suppression avec confirmation)
  */
 document.addEventListener('DOMContentLoaded', function () {
-    // 1. AJOUT AU DEVIS (AJAX)
+    // 1. Aout au devis (ajax)
     const forms = document.querySelectorAll('.add-to-quote-form');
     forms.forEach(form => {
         form.addEventListener('submit', function (e) {
@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Mise à jour du nombre de produits dans le panier
     function updateQuoteBadge(count) {
         const badgeContainer = document.querySelector('.header-icon-link');
         if (!badgeContainer) return;
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // 2. ACTIONS DE SUPPRESSION (PAGE DEVIS)
+    // 2. Actions de suppression (page devis)
     const quoteModal = setupConfirmationModal({
         modalId: 'confirmation-modal',
         messageId: 'modal-message',

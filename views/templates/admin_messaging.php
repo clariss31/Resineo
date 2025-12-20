@@ -9,7 +9,7 @@
 
 <div class="account-container">
     <div class="account-sidebar">
-        <!-- User Summary Box -->
+        <!-- Bloc résumé utilisateur -->
         <div class="user-summary">
             <div class="user-info">
                 <?php $avatar = $user->getImage() ? $user->getImage() : "img/avatar-default.png"; ?>
@@ -25,7 +25,7 @@
             <span class="user-name"><?= htmlspecialchars($user->getFirstname() . ' ' . $user->getLastname()) ?></span>
         </div>
 
-        <!-- Navigation -->
+        <!-- Navigation du compte -->
         <nav class="account-nav">
             <a href="index.php?action=compte" class="account-nav-item">
                 <img src="img/icone-compte.png" alt="Infos">
@@ -43,11 +43,10 @@
     </div>
 
     <div class="account-content">
-        <!-- Admin Messaging Inner Container -->
+        <!-- Conteneur messagerie admin -->
         <div class="admin-messaging-container">
-            <!-- Sidebar: Conversation List -->
+            <!-- Barre latérale : Liste des conversations -->
             <aside class="conversations-sidebar">
-                <!-- Removed Title "Messagerie" as requested -->
                 <div class="conversations-list">
                     <?php foreach ($conversations as $conv): ?>
                         <?php
@@ -56,6 +55,7 @@
                         <a href="index.php?action=adminMessages&id=<?= $conv->getId() ?>"
                             class="conversation-item <?= $isActive ? 'active' : '' ?>">
                             <div class="conv-avatar">
+                                <!-- Affichage de l'avatar -->
                                 <?php if (!empty($conv->getUserImage())): ?>
                                     <img src="<?= $conv->getUserImage() ?>" alt="Avatar" class="avatar-circle">
                                 <?php else: ?>
@@ -67,21 +67,22 @@
                             <div class="conv-info">
                                 <span class="conv-name"><?= htmlspecialchars($conv->getUserName()) ?></span>
                                 <span class="conv-preview">
+                                    <!-- Date du dernier message -->
                                     <?= $conv->getLastMessageDate() ? date('d/m H:i', strtotime($conv->getLastMessageDate())) : 'Nouvelle conversation' ?>
                                 </span>
                                 <p class="conv-excerpt">
                                     <?php
                                     $lastMsg = $conv->getLastMessageContent();
                                     if ($lastMsg) {
-                                        // Quick check if it's a quote request (JSON)
+                                        // Gestion de l'affichage : JSON (Devis) vs Texte brut
                                         if (
                                             strpos($lastMsg, '"type":"quote_request"') !== false ||
                                             (strpos($lastMsg, '"items":[') !== false && strpos($lastMsg, '{') === 0)
                                         ) {
+                                            // Si c'est un JSON technique, on affiche un libellé simple
                                             echo "Demande de devis...";
                                         } else {
-                                            // Decode if simple text but stored as json? No, standard is text.
-                                            // Clean tags just in case
+                                            // Si c'est du texte, on nettoie et on tronque si nécessaire
                                             $clean = strip_tags($lastMsg);
                                             echo (strlen($clean) > 30) ? substr($clean, 0, 30) . '...' : $clean;
                                         }
@@ -96,7 +97,7 @@
                 </div>
             </aside>
 
-            <!-- Main: Chat Area -->
+            <!-- Zone de discussion principale -->
             <div class="admin-chat-area">
                 <?php if ($activeConversation): ?>
                     <div class="chat-header admin-header">
@@ -159,7 +160,7 @@
                                                     </div>
                                                     <div class="quote-card-actions">
                                                         <button type="button" class="btn btn-dark"
-                                                            onclick='openOfferForm(<?= json_encode($data) ?>)'>
+                                                            onclick='openOfferForm(<?= htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') ?>)'>
                                                             Faire une offre
                                                         </button>
                                                     </div>
@@ -225,12 +226,12 @@
                                 <button type="button" class="close-offer-btn" onclick="closeOfferForm()">×</button>
                             </div>
                             <div class="offer-items-list" id="offer-items-list">
-                                <!-- Items will be injected here via JS -->
+                                <!-- Les éléments seront injectés ici via JS -->
                             </div>
                             <div id="offer-total">Total : 0.00
                                 €</div>
 
-                            <!-- Search Product Input -->
+                            <!-- Champ de recherche de produit -->
                             <div class="search-products-container">
                                 <input type="text" id="product-search-input"
                                     placeholder="Ajouter un produit (rechercher...)"
@@ -238,8 +239,8 @@
                                 <div id="search-results"></div>
                             </div>
                             <div class="offer-form-footer">
-                                <textarea id="offer-message" placeholder="Réponse..."
-                                    class="offer-message-input" aria-label="Message de l'offre"></textarea>
+                                <textarea id="offer-message" placeholder="Réponse..." class="offer-message-input"
+                                    aria-label="Message de l'offre"></textarea>
                                 <button type="button" class="btn btn-dark" onclick="submitOffer()">Envoyer</button>
                             </div>
                         </div>
@@ -248,8 +249,9 @@
                             id="main-message-form">
                             <input type="hidden" name="conversation_id" value="<?= $activeConversation->getId() ?>">
                             <input type="hidden" name="type" id="message-type" value="text">
-                            <!-- Support for message types -->
-                            <textarea name="content" id="message-content" placeholder="Répondre..." required aria-label="Votre message"></textarea>
+                            <!-- Support des types de messages -->
+                            <textarea name="content" id="message-content" placeholder="Répondre..." required
+                                aria-label="Votre message"></textarea>
                             <button type="submit" class="btn btn-dark">Envoyer</button>
                         </form>
                     </div>
@@ -263,13 +265,13 @@
     </div>
 </div>
 
-<!-- Template for Offer Item -->
+<!-- Faire une offre -->
 <template id="offer-item-template">
     <div class="offer-item-row">
         <img src="" alt="" class="offer-item-img">
         <div class="offer-item-details">
             <span class="offer-item-name-text"></span>
-            <input type="hidden" class="offer-item-name" value=""> <!-- Hidden input for name submission -->
+            <input type="hidden" class="offer-item-name" value="">
             <div class="offer-item-controls">
                 <div class="control-group">
                     <span class="control-label">Prix (€)</span>
@@ -293,11 +295,13 @@
 
 
 <script>
+    // Scroll automatique vers le bas de la zone de chat
     const chatContainer = document.getElementById('chat-messages');
     if (chatContainer) {
         chatContainer.scrollTop = chatContainer.scrollHeight;
     }
 
+    // Calculer le total de l'offre en temps réel
     function calculateOfferTotal() {
         let total = 0;
         document.querySelectorAll('.offer-item-row').forEach(row => {
@@ -311,15 +315,14 @@
         }
     }
 
+    // Ouvrir le formulaire d'offre (pré-rempli avec les données du devis)
     function openOfferForm(quoteData) {
         const container = document.getElementById('offer-form-container');
         const list = document.getElementById('offer-items-list');
         const template = document.getElementById('offer-item-template');
-
-        // Reset list
         list.innerHTML = '';
 
-        // Populate items from quote
+        // Remplir les items à partir du devis
         if (quoteData && quoteData.items) {
             quoteData.items.forEach(item => {
                 addItemToForm(item.name, item.price, item.quantity, item.image);
@@ -328,16 +331,17 @@
 
         container.style.display = 'block';
         document.getElementById('main-message-form').style.display = 'none';
-        chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to see form
+        chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll pour voir le formulaire
         calculateOfferTotal();
     }
 
+    // Fermer le formulaire d'offre
     function closeOfferForm() {
         document.getElementById('offer-form-container').style.display = 'none';
         document.getElementById('main-message-form').style.display = 'flex';
     }
 
-    // Helper to add item to list
+    // Ajouter un produit à la liste de l'offre
     function addItemToForm(name, price, qty, image) {
         const list = document.getElementById('offer-items-list');
         const template = document.getElementById('offer-item-template');
@@ -353,13 +357,13 @@
         calculateOfferTotal();
     }
 
+    // Supprimer un produit de l'offre
     function removeOfferItem(btn) {
         btn.closest('.offer-item-row').remove();
         calculateOfferTotal();
     }
 
-
-
+    // Mettre à jour la quantité (+/-)
     function updateOfferQty(btn, delta) {
         const wrapper = btn.closest('.offer-qty-control');
         const input = wrapper.querySelector('.offer-qty-input');
@@ -370,7 +374,7 @@
         calculateOfferTotal();
     }
 
-    // Search Logic
+    // Logique de recherche de produits
     const searchInput = document.getElementById('product-search-input');
     const searchResults = document.getElementById('search-results');
     let debounceTimer;
@@ -380,14 +384,11 @@
             clearTimeout(debounceTimer);
             const term = this.value.trim();
 
-            // Allow search for even 1 char if user wants, or even empty to show recent? 
-            // User asked: "a chaque fois que je change un caractère"
             if (term.length === 0) {
                 searchResults.style.display = 'none';
                 return;
             }
 
-            // Reduced debounce to 50ms for "instant" feel as requested
             debounceTimer = setTimeout(() => {
                 fetch('index.php?action=searchJson&term=' + encodeURIComponent(term))
                     .then(response => response.json())
@@ -397,7 +398,6 @@
                             data.forEach(product => {
                                 const div = document.createElement('div');
                                 div.className = 'search-result-item';
-                                // Display as a clear clickable list item
                                 div.innerHTML = `
                                     <img src="${product.image}" class="search-result-img">
                                     <div class="search-item-info">
@@ -420,10 +420,9 @@
                     .catch(err => {
                         console.error('Search error:', err);
                     });
-            }, 100); // 100ms debounce
+            }, 100);
         });
 
-        // Close search results when clicking outside
         document.addEventListener('click', function (e) {
             if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
                 searchResults.style.display = 'none';
@@ -431,6 +430,7 @@
         });
     }
 
+    // Soumettre l'offre (construit le JSON et l'envoie)
     function submitOffer() {
         const items = [];
         document.querySelectorAll('.offer-item-row').forEach(row => {

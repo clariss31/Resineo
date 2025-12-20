@@ -71,6 +71,7 @@
         </div>
 
         <div class="product-grid">
+            <!-- Boucle d'affichage des produits -->
             <?php foreach ($products as $product): ?>
                 <div class="product-card" id="product-<?= $product->getId() ?>">
                     <a href="index.php?action=showProduct&id=<?= $product->getId() ?>">
@@ -94,10 +95,13 @@
     </div>
 </div>
 
-<!-- Admin Modal -->
+<!-- Modale Administrateur -->
 <?php
+// Gestion de la modale "Créer un produit"
+// On vérifie s'il y a une demande d'ouverture de modale en session (suite à une erreur par exemple)
 $openModal = isset($_SESSION['open_modal']);
 $oldInput = $_SESSION['form_submitted'] ?? [];
+
 // Nettoyage de la session pour la prochaine fois
 unset($_SESSION['open_modal']);
 unset($_SESSION['form_submitted']);
@@ -184,6 +188,8 @@ unset($_SESSION['form_submitted']);
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Déclenche l'événement 'change' sur le sélecteur de catégorie au chargement
+    // pour afficher les champs dynamiques corrects si une valeur est déjà sélectionnée (ex: après erreur)
     const categorySelect = document.getElementById('product-category');
     if (categorySelect.value) {
         categorySelect.dispatchEvent(new Event('change'));
@@ -193,21 +199,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script src="js/admin-products.js"></script>
 
-<script>
-function updatePriceDisplay() {
-    const minRange = document.getElementById('price-min');
-    const maxRange = document.getElementById('price-max');
-    const minDisplay = document.getElementById('price-min-display');
-    const maxDisplay = document.getElementById('price-max-display');
-
-    // Prevent crossing
-    if (parseInt(minRange.value) > parseInt(maxRange.value)) {
-        const temp = minRange.value;
-        minRange.value = maxRange.value;
-        maxRange.value = temp;
-    }
-
-    minDisplay.textContent = minRange.value + ' €';
-    maxDisplay.textContent = maxRange.value + ' €';
-}
-</script>

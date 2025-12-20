@@ -1,3 +1,4 @@
+<!-- Page Devis -->
 <div class="page-header header-bg-quote">
     <div class="header-content">
         <h1>Demande de devis</h1>
@@ -11,6 +12,7 @@
     <p>Votre devis est vide.</p>
 <?php else: ?>
 
+    <!-- Liste des produits du devis -->
     <div class="quote-list">
         <div class="quote-list-header">
             <h2>Liste des produits</h2>
@@ -40,6 +42,7 @@
         <p>Total : <?= number_format($total, 2) ?> €</p>
     </div>
 
+    <!-- Formulaire d'envoi -->
     <div class="auth-container quote-form-container">
         <form action="index.php?action=sendQuote" method="post" class="login-form">
             <div class="form-group">
@@ -54,7 +57,7 @@
     </div>
 <?php endif; ?>
 
-<!-- Confirmation Modal -->
+<!-- Modale de confirmation -->
 <div id="confirmation-modal" class="modal-overlay hidden">
     <div class="modal-content">
         <p id="modal-message">Voulez-vous vraiment supprimer le produit ?</p>

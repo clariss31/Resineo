@@ -1,3 +1,4 @@
+<!-- En-tête de la page de recherche -->
 <div class="page-header header-bg-search">
     <div class="header-content">
         <h1>Résultats de la recherche pour "<?= htmlspecialchars($searchTerm) ?>"</h1>
@@ -8,6 +9,7 @@
 </div>
 
 <div class="catalogue-container">
+    <!-- Barre latérale de filtres -->
     <aside class="sidebar">
         <form id="filter-form" action="index.php" method="GET">
             <input type="hidden" name="action" value="search">
@@ -50,6 +52,7 @@
         </form>
     </aside>
 
+    <!-- Contenu du catalogue (Résultats) -->
     <div class="catalogue-content">
         <div class="results-header">
             <span class="results-count"><?= count($products) ?> résultat<?= count($products) > 1 ? 's' : '' ?></span>
@@ -58,10 +61,10 @@
                 <div class="sort-controls">
                     <select name="sort" form="filter-form" onchange="this.form.submit()">
                         <option value="">Trier par</option>
-                        <option value="price-ASC" <?= $currentSort === 'price-ASC' ? 'selected' : '' ?>>Prix croissant</option aria-label="Prix minimum">
-                        <option value="price-DESC" <?= $currentSort === 'price-DESC' ? 'selected' : '' ?>>Prix décroissant</option aria-label="Prix maximum">
-                        <option value="id-DESC" <?= $currentSort === 'id-DESC' ? 'selected' : '' ?>>Plus récents</option aria-label="Plus récents">
-                        <option value="id-ASC" <?= $currentSort === 'id-ASC' ? 'selected' : '' ?>>Plus anciens</option aria-label="Plus anciens">
+                        <option value="price-ASC" <?= $currentSort === 'price-ASC' ? 'selected' : '' ?>>Prix croissant</option>
+                        <option value="price-DESC" <?= $currentSort === 'price-DESC' ? 'selected' : '' ?>>Prix décroissant</option>
+                        <option value="id-DESC" <?= $currentSort === 'id-DESC' ? 'selected' : '' ?>>Plus récents</option>
+                        <option value="id-ASC" <?= $currentSort === 'id-ASC' ? 'selected' : '' ?>>Plus anciens</option>
                     </select>
                 </div>
             </div>
@@ -95,20 +98,4 @@
     </div>
 </div>
 
-<script>
-function updatePriceDisplay() {
-    const minRange = document.getElementById('price-min');
-    const maxRange = document.getElementById('price-max');
-    const minDisplay = document.getElementById('price-min-display');
-    const maxDisplay = document.getElementById('price-max-display');
 
-    if (parseInt(minRange.value) > parseInt(maxRange.value)) {
-        const temp = minRange.value;
-        minRange.value = maxRange.value;
-        maxRange.value = temp;
-    }
-
-    minDisplay.textContent = minRange.value + ' €';
-    maxDisplay.textContent = maxRange.value + ' €';
-}
-</script>

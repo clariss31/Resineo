@@ -1,3 +1,4 @@
+<!-- Page de détails du produit -->
 <div class="product-detail-page">
     <div class="detail-container">
 
@@ -11,6 +12,7 @@
             <div class="product-info-detail">
                 <div class="detail-breadcrumb">
                     <?php
+                    // Carte de correspondance pour les slugs de catégorie
                     $catSlugMap = [
                         'Résines' => 'resines',
                         'Entretien' => 'entretien',
@@ -58,6 +60,7 @@
     </div>
 </div>
 
+<!-- Modale d'édition -->
 <div id="edit-modal" class="modal hidden">
     <div class="modal-content">
         <form id="edit-form" action="index.php?action=updateProduct" method="POST" enctype="multipart/form-data">
@@ -146,6 +149,7 @@
     </div>
 </div>
 
+<!-- Modale de suppression -->
 <div id="delete-modal" class="modal-overlay hidden">
     <div class="modal-content">
         <p id="modal-message-delete">Voulez-vous vraiment supprimer le produit ?</p>
@@ -162,6 +166,7 @@
         const editBtn = document.getElementById('btn-edit-product');
         const closeEditBtn = document.getElementById('close-edit-modal');
 
+        // Bascule l'affichage de la modale d'édition
         function toggleEditModal() {
             editModal.classList.toggle('hidden');
         }
@@ -169,6 +174,7 @@
         if (editBtn) editBtn.addEventListener('click', toggleEditModal);
         if (closeEditBtn) closeEditBtn.addEventListener('click', toggleEditModal);
 
+        // Configuration de la modale de suppression
         const deleteBtn = document.getElementById('btn-delete-product');
         const deleteModal = setupConfirmationModal({
             modalId: 'delete-modal',
@@ -190,6 +196,7 @@
         const fScent = document.getElementById('edit-field-scent');
         const fTool = document.getElementById('edit-field-tool-type');
 
+        // Mise à jour des champs dynamiques selon la catégorie sélectionnée
         function updateEditFields() {
             if (!catSelect) return;
             const val = catSelect.value;
@@ -210,6 +217,7 @@
         const imgInput = document.getElementById('edit-image');
         const imgPreview = document.getElementById('edit-image-preview');
 
+        // Prévisualisation de l'image lors du changement de fichier
         if (imgInput) {
             imgInput.addEventListener('change', function (e) {
                 const file = e.target.files[0];
@@ -234,12 +242,14 @@
         }
     });
 
+    // Augmenter la quantité
     function increaseQty() {
         var qtyInput = document.getElementById('quantity');
         var currentVal = parseInt(qtyInput.value);
         qtyInput.value = currentVal + 1;
     }
 
+    // Diminuer la quantité (min 1)
     function decreaseQty() {
         var qtyInput = document.getElementById('quantity');
         var currentVal = parseInt(qtyInput.value);

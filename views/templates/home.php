@@ -1,3 +1,4 @@
+<!-- Page d'accueil : Section Héro -->
 <div class="home-hero">
     <div class="hero-left">
         <h1>Découvrez nos revêtements <br> <span class="text-green">techniques</span> et <span
@@ -33,6 +34,7 @@
     </div>
 </div>
 
+<!-- Section Nouveautés -->
 <div class="new-products-section">
     <h2>Nouveautés</h2>
 
@@ -66,6 +68,7 @@
     </div>
 </div>
 
+<!-- Section Fonctionnalités -->
 <div class="features-section">
     <h2>Résineo, le revêtement de sol drainant <br> esthétique et certifié</h2>
 

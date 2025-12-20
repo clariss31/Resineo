@@ -1,3 +1,4 @@
+<!-- Page Politique de Confidentialité -->
 <div class="legal-page-container legal-container">
     <h1>POLITIQUE DE CONFIDENTIALITÉ</h1>
 

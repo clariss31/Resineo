@@ -71,3 +71,27 @@ function setupConfirmationModal(config = {}) {
 
     return { show, hide };
 }
+
+/**
+ * Met à jour l'affichage des valeurs min/max du filtre prix
+ * et empêche le croisement des curseurs.
+ */
+function updatePriceDisplay() {
+    const minRange = document.getElementById('price-min');
+    const maxRange = document.getElementById('price-max');
+    const minDisplay = document.getElementById('price-min-display');
+    const maxDisplay = document.getElementById('price-max-display');
+
+    if (minRange && maxRange && minDisplay && maxDisplay) {
+        // Empêcher le croisement des valeurs (le min ne peut pas être > au max)
+        if (parseInt(minRange.value) > parseInt(maxRange.value)) {
+            const temp = minRange.value;
+            minRange.value = maxRange.value;
+            maxRange.value = temp;
+        }
+
+        // Mise à jour de l'affichage texte
+        minDisplay.textContent = minRange.value + ' €';
+        maxDisplay.textContent = maxRange.value + ' €';
+    }
+}

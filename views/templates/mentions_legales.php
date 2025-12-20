@@ -1,3 +1,4 @@
+<!-- Page Mentions Légales -->
 <div class="legal-page-container legal-container">
     <h1>MENTIONS LÉGALES</h1>
 

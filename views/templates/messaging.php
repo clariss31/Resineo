@@ -1,3 +1,4 @@
+<!-- En-tête de la page -->
 <div class="page-header header-bg-account">
     <div class="header-content">
         <h1>Mon compte</h1>
@@ -14,6 +15,7 @@
                 <?php $avatar = $user->getImage() ? $user->getImage() : "img/avatar-default.png"; ?>
                 <img src="<?= $avatar ?>" alt="Avatar" class="avatar cursor-pointer"
                     onclick="document.getElementById('avatar-messaging-input').click();">
+                <!-- Formulaire caché pour l'upload d'avatar -->
                 <form action="index.php?action=updateAccount" method="post" enctype="multipart/form-data"
                     class="display-none">
                     <input type="hidden" name="redirect_to" value="messagerie">
@@ -40,7 +42,8 @@
         </nav>
     </div>
 
-    <main class="account-content messaging-content">
+    <!-- Contenu de la messagerie -->
+    <div class="account-content messaging-content">
         <div class="chat-header">
             <div class="chat-title">
                 <img src="img/avatar-resineo.png" alt="Resineo" class="chat-logo">
@@ -48,11 +51,13 @@
             </div>
         </div>
 
+        <!-- Discussion -->
         <div class="chat-messages" id="chat-messages">
             <?php if (empty($messages)): ?>
                 <p class="empty-state">Commencez la discussion avec notre support.</p>
             <?php else: ?>
                 <?php foreach ($messages as $msg): ?>
+                    <!-- Détermine si le message doit prendre toute la largeur (devis/offre) -->
                     <?php $isWide = in_array($msg->getType(), ['quote_request', 'offer']); ?>
                     <div
                         class="message-bubble <?= $msg->getSenderId() === $user->getId() ? 'message-sent' : 'message-received' ?> <?= $isWide ? 'wide-bubble' : '' ?>">
@@ -68,6 +73,7 @@
                                         </div>
                                         <div class="quote-card-items">
                                             <?php
+                                            // Calcul du total pour l'affichage
                                             $total = 0;
                                             foreach ($data['items'] as $item):
                                                 $total += $item['price'] * $item['quantity'];
@@ -147,10 +153,11 @@
                 <button type="submit" class="btn btn-dark">Envoyer</button>
             </form>
         </div>
-    </main>
+    </div>
 </div>
 
 <script>
+    // Scroll automatique vers le bas pour voir les derniers messages
     const chatContainer = document.getElementById('chat-messages');
     if (chatContainer) {
         chatContainer.scrollTop = chatContainer.scrollHeight;

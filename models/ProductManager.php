@@ -50,25 +50,15 @@ class ProductManager extends AbstractEntityManager
 
         // Recherche textuelle (Search)
         if (!empty($filters['search'])) {
-            // Utilisation du mode booléen pour permettre la recherche partielle (prefix*)
-            $searchTerm = $filters['search'];
-            // On ajoute * à la fin de chaque mot pour la recherche par préfixe
+            $searchTerm = trim($filters['search']);
             $words = explode(' ', $searchTerm);
-            $booleanSearch = '';
-            foreach ($words as $word) {
-                if (strlen($word) > 2) { // Uniquement pour les mots de plus de 2 lettres
-                    $booleanSearch .= '+' . $word . '* ';
-                }
-            }
-            $booleanSearch = trim($booleanSearch);
 
-            if (!empty($booleanSearch)) {
-                $where[] = "MATCH(name, description) AGAINST(:search IN BOOLEAN MODE)";
-                $params['search'] = $booleanSearch;
-            } else {
-                // Fallback si la recherche génère une chaîne vide (ex: mots trop courts)
-                $where[] = "name LIKE :search_like OR description LIKE :search_like";
-                $params['search_like'] = "%$searchTerm%";
+            foreach ($words as $index => $word) {
+                if (!empty($word)) {
+                    $paramName = "search_" . $index;
+                    $where[] = "(name LIKE :$paramName OR description LIKE :$paramName)";
+                    $params[$paramName] = "%$word%";
+                }
             }
         }
 
@@ -97,7 +87,7 @@ class ProductManager extends AbstractEntityManager
             $params['max_price'] = $filters['max_price'];
         }
 
-        // Autres filtres génériques (color, scent...)
+        // Filtres couleur, odeur et type d'outil
         $genericFilters = ['color', 'scent', 'tool_type'];
         foreach ($genericFilters as $key) {
             if (!empty($filters[$key])) {
@@ -110,11 +100,15 @@ class ProductManager extends AbstractEntityManager
             $sql .= " WHERE " . implode(" AND ", $where);
         }
 
-        // Tri
+        // Tri par
         if (!empty($filters['order_by'])) {
+            // Détermine la direction du tri (ASC par défaut, DESC si spécifié)
             $direction = (isset($filters['direction']) && strtoupper($filters['direction']) === 'DESC') ? 'DESC' : 'ASC';
+
+            // Liste blanche des colonnes autorisées pour le tri (sécurité anti-injection SQL)
             $allowedSorts = ['price', 'name', 'id'];
 
+            // Vérifie que la colonne demandée est dans la liste blanche avant de l'ajouter à la requête
             if (in_array($filters['order_by'], $allowedSorts)) {
                 $sql .= " ORDER BY " . $filters['order_by'] . " " . $direction;
             }
@@ -188,8 +182,6 @@ class ProductManager extends AbstractEntityManager
             }
         }
 
-        // ... autres filtres si nécessaire
-
         if (!empty($where)) {
             $sql .= " WHERE " . implode(" AND ", $where);
         }
@@ -219,6 +211,7 @@ class ProductManager extends AbstractEntityManager
         }
         return $products;
     }
+
     /**
      * Crée un nouveau produit.
      * @param Product $product

@@ -1,3 +1,4 @@
+<!-- En-tête de la page Outillage -->
 <div class="page-header header-bg-outillage">
     <div class="header-content">
         <h1>Outillage</h1>
@@ -8,6 +9,7 @@
 </div>
 
 <div class="catalogue-container">
+    <!-- Barre latérale de filtres -->
     <aside class="sidebar">
         <form id="filter-form" action="index.php" method="GET">
             <input type="hidden" name="action" value="outillage">
@@ -48,6 +50,7 @@
         </form>
     </aside>
 
+    <!-- Contenu du catalogue outillage -->
     <div class="catalogue-content">
         <div class="results-header">
             <span class="results-count"><?= count($products) ?> résultats</span>
@@ -85,21 +88,3 @@
         </div>
     </div>
 </div>
-
-<script>
-function updatePriceDisplay() {
-    const minRange = document.getElementById('price-min');
-    const maxRange = document.getElementById('price-max');
-    const minDisplay = document.getElementById('price-min-display');
-    const maxDisplay = document.getElementById('price-max-display');
-
-    if (parseInt(minRange.value) > parseInt(maxRange.value)) {
-        const temp = minRange.value;
-        minRange.value = maxRange.value;
-        maxRange.value = temp;
-    }
-
-    minDisplay.textContent = minRange.value + ' €';
-    maxDisplay.textContent = maxRange.value + ' €';
-}
-</script>

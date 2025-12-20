@@ -34,12 +34,11 @@ class ConversationManager extends AbstractEntityManager
             return $conversation;
         }
 
-        // Si toujours rien, c'est un problème critique
         throw new Exception("Impossible de créer ou récupérer la conversation pour l'utilisateur $userId.");
     }
 
     /**
-     * Récupère toutes les conversations pour l'admin.
+     * Récupère les conversations pour l'admin.
      * @return Conversation[]
      */
     public function findAllWithDetails(): array
@@ -65,6 +64,11 @@ class ConversationManager extends AbstractEntityManager
         return $conversations;
     }
 
+    /**
+     * Récupère une conversation par son ID.
+     * @param int $id
+     * @return Conversation|null
+     */
     public function findOneById(int $id): ?Conversation
     {
         $sql = "SELECT c.*, u.firstname, u.lastname, u.image as user_image FROM conversations c 
@@ -82,6 +86,11 @@ class ConversationManager extends AbstractEntityManager
         return null;
     }
 
+    /**
+     * Crée une conversation pour un utilisateur.
+     * @param int $userId
+     * @return void
+     */
     private function createConversation(int $userId): void
     {
         $sql = "INSERT INTO conversations (user_id, created_at) 

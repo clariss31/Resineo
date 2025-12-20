@@ -1,3 +1,4 @@
+<!-- Formulaire d'inscription -->
 <div class="auth-container">
     <h1>S'inscrire</h1>
     <form action="index.php?action=register" method="post" class="login-form">

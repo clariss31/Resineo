@@ -22,6 +22,7 @@ $timestamp = filemtime($cssFile);
 </head>
 
 <body>
+    <!-- En-tête principal -->
     <header class="main-header">
         <div class="header-left">
             <a href="index.php?action=home">
@@ -66,6 +67,7 @@ $timestamp = filemtime($cssFile);
         </div>
     </header>
 
+    <!-- Contenu principal -->
     <main>
         <?php if (isset($_SESSION['flash'])): ?>
             <div class="flash-message" id="flash-message">
@@ -85,6 +87,7 @@ $timestamp = filemtime($cssFile);
         <?= $content /* Ici est affiché le contenu de la page. */ ?>
     </main>
 
+    <!-- Pied de page global -->
     <footer class="global-footer">
         <img src="img/resines.png" alt="Ambiance Résines" class="footer-top-image">
 

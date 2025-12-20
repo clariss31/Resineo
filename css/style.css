@@ -1,6 +1,6 @@
 /* Styles de base et Reset */
 :root {
-    --primary-dark: #12382f;
+    --primary-dark: #1a3d35;
     --primary-light: #eef4f5;
     --secondary-green: #6c9a8b;
     --text-color: black;
@@ -68,7 +68,7 @@ p {
 .search-form {
     display: flex;
     align-items: center;
-    border: 2px solid #1a3c34;
+    border: 2px solid #1a3d35;
     border-radius: 8px;
     padding: 5px;
     background-color: #fff;
@@ -80,11 +80,11 @@ p {
     outline: none;
     padding: 8px;
     font-size: 1rem;
-    color: #032b21;
+    color: #1a3d35;
 }
 
 .search-form input[type="text"]::placeholder {
-    color: #0d4436;
+    color: #1a3d35;
     opacity: 1;
 }
 
@@ -111,13 +111,13 @@ p {
 
 .header-nav a {
     text-decoration: none;
-    color: #032b21;
+    color: #1a3d35;
     font-size: 1.1rem;
     font-weight: 500;
 }
 
 .header-nav a:hover {
-    color: #1a3c34;
+    color: #1a3d35;
 }
 
 /* Actions Utilisateur */
@@ -173,7 +173,6 @@ footer.global-footer {
 
 .applicator-text {
     font-size: 1.1rem;
-    /* Même taille que le bouton (environ) */
     font-weight: bold;
 }
 
@@ -220,7 +219,7 @@ footer.global-footer {
 /* Bouton Devis - Style unifié */
 .btn-quote {
     display: inline-block;
-    background-color: #1a3c34;
+    background-color: #1a3d35;
     color: white;
     border: none;
     border-radius: 8px;
@@ -253,7 +252,7 @@ footer.global-footer {
     background-color: var(--primary-light);
     padding: 1.5rem;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: none;
 }
 
 .quote-item-info {
@@ -291,7 +290,7 @@ footer.global-footer {
 .quantity-selector {
     display: flex;
     align-items: center;
-    background-color: #1a3c34;
+    background-color: #1a3d35;
     border-radius: 5px;
     padding: 5px 10px;
     color: white;
@@ -321,7 +320,7 @@ footer.global-footer {
 }
 
 .btn-delete {
-    background-color: #1a3c34;
+    background-color: #1a3d35;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -347,12 +346,10 @@ footer.global-footer {
     color: #000;
 }
 
-
 .filters {
     margin-bottom: 2rem;
 }
 
-/* Buttons */
 /* Boutons */
 .btn {
     display: inline-block;
@@ -384,7 +381,6 @@ footer.global-footer {
     border: 2px solid #fff;
 }
 
-/* Bouton Sombre (Reference: Devenir applicateur) */
 .btn-dark {
     background-color: var(--primary-dark);
     color: white;
@@ -438,17 +434,6 @@ footer.global-footer {
     width: 40px;
 }
 
-.contact-item a {
-    text-decoration: underline;
-    color: #12382f;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-.contact-item a:hover {
-    color: #7b9e93;
-}
-
 /* Bas du pied de page */
 .footer-bottom {
     display: flex;
@@ -476,14 +461,25 @@ footer.global-footer {
     gap: 2rem;
 }
 
-.legal-links a {
+.legal-links a,
+.contact-item a,
+.btn-clear-all,
+.register-link a {
     text-decoration: underline;
     color: var(--primary-dark);
     font-weight: bold;
     transition: color 0.3s;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 1.1rem;
 }
 
-.legal-links a:hover {
+.legal-links a:hover,
+.contact-item a:hover,
+.btn-clear-all:hover,
+.register-link a:hover {
     color: #7b9e93;
 }
 
@@ -523,7 +519,7 @@ footer.global-footer {
 .form-group select {
     width: 100%;
     padding: 12px;
-    border: 2px solid #1a3c34;
+    border: 2px solid #1a3d35;
     border-radius: 8px;
     font-size: 1rem;
     outline: none;
@@ -542,7 +538,7 @@ footer.global-footer {
 }
 
 .form-actions .btn {
-    background-color: #1a3c34;
+    background-color: #1a3d35;
     color: white;
     font-size: 1.1rem;
 }
@@ -569,12 +565,6 @@ footer.global-footer {
     margin: 0;
 }
 
-.register-link a {
-    color: #1a3c34;
-    font-weight: bold;
-    text-decoration: underline;
-}
-
 /* Spécificités formulaire devis */
 .quote-form-container {
     margin: 0 auto;
@@ -584,7 +574,7 @@ footer.global-footer {
 .quote-form-textarea {
     width: 100%;
     padding: 10px;
-    border: 2px solid #1a3c34;
+    border: 2px solid #1a3d35;
     border-radius: 0;
     outline: none;
     background-color: #fff;
@@ -609,7 +599,7 @@ footer.global-footer {
     position: absolute;
     top: -5px;
     right: -8px;
-    background-color: #1a3c34;
+    background-color: #1a3d35;
     color: white;
     font-size: 0.75rem;
     font-weight: bold;
@@ -628,7 +618,7 @@ footer.global-footer {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #1a3c34;
+    background-color: #1a3d35;
     color: white;
     padding: 15px 25px;
     border-radius: 5px;
@@ -644,22 +634,6 @@ footer.global-footer {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 1rem;
-}
-
-.btn-clear-all {
-    color: var(--primary-dark);
-    text-decoration: underline;
-    font-weight: bold;
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 0;
-    font-size: 1rem;
-    transition: color 0.3s;
-}
-
-.btn-clear-all:hover {
-    color: #7b9e93;
 }
 
 /* Styles Modale */
@@ -715,7 +689,7 @@ footer.global-footer {
 }
 
 .modal-actions .btn-primary {
-    background-color: #1a3c34;
+    background-color: #1a3d35;
     color: white;
     border: none;
     transition: background-color 0.3s;
@@ -727,8 +701,8 @@ footer.global-footer {
 
 .modal-actions .btn-secondary {
     background-color: white;
-    color: #1a3c34;
-    border: 2px solid #1a3c34;
+    color: #1a3d35;
+    border: 2px solid #1a3d35;
 }
 
 /* Styles Catalogue */
@@ -797,7 +771,13 @@ footer.global-footer {
     width: 100%;
 }
 
-/* Specific override for grid layout */
+.no-results-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 1.1rem;
+    margin-top: 2rem;
+}
+
 .product-grid .product-card {
     border-radius: 8px;
     padding: 15px;
@@ -830,7 +810,7 @@ footer.global-footer {
 
 /* Boutons Formulaire Ajout */
 .add-to-quote-form .btn {
-    background-color: #1a3c34;
+    background-color: #1a3d35;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -886,13 +866,13 @@ footer.global-footer {
     height: 20px;
     width: 20px;
     background-color: transparent;
-    border: 2px solid #12382f;
+    border: 2px solid #1a3d35;
     border-radius: 4px;
 }
 
 /* État Coché */
 .checkbox-group input:checked~label::before {
-    background-color: #12382f;
+    background-color: #1a3d35;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' width='16px' height='16px'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: center;
@@ -978,7 +958,7 @@ footer.global-footer {
 
 .sort-controls select {
     padding: 0.8rem;
-    border: 2px solid #12382f;
+    border: 2px solid #1a3d35;
     border-radius: 8px;
     font-size: 1rem;
     padding-right: 2rem;
@@ -1013,7 +993,7 @@ footer.global-footer {
     flex-shrink: 0;
 }
 
-/* Couleurs Spécifiques */
+/* Couleurs filtre couleur */
 .color-circle.Sable {
     background-color: #cdbaac;
 }
@@ -1079,7 +1059,7 @@ footer.global-footer {
     font-size: 14px;
 }
 
-/* Styles Page Compte (Legacy container, overridden below) */
+/* Styles Page Compte */
 .account-container {
     display: flex;
     max-width: 1200px;
@@ -1087,7 +1067,6 @@ footer.global-footer {
     gap: 3rem;
     align-items: flex-start;
 }
-
 
 /* --- Styles Page d'Accueil --- */
 .home-hero {
@@ -1150,8 +1129,6 @@ footer.global-footer {
     margin-left: 0;
 }
 
-/* Bouton Dark déjà défini */
-
 .hero-right-grid {
     display: flex;
     gap: 1rem;
@@ -1182,7 +1159,7 @@ footer.global-footer {
     height: 242px;
 }
 
-/* Images de fond manquantes */
+/* Images de fond */
 .bg-resines {
     background-image: url('../img/resines.png');
 }
@@ -1200,13 +1177,11 @@ footer.global-footer {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    /* Aligné à gauche avec padding bas égal (20px) */
-    /* transform: translateX(-50%); Supprimé pour alignement gauche */
     background: white;
     padding: 0.8rem 1.2rem;
     border-radius: 12px;
     text-decoration: none;
-    color: #1a3c34;
+    color: #1a3d35;
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -1246,9 +1221,10 @@ footer.global-footer {
 
 .products-grid .product-card {
     width: 100%;
+    box-shadow: none;
 }
 
-/* Card Produit (Style standardisé) */
+/* Card Produit */
 .product-card {
     background: #eff4f4;
     border-radius: 12px;
@@ -1296,9 +1272,7 @@ footer.global-footer {
     padding: 4rem 5%;
     text-align: center;
     border-radius: 30px;
-    /* Bordure radius cohérente avec le reste */
     margin-top: 2rem;
-    /* Marge pour l'esthétique "boxed" */
 }
 
 .features-grid {
@@ -1356,7 +1330,7 @@ footer.global-footer {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    border: 3px solid #1a3c34;
+    border: 3px solid #1a3d35;
     border-radius: 8px;
     overflow: hidden;
     background-color: #fff;
@@ -1369,7 +1343,7 @@ footer.global-footer {
     gap: 1rem;
     padding: 1rem;
     border: none;
-    border-bottom: 3px solid #1a3c34;
+    border-bottom: 3px solid #1a3d35;
     background-color: #fff;
     position: relative;
     z-index: 2;
@@ -1390,7 +1364,7 @@ footer.global-footer {
 .user-summary .logout-link {
     font-weight: bold;
     text-decoration: underline;
-    color: #1a3c34;
+    color: #1a3d35;
     font-size: 1rem;
 }
 
@@ -1411,12 +1385,11 @@ footer.global-footer {
     color: white;
     font-weight: 500;
     font-size: 1.1rem;
-    background-color: #1a3c34;
+    background-color: #1a3d35;
     border: none;
-    border-bottom: 3px solid #1a3c34;
+    border-bottom: 3px solid #1a3d35;
     cursor: pointer;
     margin-top: 0;
-    /* Chevauchement bordure item précédent */
     position: relative;
     z-index: 1;
 }
@@ -1428,11 +1401,11 @@ footer.global-footer {
 /* État inactif */
 .account-nav-item:not(.active) {
     background-color: #fff;
-    color: #1a3c34;
+    color: #1a3d35;
 }
 
 .account-nav-item.active {
-    background-color: #1a3c34;
+    background-color: #1a3d35;
     color: white;
     z-index: 3;
 }
@@ -1469,7 +1442,7 @@ footer.global-footer {
 .account-form input {
     width: 100%;
     padding: 12px;
-    border: 3px solid #1a3c34;
+    border: 3px solid #1a3d35;
     font-size: 1rem;
     border-radius: 0;
     background-color: white;
@@ -1579,7 +1552,7 @@ footer.global-footer {
 .qty-group {
     display: flex;
     align-items: center;
-    background-color: #1a3c34;
+    background-color: #1a3d35;
     border-radius: 8px;
     padding: 5px;
     height: 48px;
@@ -1657,7 +1630,6 @@ footer.global-footer {
 
 .modal-content {
     background-color: #f0f5f5;
-    /* Fond gris/vert clair */
     padding: 2rem;
     border-radius: 16px;
     width: 90%;
@@ -1734,14 +1706,14 @@ footer.global-footer {
 
 .form-group label {
     font-weight: 600;
-    color: #1a3c34;
+    color: #1a3d35;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
     padding: 0.7rem;
-    border: 3px solid #1a3c34;
+    border: 3px solid #1a3d35;
     border-radius: 8px;
     font-family: inherit;
     font-size: 0.95rem;
@@ -1756,7 +1728,6 @@ footer.global-footer {
     display: flex;
     gap: 1rem;
     align-items: flex-end;
-    /* Alignement correct des champs */
 }
 
 .form-row .form-group {
@@ -1774,8 +1745,6 @@ footer.global-footer {
     width: auto;
 }
 
-
-
 .modal-close {
     position: absolute;
     top: 1rem;
@@ -1783,7 +1752,7 @@ footer.global-footer {
     background: none;
     border: none;
     font-size: 2rem;
-    color: #1a3c34;
+    color: #1a3d35;
     cursor: pointer;
 }
 
@@ -1864,7 +1833,7 @@ footer.global-footer {
     height: 60px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #1a3c34;
+    border: 2px solid #1a3d35;
 }
 
 .chat-title h2 {
@@ -1878,7 +1847,6 @@ footer.global-footer {
     padding: 2rem;
     overflow-y: auto;
     background-color: #fff;
-    /* Fond blanc pour la zone de discussion */
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -1898,7 +1866,7 @@ footer.global-footer {
 
 .message-sent {
     align-self: flex-end;
-    background-color: #1a3c34;
+    background-color: #1a3d35;
     color: white;
     border-bottom-right-radius: 2px;
 }
@@ -1907,7 +1875,7 @@ footer.global-footer {
     align-self: flex-start;
     background-color: #f0f5f5;
     border: none;
-    color: #1a3c34;
+    color: #1a3d35;
     border-bottom-left-radius: 2px;
 }
 
@@ -1936,7 +1904,6 @@ footer.global-footer {
 .display-none {
     display: none;
 }
-
 
 /* Carte blanche dans bulle reçue */
 .message-received .quote-card-item {
@@ -1976,7 +1943,7 @@ footer.global-footer {
 .message-form textarea {
     flex: 1;
     padding: 10px;
-    border: 2px solid #1a3c34;
+    border: 2px solid #1a3d35;
     border-radius: 8px;
     resize: none;
     height: 50px;
@@ -1988,7 +1955,6 @@ footer.global-footer {
     height: 50px;
     padding: 0 30px;
 }
-
 
 /* --- Styles Messagerie Admin --- */
 
@@ -2040,7 +2006,7 @@ footer.global-footer {
 .avatar-circle {
     width: 40px;
     height: 40px;
-    background-color: #1a3c34;
+    background-color: #1a3d35;
     color: white;
     border-radius: 50%;
     display: flex;
@@ -2092,7 +2058,6 @@ footer.global-footer {
     text-overflow: ellipsis;
 }
 
-/* Override padding global pour cette zone */
 .admin-chat-area {
     padding: 0 !important;
     flex: 1;
@@ -2129,7 +2094,7 @@ footer.global-footer {
 .quote-card-header {
     font-weight: bold;
     margin-bottom: 10px;
-    color: #1a3c34;
+    color: #1a3d35;
     font-size: 1rem;
 }
 
@@ -2163,14 +2128,14 @@ footer.global-footer {
 
 .quote-item-name {
     font-weight: normal;
-    color: #1a3c34;
+    color: #1a3d35;
     font-size: 1rem;
     margin-bottom: 5px;
 }
 
 .quote-item-price {
     font-weight: bold;
-    color: #1a3c34;
+    color: #1a3d35;
 }
 
 .quote-item-qty {
@@ -2188,10 +2153,6 @@ footer.global-footer {
     margin-top: 15px;
 }
 
-/* -------------------------------------------------------------------------- */
-/*                            Offer Form & Messaging                          */
-/* -------------------------------------------------------------------------- */
-
 /* Styles Généraux Devis/Offre */
 .quote-request-card {
     background-color: #fff;
@@ -2200,11 +2161,10 @@ footer.global-footer {
     overflow: hidden;
 }
 
-/* Remove default borders for clearer look as requested */
 .quote-card-header {
     background-color: #f8f9fa;
     border-bottom: none;
-    color: #1a3c34;
+    color: #1a3d35;
     font-family: inherit;
     font-size: 1rem;
     font-weight: bold;
@@ -2215,11 +2175,6 @@ footer.global-footer {
     font-size: 0.95rem;
     color: #333;
 }
-
-/* -------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------- */
-/*             Intégration transparente dans les bulles (Client & Admin)      */
-/* -------------------------------------------------------------------------- */
 
 .message-bubble .quote-request-card {
     background: transparent;
@@ -2244,13 +2199,12 @@ footer.global-footer {
     color: #fff;
 }
 
-/* Suppression du séparateur dans les messages envoyés */
 .message-sent .quote-card-message {
     border-top: none;
 }
 
 .message-received .quote-card-header {
-    color: #1a3c34;
+    color: #1a3d35;
 }
 
 .message-received .quote-card-message {
@@ -2258,7 +2212,6 @@ footer.global-footer {
     color: #333;
 }
 
-/* Items in Sent (Green) Bubble -> White cards */
 .message-sent .quote-card-item {
     background: #fff;
     border-radius: 6px;
@@ -2267,7 +2220,6 @@ footer.global-footer {
     border: none;
 }
 
-/* Articles dans bulle reçue (Blanc) */
 .message-received .quote-card-item {
     background: #fff;
     border: 1px solid #eee;
@@ -2275,9 +2227,7 @@ footer.global-footer {
     padding: 10px;
 }
 
-/* -------------------------------------------------------------------------- */
-/*                            Formulaire d'Offre                              */
-/* -------------------------------------------------------------------------- */
+/* Formulire d'Offre */
 
 .offer-form-header {
     display: flex;
@@ -2291,7 +2241,7 @@ footer.global-footer {
 .offer-form-header h3 {
     margin: 0;
     font-size: 1.2rem;
-    color: #1a3c34;
+    color: #1a3d35;
     font-family: inherit;
     font-weight: bold;
 }
@@ -2302,7 +2252,7 @@ footer.global-footer {
     font-size: 1.8rem;
     line-height: 1;
     cursor: pointer;
-    color: #1a3c34;
+    color: #1a3d35;
     transition: color 0.3s;
 }
 
@@ -2347,7 +2297,7 @@ footer.global-footer {
     font-weight: normal;
     margin-bottom: 5px;
     font-size: 1rem;
-    color: #1a3c34;
+    color: #1a3d35;
 }
 
 .offer-item-controls {
@@ -2368,7 +2318,7 @@ footer.global-footer {
 .offer-qty-control {
     display: flex;
     align-items: center;
-    background-color: #1a3c34;
+    background-color: #1a3d35;
     border-radius: 5px;
     padding: 5px;
     color: white;
@@ -2407,7 +2357,7 @@ footer.global-footer {
 .remove-item-btn {
     background: none;
     border: none;
-    color: #1a3c34;
+    color: #1a3d35;
     font-size: 1.4rem;
     cursor: pointer;
     padding: 0 10px;
@@ -2426,7 +2376,7 @@ footer.global-footer {
 #product-search-input {
     width: 100%;
     padding: 12px;
-    border: 2px solid #1a3c34;
+    border: 2px solid #1a3d35;
     border-radius: 6px;
     font-size: 1rem;
     outline: none;
@@ -2469,7 +2419,6 @@ footer.global-footer {
     border-radius: 4px;
 }
 
-/* Footer: Message + Bouton côte à côte */
 .offer-form-footer {
     display: flex;
     align-items: center;
@@ -2480,7 +2429,7 @@ footer.global-footer {
     flex: 1;
     height: 50px;
     padding: 10px;
-    border: 2px solid #1a3c34;
+    border: 2px solid #1a3d35;
     border-radius: 6px;
     resize: none;
     font-family: inherit;
@@ -2488,7 +2437,6 @@ footer.global-footer {
     margin-bottom: 0;
 }
 
-/* Hauteur bouton harmonisée */
 .offer-form-footer .btn {
     height: 50px;
     padding: 0 25px;
@@ -2498,7 +2446,6 @@ footer.global-footer {
     white-space: nowrap;
 }
 
-/* Helper Clean Classes */
 .quote-request-card.no-bg {
     background: none;
     border: none;
@@ -2511,11 +2458,6 @@ footer.global-footer {
     color: #333;
 }
 
-/* -------------------------------------------------------------------------- */
-/*             Intégration dans les bulles de message                        */
-/* -------------------------------------------------------------------------- */
-
-/* Carte transparente dans les bulles */
 .message-bubble .quote-request-card {
     background: transparent;
     border: none;
@@ -2528,7 +2470,6 @@ footer.global-footer {
     background: transparent;
     border-bottom: none;
     padding-left: 0;
-    /* Remove left padding as requested to align with text */
     padding-right: 0;
     margin-bottom: 10px;
 }
@@ -2545,7 +2486,7 @@ footer.global-footer {
 
 /* Si reçu (Blanc) : Texte sombre */
 .message-received .quote-card-header {
-    color: #1a3c34;
+    color: #1a3d35;
 }
 
 .message-received .quote-card-message {
@@ -2566,17 +2507,12 @@ footer.global-footer {
 /* Articles dans bulle reçue (Blanc) */
 .message-received .quote-card-item {
     background: #fff;
-    /* Léger contraste */
     border: 1px solid #eee;
     border-radius: 6px;
     padding: 10px;
 }
 
-/* -------------------------------------------------------------------------- */
-/*                            Offer Form (Interactive)                        */
-/* -------------------------------------------------------------------------- */
-
-
+/* Formulaire d'Offre (Interactif) */
 
 .offer-form-header {
     display: flex;
@@ -2588,7 +2524,7 @@ footer.global-footer {
 .offer-form-header h3 {
     margin: 0;
     font-size: 1.2rem;
-    color: #1a3c34;
+    color: #1a3d35;
     font-family: inherit;
     font-weight: bold;
 }
@@ -2599,7 +2535,7 @@ footer.global-footer {
     font-size: 1.8rem;
     line-height: 1;
     cursor: pointer;
-    color: #1a3c34;
+    color: #1a3d35;
     transition: color 0.3s;
 }
 
@@ -2644,7 +2580,7 @@ footer.global-footer {
     font-weight: normal;
     margin-bottom: 5px;
     font-size: 1rem;
-    color: #1a3c34;
+    color: #1a3d35;
 }
 
 .offer-item-controls {
@@ -2665,7 +2601,7 @@ footer.global-footer {
 .control-label {
     font-weight: bold;
     font-size: 1rem;
-    color: #1a3c34;
+    color: #1a3d35;
     margin: 0;
 }
 
@@ -2673,10 +2609,10 @@ footer.global-footer {
     width: 80px;
     height: 40px;
     padding: 5px 8px;
-    border: 2px solid #1a3c34;
+    border: 2px solid #1a3d35;
     border-radius: 4px;
     font-weight: bold;
-    color: #1a3c34;
+    color: #1a3d35;
     text-align: center;
     font-size: 1.1rem;
     font-family: inherit;
@@ -2685,7 +2621,7 @@ footer.global-footer {
 .offer-qty-control {
     display: flex;
     align-items: center;
-    background-color: #1a3c34;
+    background-color: #1a3d35;
     border-radius: 5px;
     padding: 0 5px;
     color: white;
@@ -2725,7 +2661,7 @@ footer.global-footer {
 .remove-item-btn {
     background: none;
     border: none;
-    color: #1a3c34;
+    color: #1a3d35;
     font-size: 1.4rem;
     cursor: pointer;
     padding: 0 10px;
@@ -2744,7 +2680,7 @@ footer.global-footer {
 #product-search-input {
     width: 100%;
     padding: 12px;
-    border: 2px solid #1a3c34;
+    border: 2px solid #1a3d35;
     border-radius: 6px;
     font-size: 1rem;
     outline: none;
@@ -2801,7 +2737,7 @@ footer.global-footer {
     flex: 1;
     height: 50px;
     padding: 10px;
-    border: 2px solid #1a3c34;
+    border: 2px solid #1a3d35;
     border-radius: 6px;
     resize: none;
     font-family: inherit;
@@ -2818,7 +2754,7 @@ footer.global-footer {
     white-space: nowrap;
 }
 
-/* Helper Clean Classes */
+/* Classes utilitaires */
 .quote-request-card.no-bg {
     background: none;
     border: none;
@@ -2831,18 +2767,18 @@ footer.global-footer {
     color: #333;
 }
 
-/* Empty State Admin Messaging */
+/* État vide messagerie admin */
 .empty-state {
     display: flex;
     margin-top: 20px;
     justify-content: center;
     height: 100%;
-    color: #1a3c34;
+    color: #1a3d35;
     font-size: 1rem;
     font-weight: normal;
 }
 
-/* Utilities & Refactoring Inline Styles */
+/* Utilitaires et refactorisation styles en ligne */
 .cursor-pointer {
     cursor: pointer;
 }
@@ -2895,7 +2831,7 @@ footer.global-footer {
     margin-top: 2rem;
 }
 
-/* Admin Messaging JS Template Classes */
+/* Classes pour les templates JS de messagerie admin */
 .search-item-info {
     flex: 1;
 }
@@ -2909,7 +2845,7 @@ footer.global-footer {
     color: #666;
 }
 
-/* Wide Bubble for Quotes/Offers */
+/* Bulle large pour Devis/Offres */
 .message-bubble.wide-bubble {
     width: 70%;
 }

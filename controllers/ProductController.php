@@ -27,7 +27,7 @@ class ProductController
             $filters['max_price'] = (float) $_GET['max_price'];
         }
 
-        // Tri des résultats
+        // Tri des résultats avec base de données
         if (isset($_GET['sort'])) {
             $parts = explode('-', $_GET['sort']);
             if (count($parts) === 2) {
@@ -225,9 +225,14 @@ class ProductController
         $product->setPrice((float) Utils::request('price'));
         $product->setCategoryId((int) Utils::request('category_id'));
 
-        $product->setColor(Utils::request('color') ?: null);
+        // Gestion Couleur (Catégorie 1 = Résines)
+        if ($product->getCategoryId() === 1) {
+            $product->setColor(Utils::request('color') ?: null);
+        } else {
+            $product->setColor(null);
+        }
 
-        // Gestion Odeur
+        // Gestion Odeur (Catégorie 2 = Entretien)
         $noScent = Utils::request('no_scent'); // Valeur attendue : 'yes' (Sans odeur = Oui) ou 'no' (Sans odeur = Non)
         if ($product->getCategoryId() === 2) {
             if ($noScent === 'yes') {
@@ -241,7 +246,12 @@ class ProductController
             $product->setScent(null);
         }
 
-        $product->setToolType(Utils::request('tool_type') ?: null);
+        // Gestion Type d'outil (Catégorie 3 = Outillage)
+        if ($product->getCategoryId() === 3) {
+            $product->setToolType(Utils::request('tool_type') ?: null);
+        } else {
+            $product->setToolType(null);
+        }
 
         // Gestion de l'image
         if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
@@ -305,7 +315,7 @@ class ProductController
         $categoryId = (int) Utils::request('category_id');
         $price = (float) Utils::request('price');
 
-        // VAL: 1. Vérification des champs obligatoires de base
+        // Vérification des champs obligatoires de base
         if (empty($name) || empty($description) || empty($price) || !$categoryId) {
             $_SESSION['flash'] = "Veuillez remplir tous les champs obligatoires.";
             $_SESSION['form_submitted'] = $_POST;
@@ -313,7 +323,7 @@ class ProductController
             Utils::redirect('catalogue');
         }
 
-        // VAL: 2. Vérification de l'image (Obligatoire)
+        // Vérification de l'image obligatoire
         if (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
             $_SESSION['flash'] = "L'ajout d'une image est obligatoire.";
             $_SESSION['form_submitted'] = $_POST;
@@ -417,7 +427,7 @@ class ProductController
             $filters['max_price'] = (float) $_GET['max_price'];
         }
 
-        // Tri des résultats
+        // Tri des résultats en base de données
         if (isset($_GET['sort'])) {
             $parts = explode('-', $_GET['sort']);
             if (count($parts) === 2) {

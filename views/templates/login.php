@@ -1,3 +1,4 @@
+<!-- Formulaire de connexion -->
 <div class="auth-container">
     <h1>Se connecter</h1>
     <form action="index.php?action=connectUser" method="post" class="login-form">
